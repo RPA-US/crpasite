@@ -1,0 +1,5 @@
+django==3.0.3
+pylint==2.4.4
+wheel==0.34.2
+autopep8==1.5
+scaleapi==0.2.15

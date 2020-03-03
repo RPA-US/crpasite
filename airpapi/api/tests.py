@@ -3,7 +3,7 @@ from django.test import TestCase
 # Create your tests here.
 # /api/tests.py
 
-from api.models import Bucketlist
+from .models import Bucketlist
 from rest_framework import status
 from django.urls import reverse
 from rest_framework.test import APIClient

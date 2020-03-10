@@ -1,0 +1,15 @@
+{% load i18n %}
+{% load static %}
+
+{% if request.user.is_superuser or request.user.is_staff %}
+    <li class="nav-item p-3"><a class="text-white" href="{% url 'admin:index' %}">{% trans 'Administracion' %}</a></li>
+{% endif %}
+<li class="nav-item  p-3"><a class="lang"> {% include 'lang.html' %} </a></li>
+{% if user.is_authenticated %}
+    <li class="nav-item p-3"><a href="{% url 'cas_logout' %}"><img src="{% static 'img/off.svg' %}"
+                                                                   alt="{% trans 'Usuario img' %}" width="40px"
+                                                                   height="40px"></a></li>
+{% else %}
+    <li class="nav-item p-3"><a href="{% url 'cas_login' %}">{% trans "Iniciar Sesión" %}</a></li>
+    <li class="nav-item p-3"><a href="{% url 'register_user' %}">{% trans "Solicitud de Registro" %}</a></li>
+{% endif %}

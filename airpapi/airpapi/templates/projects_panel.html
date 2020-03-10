@@ -1,0 +1,82 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="ml-3 mb-3">
+            <button type="button" id="collapsed-button" class="btn btn-outline-secondary btn-sm mb-1 {% if projects|length%}collapsed{% endif %}" data-toggle="collapse" data-target="#infoMessage" aria-expanded="false" aria-controls="infoMessage"></button>
+            <div class="">
+                <span class="card card-body small text-muted {% if projects|length == 0 %}collapse show{% else %}collapse{% endif %}" id="infoMessage">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras consequat, enim ac lobortis placerat, turpis ipsum dapibus dolor, et vulputate neque nunc et elit. Donec varius suscipit iaculis. Pellentesque imperdiet dolor a leo sollicitudin vulputate.
+                    Nulla porttitor tempus lorem in placerat. Nunc id sapien sit amet ligula dictum finibus ut ac felis.
+                    Sed molestie pretium hendrerit. Nulla volutpat nisi a erat blandit condimentum. Maecenas lacinia eu nisi ac malesuada.
+                    Cras ut lectus nisi. Donec et rutrum sem.
+                </span>
+            </div>
+        </div>
+        <div class="">
+            <button class="btn btn-outline-dark ml-3 mb-3" onclick="location.href='{% url 'manage_project' 0 %}'">{% trans 'Nuevo proyecto' %}</button>
+        </div>
+        {% for project in projects %}
+            <div class="row text-center float-left m-3 panel-element border rounded" style="width: 450px; box-shadow: 2px 2px #9b9b9b;">
+                <a class="side-buttons font-weight-bold text-white" style="background-color: {{ project.web_cl_colour }};" href="{% url 'manage_project' project.web_id_project %}">
+                    <p class="mb-0">
+                        <span>{{ project.web_tx_name }}</span>
+                    </p>
+                </a>
+                <div class="col-sm-8 pl-0 side-elements border-right rounded">
+                    <div>
+                        <div class="mark-element"
+                            {% if project.web_tx_status == 1 %}
+                                style="top: 0; bottom: 288px"
+                            {% elif project.web_tx_status == 2 %}
+                                style="top: 40px; bottom: 248px"
+                            {% elif project.web_tx_status == 3 %}
+                                style="top: 80px; bottom: 208px"
+                            {% elif project.web_tx_status == 4 %}
+                                style="top: 120px; bottom: 188px"
+                            {% else %}
+                                style="width: 0;"
+                            {% endif %}>
+                        </div>
+                        <div>
+                            <div class="element-side-1">
+                                <a class="side-buttons {% if project.web_tx_status == 1 %} active {% endif %}" href="{% url 'surveys_list' project.web_id_project 0 %}">
+                                    <p class="mb-0">
+                                        <span>{% trans 'Caracterizador' %}</span>
+                                    </p>
+                                </a>
+                            </div>
+                            <div class="element-side-1">
+                                <a class="side-buttons {% if project.web_tx_status == 2 %} active {% endif %}" href="{% url 'recommend_list' project.web_id_project 0 %}">
+                                    <p class="mb-0">
+                                        <span>{% trans 'Recomendador' %}</span>
+                                    </p>
+                                </a>
+                            </div>
+                            <div class="element-side-1">
+                                <a class="side-buttons {% if project.web_tx_status == 3 %} active {% endif %}" href="{% url 'datasets_list' project.web_id_project %}">
+                                    <p class="mb-0">
+                                        <span>{% trans 'Modelador' %}</span>
+                                    </p>
+                                </a>
+                            </div>
+                            <div class="element-side-1">
+                                <a class="side-buttons {% if project.web_tx_status == 4 %} active {% endif %}" href="{% url 'models_list' project.web_id_project %}">
+                                    <p class="mb-0">
+                                        <span>{% trans 'Implementador' %}</span>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 p-3 align-self-center text-center">
+{#                    TODO Cuadro de previsualización para los proyectos, cambiar cuando se defina qué meter#}
+                    <img src="{% static 'img/logo_airpapi.png' %}" class="img-fluid" alt="{{ project.web_tx_name }}">
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

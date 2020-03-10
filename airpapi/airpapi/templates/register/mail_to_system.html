@@ -1,0 +1,13 @@
+{% load i18n %}
+{% autoescape off %}
+
+Solicitud de nuevo usuario en la plataforma AIRPAPI.
+
+El usuario {{ user }} solicita el registro con los siguientes datos ha solicitado:
+
+* Nombre: {{ surname }}
+* Apellidos: {{ name }}
+* Correo electrónico {{ mail }}
+
+Para que este usuario pueda comenzar a utilizar AIRPAPI, hay que activarlo en el panel de administración de la plataforma.
+{% endautoescape %}

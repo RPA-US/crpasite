@@ -1,0 +1,2 @@
+https://bower.io/ -> Bower: A package manager for the web
+https://github.com/machineboy2045/angular-selectize -> angular-selectize: an Angular.js directive for (Brian Reavis's) selectize jQuery plugin

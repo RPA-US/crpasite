@@ -1,0 +1,53 @@
+
+[
+    {
+      "model": "auth.user",
+      "pk": 1,
+      "fields": {
+        "password": "pbkdf2_sha256$36000$TfBN72XCzUxS$iNrzzaZ/AMDAQ1AcATF8BmNAVkS7mZwKP506MMoDq8w=",
+        "is_superuser": true,
+        "username": "administrator",
+        "first_name": "Administrador",
+        "last_name": "AIRPAPI",
+        "email": "info.daliasoft@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "groups": [],
+        "user_permissions": []
+      }
+    },
+     {
+      "model": "auth.user",
+      "pk": 2,
+      "fields": {
+        "password": "pbkdf2_sha256$36000$TfBN72XCzUxS$iNrzzaZ/AMDAQ1AcATF8BmNAVkS7mZwKP506MMoDq8w=",
+        "is_superuser": true,
+        "username": "user",
+        "first_name": "Usuario",
+        "last_name": "AIRPAPI",
+        "email": "info.daliasoft@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "groups": [],
+        "user_permissions": []
+      }
+    },
+  
+    {
+    "model": "authtoken.token",
+    "pk": "d8884fc3cd34ab420e9dfc777e3d1e7a6ff0712e",
+    "fields": {
+  
+      "user": 1,
+      "created": "2020-02-08T10:05:58.157Z"
+    }
+    },
+    {
+    "model": "authtoken.token",
+    "pk": "5c64e84dda6b5861cb4f51887c6be6dc1412af58",
+    "fields": {
+      "user": 2,
+      "created": "2020-02-08T10:05:58.157Z"
+    }
+    }
+  ]

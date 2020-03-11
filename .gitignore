@@ -101,3 +101,8 @@ buildNumber.properties
 
 # JetBrains
 .idea
+
+env
+*.DS_Store
+*.pyc
+__pycache__

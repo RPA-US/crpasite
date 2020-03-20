@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+{% block content %}
+    <div class="container float-left ml-3">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>{% trans '¿POR QUÉ ELEGIRNOS?' %}</h2>
+                <ul>
+                    <li>{% trans 'Somos una empresa que cubre una nueva necesidad no idetificada por nadie más' %}</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h2>{% trans 'NUESTROS VALORES' %}</h2>
+                <ul>
+                    <li>{% trans 'Ejemplo uno' %}</li>
+                    <li>{% trans 'Ejemplo dos' %}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% load i18n %}
+
+<div class="side-elements">
+    <div>
+        <div class="mark-element"
+                {% if active_module == 'charact' %}
+                    style="top: 0; bottom: 288px"
+                {% elif active_module == 'recomm' %}
+                    style="top: 40px; bottom: 248px"
+                {% elif active_module == 'model' %}
+                    style="top: 80px; bottom: 208px"
+                {% elif active_module == 'implem' %}
+                    style="top: 120px; bottom: 188px"
+                {% endif %}>
+        </div>
+        <div class="position-relative pl-4">
+            <div class="mb-3">
+                <div class="element-side-1">
+                    <a class="side-buttons {% if active_module == 'charact' %} active {% endif %}" href="{% url 'surveys_list' id_project 0 %}">
+                        <p class="mb-0">
+                            <span>{% trans 'Caracterizador' %}</span>
+                        </p>
+                    </a>
+                </div>
+                <div class="element-side-1">
+                    <a class="side-buttons {% if active_module == 'recomm' %} active {% endif %}" href="{% url 'recommend_list' id_project 0 %}">
+                        <p class="mb-0">
+                            <span>{% trans 'Recomendador' %}</span>
+                        </p>
+                    </a>
+                </div>
+                <div class="element-side-1">
+                    <a class="side-buttons {% if active_module == 'model' %} active {% endif %}" href="{% url 'datasets_list' id_project %}">
+                        <p class="mb-0">
+                            <span>{% trans 'Modelador' %}</span>
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    <hr>
+    </div>
+</div>

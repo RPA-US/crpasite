@@ -18,7 +18,6 @@ from datetime import timedelta
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASEURL = 'http://airpapi.herokuapp.com'
 
-django_heroku.settings(locals())
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -26,7 +25,7 @@ django_heroku.settings(locals())
 SECRET_KEY = "u)ose3fgou3=bq$bq1%hrf_zb88z8$dy#h)1@1%&qz2_r@iq3l"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [".herokuapp.com"]
 
@@ -36,6 +35,7 @@ ALLOWED_HOSTS = [".herokuapp.com"]
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
+    'whitenoise.runserver_nostatic',
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
@@ -58,6 +58,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = "airpapi.urls"
@@ -151,5 +152,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = "/static/"
+
+django_heroku.settings(locals())

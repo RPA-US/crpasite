@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     "django.contrib.postgres",
     "airpapi",
     "consumer",
-    "processor",
 ]
 
 MIDDLEWARE = [

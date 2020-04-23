@@ -17,7 +17,8 @@ from datetime import timedelta
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASEURL = "http://airpapi.herokuapp.com"
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]=os.path.join(BASE_DIR, "airpaapi-94f8f1d04777.json")
 
 # django_heroku.settings(locals())
 # Quick-start development settings - unsuitable for production

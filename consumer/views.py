@@ -3,7 +3,8 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
-import scaleapi
+
+# import scaleapi
 from drf_yasg import openapi
 from drf_yasg.app_settings import swagger_settings
 from drf_yasg.inspectors import (
@@ -15,12 +16,17 @@ from drf_yasg.inspectors import (
 from drf_yasg.utils import no_body, swagger_auto_schema
 from consumer import serializers
 
+# ===============================
+from google.cloud import vision
+import io
+
+
 # from fastapi import APIRouter, FastAPI
 # from fastapi.responses import JSONResponse
 
 # Create your views here.
 
-client = scaleapi.ScaleClient("test_449f3f6419964ef5ac641ca7f1d4738f")
+# client = scaleapi.ScaleClient("test_449f3f6419964ef5ac641ca7f1d4738f")
 
 # SCALE AI
 # Test API Key: test_449f3f6419964ef5ac641ca7f1d4738f
@@ -110,8 +116,31 @@ from rest_framework.parsers import FileUploadParser, MultiPartParser
     methods=["get", "post", "delete"],
     parser_classes=(MultiPartParser, FileUploadParser),
 )
-def image(self, request, slug=None):
+def image():
     """
     image method docstring
     """
     pass
+
+@api_view(["GET"])
+# @permission_classes((IsAuthenticated,))
+# class image_google(viewsets.ModelViewSet):
+def image_google(request):
+    print("HOLAA")
+    client = vision.ImageAnnotatorClient()
+    path = "test_data/Image.jpg"
+    with io.open(path, "rb") as image_file:
+        content = image_file.read()
+    image = vision.types.Image(content=content)
+    response = client.image_properties(image=image)
+    props = response.image_properties_annotation
+    print('Properties of the image:')
+    print(props)
+
+    for color in props.dominant_colors.colors:
+        print('Fraction: {}'.format(color.pixel_fraction))
+        print('\tr: {}'.format(color.color.red))
+        print('\tg: {}'.format(color.color.green))
+        print('\tb: {}'.format(color.color.blue))
+    return response 
+

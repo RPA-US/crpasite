@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path, include
 from rest_framework import routers
-from processor import views
+# from processor import views
 from consumer import views as consumer_views
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view

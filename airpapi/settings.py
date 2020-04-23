@@ -12,11 +12,12 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import django_heroku
+import consumer.validators
 from datetime import timedelta
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASEURL = 'http://airpapi.herokuapp.com'
+BASEURL = "http://airpapi.herokuapp.com"
 
 # django_heroku.settings(locals())
 # Quick-start development settings - unsuitable for production
@@ -90,7 +91,7 @@ SWAGGER_SETTINGS = {"SECURITY_DEFINITIONS": None}
 
 # ================================================================================================================================================================
 
-#REST_FRAMEWORK = {
+# REST_FRAMEWORK = {
 #    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
 #    "DEFAULT_RENDERER_CLASSES": (
 #        "rest_framework.renderers.JSONRenderer",
@@ -111,47 +112,40 @@ SWAGGER_SETTINGS = {"SECURITY_DEFINITIONS": None}
 #    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
 #    "PAGE_SIZE": 10,
 #    # "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
-#}
+# }
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
 }
 
 
 # ================================================================================================================================================================
 
 SIMPLE_JWT = {
-    'AUTH_HEADER_TYPES': ('JWT',),
+    "AUTH_HEADER_TYPES": ("JWT",),
     # 'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     # 'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     # 'ROTATE_REFRESH_TOKENS': False,
     # 'BLACKLIST_AFTER_ROTATION': True,
- 
     # 'ALGORITHM': 'HS256',
     # 'SIGNING_KEY': SECRET_KEY,
     # 'VERIFYING_KEY': None,
     # 'AUDIENCE': None,
     # 'ISSUER': None,
- 
     # 'AUTH_HEADER_TYPES': ('Bearer',),
     # 'USER_ID_FIELD': 'id',
     # 'USER_ID_CLAIM': 'user_id',
- 
     # 'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     # 'TOKEN_TYPE_CLAIM': 'token_type',
- 
     # 'JTI_CLAIM': 'jti',
- 
     # 'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
     # 'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     # 'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
@@ -169,13 +163,13 @@ SIMPLE_JWT = {
 # }
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bzpro8nmnav7lcx1wfof',
-        'USER': 'uphbbfafkvwo5cfrwb4r',
-        'PASSWORD': 'vo5QlKsKgQB0JeuLcDf3',
-        'HOST': 'bzpro8nmnav7lcx1wfof-postgresql.services.clever-cloud.com',
-        'PORT': '5432',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "bzpro8nmnav7lcx1wfof",
+        "USER": "uphbbfafkvwo5cfrwb4r",
+        "PASSWORD": "vo5QlKsKgQB0JeuLcDf3",
+        "HOST": "bzpro8nmnav7lcx1wfof-postgresql.services.clever-cloud.com",
+        "PORT": "5432",
     }
 }
 
@@ -187,9 +181,16 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "OPTIONS": {"min_length": 8,},
+    },
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    {"NAME": "consumer.validators.NumberValidator"},
+    {"NAME": "consumer.validators.UppercaseValidator"},
+    {"NAME": "consumer.validators.LowercaseValidator"},
+    {"NAME": "consumer.validators.SymbolValidator"},
 ]
 
 
@@ -211,4 +212,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
-LOGOUT_REDIRECT_URL="home"
+LOGOUT_REDIRECT_URL = "home"

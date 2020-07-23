@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     "tags",
     "billing",
     "orders",
-    "addresses"
+    "addresses",
+    # "categories",
+    "categories.editor",
 ]
 
 AUTH_USER_MODEL = "accounts.User"  # changes the built-in user model to ours

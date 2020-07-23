@@ -1,6 +1,8 @@
 # Google App Engine generated folder
 appengine-generated/
 
+#sql
+db.sqlite3
 
 # ECLIPSE
 .metadata
@@ -99,13 +101,9 @@ buildNumber.properties
 # VS Code
 .vscode
 
-# Angular compiling
-frontend/node_modules
-
 # JetBrains
 .idea
-*.iml
-
+.env
 env
 *.DS_Store
 *.pyc

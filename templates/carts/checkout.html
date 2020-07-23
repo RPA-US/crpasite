@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load l10n %}
+
+{% block title %}
+Checkout
+{% endblock %}
+
+{% block content %}
+{{ object.order_code }} -- {{ object.cart.id }}
+
+{% if not billing_profile %}
+<div class="row">
+    <div class="col-12 col-md-6">
+        <p class="lead text-center"><b>Login</b></p>
+        <div class="row d-flex justify-content-center">
+            <div class="col-6">
+                {% include "accounts/snippets/login_form.html" with form=login_form next_url=request.build_absolute_uri %}
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 text-center">
+        <b>Continue as Guest</b>
+        <div class="row d-flex justify-content-center">
+            <div class="col-6">
+                {% url 'accounts:guest_register' as guest_register_url %}
+                {% include "accounts/snippets/login_form.html" with form=guest_form next_url=request.build_absolute_uri action_url=guest_register_url %}
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+
+{% if not object.shipping_address %}
+<div class="row d-flex justify-content-center">
+    <div class="col-12 pt-5">
+        <p class="lead">Shipping Address</p>
+        <hr>
+    </div>
+    <div class="col-6">
+        {% url 'addresses:checkout_create_view' as checkout_create_view %}
+        {% include "addresses/snippets/form.html" with form=address_form next_url=request.build_absolute_uri action_url=checkout_create_view address_type='shipping' %}
+    </div>
+    <div class="col-6">
+        {% url 'addresses:checkout_reuse_view' as checkout_reuse_view %}
+        {% include 'addresses/snippets/prev_addresses.html' with addresses_qs=address_qs next_url=request.build_absolute_uri address_type='shipping' action_url=checkout_reuse_view %}
+    </div>
+</div>
+{% elif not object.billing_address %}
+<div class="row d-flex justify-content-center">
+    <div class="col-12 pt-5">
+        <p class="lead">Billing Address</p>
+        <hr>
+    </div>
+    <div class="col-6">
+        {% url 'addresses:checkout_create_view' as checkout_create_view %}
+        {% include "addresses/snippets/form.html" with form=address_form next_url=request.build_absolute_uri action_url=checkout_create_view address_type='billing' %}
+    </div>
+    <div class="col-6">
+        {% url 'addresses:checkout_reuse_view' as checkout_reuse_view %}
+        {% include 'addresses/snippets/prev_addresses.html' with addresses_qs=address_qs next_url=request.build_absolute_uri address_type='billing' action_url=checkout_reuse_view %}
+    </div>
+</div>
+{% else %}
+<h1>Checkout</h1>
+<p>Cart Items:
+    {% for prodcut in object.cart.products.all %}
+    {{ prodcut }} {% if not forloop.last %},{% endif %}
+    {% endfor %}
+</p>
+<p>Cart Total: {{ object.cart.total|floatformat:2|localize }}</p>
+<p>Shipping Address: {{ object.shipping_address.get_address|safe }}</p>
+<p>Billing Address: {{ object.billing_address.get_address|safe }}</p>
+<p>Shipping Total: {{ object.shipping_total|floatformat:2|localize }}</p>
+<p>Total: {{ object.order_total|floatformat:2|localize }}</p>
+<form class="form" method="post" action="{% url 'carts:checkout' %}">{% csrf_token %}
+    <input type="hidden" name="order_code" value="{{ object.order_code }}">
+    <button type="submit" class="btn btn-success">Checkout</button>
+</form>
+{% endif %}
+{% endif %}
+
+{% endblock %}

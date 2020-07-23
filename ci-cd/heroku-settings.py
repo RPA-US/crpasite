@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import dj_database_url
 import django_heroku
+import psycopg2
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -79,21 +81,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "crpasite.wsgi.application"
-
-
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bzpro8nmnav7lcx1wfof',
-        'HOST': 'bzpro8nmnav7lcx1wfof-postgresql.services.clever-cloud.com',
-        'PORT': '5432',
-        'USER': 'uphbbfafkvwo5cfrwb4r',
-        'PASSWORD': 'vo5QlKsKgQB0JeuLcDf3',
-    }
-}
 
 
 # Password validation

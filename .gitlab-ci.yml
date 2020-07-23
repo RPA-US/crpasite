@@ -1,0 +1,47 @@
+stages:
+  - test
+  - deploy
+
+test:
+  stage: test
+  image: python:3.7
+  services:
+    - postgres:latest
+  variables:
+    POSTGRES_HOST_AUTH_METHOD: trust
+  script:
+    - rm crpasite/settings.py
+    - cp ci-cd/ci-settings.py crpasite/settings.py
+    - python -m venv env
+    - source env/bin/activate
+    - pip install -r requirements.txt
+    - python manage.py makemigrations
+    - python manage.py migrate
+    - coverage run manage.py test
+    - coverage report
+  only:
+  - master
+
+deploy_develop:
+  stage: deploy
+  script:
+  - rm crpasite/settings.py
+  - cp ci-cd/heroku-settings.py crpasite/settings.py
+  - apt-get update -qy
+  - apt-get install -y ruby-dev
+  - gem install dpl
+  - dpl --provider=heroku --app=$HEROKU_APP_BACKEND_DEVELOP --api-key=$HEROKU_API_KEY --skip_cleanup=true
+  only:
+  - develop
+
+deploy_production:
+  stage: deploy
+  script:
+  - rm crpasite/settings.py
+  - cp ci-cd/heroku-settings.py crpasite/settings.py
+  - apt-get update -qy
+  - apt-get install -y ruby-dev
+  - gem install dpl
+  - dpl --provider=heroku --app=$HEROKU_APP_BACKEND_PRODUCTION --api-key=$HEROKU_API_KEY --skip_cleanup=true
+  only:
+  - master

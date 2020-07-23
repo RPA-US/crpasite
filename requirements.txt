@@ -5,4 +5,4 @@ Pillow==7.0.0
 pytz==2019.3
 sqlparse==0.3.0
 black
-mysqlclient==2.0.1
+psycopg2==2.8.5

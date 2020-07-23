@@ -1,9 +1,9 @@
-# TFG. A Framework for Sharing RPA Components Through Plataforms​
+[![pipeline status](https://gitlab.com/a8081/tfg/badges/master/pipeline.svg)](https://gitlab.com/a8081/tfg/-/commits/master)
+[![coverage report](https://gitlab.com/a8081/tfg/badges/master/coverage.svg)](https://gitlab.com/a8081/tfg/-/commits/master)
+# AIRPAAPI. A Framework for Sharing RPA Components Through Plataforms​
 
-Ingeniería Informática. Ingeniería del Software. Trabajo Fin de Grado
+To prepare the development environment, execute the following commands:
 
-Para preparar el entorno de desarrollo ejecute:
-Version de python=python3.5
 ```
 git clone https://gitlab.com/a8081/tfg
 python3 -m venv env
@@ -13,3 +13,7 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
+
+Python version = 3.7.5
+
+Bachelor thesis. Software Engineering. University of Seville.

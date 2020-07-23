@@ -1,0 +1,232 @@
+{% url "products:list" as products_list_url %}
+{% url "carts:home" as cart_home_url %}
+{% url "accounts:logout" as logout_url %}
+{% url "accounts:login" as login_url %}
+{% url "accounts:register" as register_url %}
+{% url "contact_url" as contact_url %}
+{% url "products:list" as categories_list_url %}
+{% url "accounts:register" as categories_register_url %}
+{% load static %}
+
+<header>
+  <!-- Header Start -->
+  <div class="header-area">
+    <div class="main-header ">
+      {% if request.user.is_authenticated %}
+      <div class="header-top top-bg d-none d-lg-block">
+        <div class="container-fluid">
+          <div class="col-xl-12">
+            <div class="row d-flex justify-content-between align-items-center">
+              <div class="header-info-left d-flex">
+                <div class="flag">
+                  <img src="{% static "img/icon/header_icon.png" %}" alt="">
+                </div>
+                <div class="select-this">
+                  <form action="#">
+                    <div class="select-itms">
+                      <select name="select" id="select1">
+                        <option value="">USA</option>
+                        <option value="">SPAIN</option>
+                      </select>
+                    </div>
+                  </form>
+                </div>
+                <ul class="contact-now">
+                  <li>+34 954556817</li>
+                </ul>
+              </div>
+              <div class="header-info-right">
+                <ul>
+                  <li><a href="login.html">My Account </a></li>
+                  {% if user.is_superuser %}
+                  <li><a href="{% url 'admin:index' %}">Dashboard</a></li>
+                  {% else %}
+                  <li><a href="product_list.html">Wish List </a></li>
+                  <li><a href="cart.html">Shopping</a></li>
+                  <li><a href="cart.html">Cart</a></li>
+                  <li><a href="checkout.html">Checkout</a></li>
+                  {% endif %}
+                  {% if request.user.is_authenticated %}
+                  <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                  {% endif %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      <div class="header-bottom  header-sticky">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <!-- Logo -->
+            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-3">
+              <div class="logo">
+                <a href="/"><img src="{% static "img/logo/logotitulo.png" %}" alt="crpasite logo" height="50"></a>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-8 col-md-7 col-sm-5">
+              <!-- Main-menu -->
+              <div class="main-menu f-right d-none d-lg-block">
+                <nav>
+                  <ul id="navigation">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#">Catagories</a>
+                      <ul class="submenu">
+                        <li><a href="{% url "products:list" %}"> Navigate</a></li>
+                        <li><a href="{% url "accounts:register" %}"> Category proposal</a></li>
+                      </ul>
+                    </li>
+
+                    <li class="hot"><a href="#">Latest</a>
+                      <ul class="submenu">
+                        <li><a href="product_list.html"> Product list</a></li>
+                        <li><a href="single-product.html"> Product Details</a></li>
+                      </ul>
+                    </li>
+                    <!--li><a href="blog.html">Blog</a>
+                      <ul class="submenu">
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="single-blog.html">Blog Details</a></li>
+                      </ul>
+                    </li-->
+                    <li><a href="#">Pages</a>
+                      <ul class="submenu">
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="cart.html">Card</a></li>
+                        <li><a href="elements.html">Element</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="confirmation.html">Confirmation</a></li>
+                        <li><a href="cart.html">Shopping Cart</a></li>
+                        <li><a href="checkout.html">Product Checkout</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="single-blog.html">Blog Details</a></li>
+                        <li><a href="product_list.html"> Product list</a></li>
+                        <li><a href="single-product.html"> Product Details</a></li>
+                      </ul>
+                    </li>
+                    <li class="{% if request.path == products_list_url %}noactive{% endif %}">
+                      <a href="{% url "products:list" %}">Products</a>
+                    </li>
+                    <li class="{% if request.path == contact_url %}noactive{% endif %}">
+                      <a href="{% url "contact_url" %}">Contact</a>
+                    </li>
+                    <div id="mobile-elements">
+                      <li><a href="#">Options</a>
+                        <ul class="submenu">
+                          {% if request.user.is_authenticated %}
+                          <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                          {% else %}
+                          <li class="{% if request.path == login_url %}noactive{% endif %}">
+                            <a href="{% url 'accounts:login' %}">Login</a>
+                          </li>
+                          <li class="{% if request.path == register_url %}noactive{% endif %}">
+                            <a href="{% url 'accounts:register' %}">Register</a>
+                          </li>
+                          {% endif %}
+                          <li><a href="{% url 'carts:home' %}">Cart</a></li>
+                          <li><a href="{% url 'search:products' %}">Search</a></li>
+                        </ul>
+                      </li>
+                    </div>
+                  </ul>
+
+                </nav>
+              </div>
+            </div>
+            <div id="desktop-elements" class="col-xl-5 col-lg-3 col-md-3 col-sm-3 fix-card">
+              <ul class="header-right f-right d-none d-lg-block d-flex justify-content-between">
+                <li class="d-none d-xl-block">
+                  <div class="form-box f-right ">
+                    <form method="GET" action="{% url 'search:products' %}">
+                      <input type="text" name="q" placeholder="Search">
+                      <div class="search-icon">
+                        <button class="search-btn" type="submit"><i class="fas fa-search special-tag"></i></button>
+                      </div>
+                    </form>
+                  </div>
+                </li>
+                <li>
+                  <div class="shopping-card">
+                    <a href="{% url 'carts:home' %}"><i class="fas fa-shopping-cart"></i></a>
+                    <!--span id="cart-items-counter" data-cart-items="0"></span-->
+                  </div>
+                </li>
+                {% comment %} {% if request.user.is_authenticated %}
+                <li class=" d-none d-xl-block">
+                  <div class="favorit-items">
+                    <i class="far fa-heart"></i>
+                  </div>
+                </li>
+                {% endif %} {% endcomment %}
+
+                {% if not request.user.is_authenticated %}
+                <li class="d-none d-lg-block {% if request.path == login_url %}noactive{% endif %}">
+                  <a class="btn header-btn" href="{% url 'accounts:login' %}">Login</a>
+                </li>
+                <li class="d-none d-lg-block {% if request.path == register_url %}noactive{% endif %}">
+                  <a class="btn header-btn" href="{% url 'accounts:register' %}">Register</a>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+            <!-- Mobile Menu -->
+            <div class="col-12">
+              <div class="mobile_menu d-block d-lg-none"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Header End -->
+</header>
+<!--nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+  <img src="https://i.ibb.co/XYxdRKd/logo.png" height="30" class="d-inline-block align-top" alt="crpasite logo">
+  <a class="navbar-brand" href="/">{{ site_title }}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item {% if request.path == products_list_url %}active{% endif %}">
+        <a class="nav-link" href="{% url "products:list" %}">Products</a>
+      </li>
+      <li class="nav-item {% if request.path == contact_url %}active{% endif %}">
+        <a class="nav-link" href="{% url "contact_url" %}">Contact us</a>
+      </li>
+      {% if request.user.is_authenticated %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Profile
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          {% if user.is_superuser %}
+          <a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
+          <div class="dropdown-divider"></div>
+          {% endif %}
+
+          <a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a>
+        </div>
+      </li>
+
+
+      {% else %}
+      <li class="nav-item {% if request.path == login_url %}active{% endif %}">
+        <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+      </li>
+      <li class="nav-item {% if request.path == register_url %}active{% endif %}">
+        <a class="nav-link" href="{% url 'accounts:register' %}">Register</a>
+      </li>
+      {% endif %}
+      <li class="nav-item {% if request.path == cart_home_url %}active{% endif %}">
+        <a class="nav-link nav-cart-count" href="{% url 'carts:home' %}">{{ request.session.cart_items }} <i
+            class="fas fa-shopping-cart"></i></a>
+      </li>
+    </ul>
+    {% include 'search/snippets/search-form.html' %}
+  </div>
+</nav-->

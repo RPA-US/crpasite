@@ -106,5 +106,3 @@ buildNumber.properties
 .env
 env
 *.DS_Store
-*.pyc
-__pycache__

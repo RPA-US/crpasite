@@ -1,6 +1,9 @@
 # Google App Engine generated folder
 appengine-generated/
 
+.env
+
+*.sqlite3
 
 # ECLIPSE
 .metadata

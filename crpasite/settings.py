@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     "billing",
     "orders",
     "addresses",
-    # "categories",
+    "categories",
+    "taxcategs",
     "categories.editor",
 ]
 

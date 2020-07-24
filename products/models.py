@@ -5,7 +5,7 @@ from django.db.models.signals import pre_save
 from crpasite.utils import unique_slug_generator
 from django.urls import reverse
 from django.db.models import Q
-from categories.models import TaxCateg
+from taxcategs.models import TaxCateg
 
 
 def get_filename_ext(filepath):
@@ -69,7 +69,7 @@ class Product(models.Model):
     featured = models.BooleanField(default=False)
     active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    categories = models.ManyToMany(TaxCateg)
+    categories = models.ManyToManyField(TaxCateg)
 
     # Manager
     objects = ProductManager()

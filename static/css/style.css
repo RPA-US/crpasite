@@ -2531,6 +2531,57 @@ input:focus::-moz-placeholder {
   }
 }
 
+.padding-top {
+  padding-top: 200px;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+  /* line 690, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
+  .padding-top {
+    padding-top: 200px;
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  /* line 690, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
+  .padding-top {
+    padding-top: 200px;
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  /* line 690, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
+  .padding-top {
+    padding-top: 100px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  /* line 690, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
+  .padding-top {
+    padding-top: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  /* line 690, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
+  .padding-top {
+    padding-top: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
 /*-- Section Padding -- */
 /* line 690, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
 .section-padding2 {
@@ -4009,7 +4060,7 @@ input:focus {
   color: #1f2022;
   font-family: "Playfair Display", serif;
   text-transform: uppercase;
-  font-size: 100px;
+  font-size: 80px;
   font-weight: 700;
   line-height: 1.1;
   text-transform: capitalize;
@@ -13044,4 +13095,8 @@ input:focus {
   #mobile-elements {display: none; }
 }
 
+.form-validation {
+  padding-top: 5%;
+  color: rebeccapurple;
+}
 /*# sourceMappingURL=style.css.map */

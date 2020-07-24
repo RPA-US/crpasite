@@ -4,8 +4,8 @@
 {% url "accounts:login" as login_url %}
 {% url "accounts:register" as register_url %}
 {% url "contact_url" as contact_url %}
-{% url "products:list" as categories_list_url %}
-{% url "accounts:register" as categories_register_url %}
+{% url "taxcategs:list" as categories_list_url %}
+{% url "taxcategs:register" as categories_register_url %}
 {% load static %}
 
 <header>
@@ -73,8 +73,8 @@
                     <li><a href="/">Home</a></li>
                     <li><a href="#">Catagories</a>
                       <ul class="submenu">
-                        <li><a href="{% url "products:list" %}"> Navigate</a></li>
-                        <li><a href="{% url "accounts:register" %}"> Category proposal</a></li>
+                        <li><a href="{% url "taxcategs:list" %}"> Navigate</a></li>
+                        <li><a href="{% url "taxcategs:register" %}"> Category proposal</a></li>
                       </ul>
                     </li>
 

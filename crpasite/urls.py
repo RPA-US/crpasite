@@ -15,7 +15,7 @@ urlpatterns = (
         path("addresses/", include("addresses.urls")),
         path("cart/", include("carts.urls")),
         path("search/", include("search.urls")),
-        path("categories/", include("categories.urls")),
+        path("categories/", include("taxcategs.urls")),
     ]
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

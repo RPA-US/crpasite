@@ -13,11 +13,18 @@ def register_page(request):
 
     if form.is_valid():
         data = form.cleaned_data
-        email = data.get("email")
-        password = data.get("password")
-        first_name = data.get("first_name")
-        last_name = data.get("last_name")
-        new_user = User.objects.create_user(email, password, first_name, last_name)
+        role = data.get("role")
+        # Checking: user cannot register as Reviewer
+        if role == "2" or role == "3":
+            password = data.get("password")
+            first_name = data.get("first_name")
+            last_name = data.get("last_name")
+            email = data.get("email")
+            new_user = User.objects.create_user(
+                email, password, first_name, last_name, int(role)
+            )
+        else:
+            new_user = None
         if new_user is not None:
             messages.success(request, "Created User.")
             return redirect("accounts:login")
@@ -27,6 +34,38 @@ def register_page(request):
     context = {"form": form}
 
     return render(request, "accounts/register.html", context)
+
+
+def register_page_reviewer(request):
+    form = RegisterForm(request.POST or None)
+
+    if form.is_valid():
+        if request.user.is_authenticated():
+            principal_role = request.user.role == "1"
+        else:
+            principal_role = False
+        data = form.cleaned_data
+        # Checking: user cannot create a Reviewer account, only Reviewers can create others Reviewers accounts
+        if principal_role:
+            password = data.get("password")
+            first_name = data.get("first_name")
+            last_name = data.get("last_name")
+            email = data.get("email")
+            role = "1"
+            new_user = User.objects.create_user(
+                email, password, first_name, last_name, int(role)
+            )
+        else:
+            new_user = None
+        if new_user is not None:
+            messages.success(request, "Reviewer created.")
+            return redirect("accounts:login")
+
+        messages.warning(request, "Create Error !")
+
+    context = {"form": form}
+
+    return render(request, "accounts/register_reviewer.html", context)
 
 
 def login_page(request):

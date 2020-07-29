@@ -105,4 +105,5 @@ buildNumber.properties
 .idea
 .env
 env
+environ
 *.DS_Store

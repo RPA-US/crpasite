@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "categories",
     "taxcategs",
     "categories.editor",
+    'django_roles_access',
 ]
 
 AUTH_USER_MODEL = "accounts.User"  # changes the built-in user model to ours
@@ -60,6 +61,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    #'django_roles_access.middleware.RolesMiddleware',
 ]
 
 ROOT_URLCONF = "crpasite.urls"

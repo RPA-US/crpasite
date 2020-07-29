@@ -13,6 +13,7 @@ class UserManager(BaseUserManager):
         password=None,
         first_name=None,
         last_name=None,
+        role=None,
         is_active=True,
         is_staff=False,
         is_superuser=False,
@@ -26,6 +27,7 @@ class UserManager(BaseUserManager):
             email=self.normalize_email(email),
             first_name=first_name,
             last_name=last_name,
+            role = role,
         )
         user_obj.active = is_active
         user_obj.staff = is_staff
@@ -40,12 +42,24 @@ class UserManager(BaseUserManager):
 
     def create_superuser(self, email, password=None):
         user_obj = self.create_user(
-            email, password=password, is_staff=True, is_superuser=True
+            email, password=password, role=4, is_staff=True, is_superuser=True
         )
         return user_obj
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    REVIEWER = 1
+    PROVIDER = 2
+    DEVELOPER = 3
+    ADMIN = 4
+
+    ROLE_CHOICES = (
+        (REVIEWER, "Reviewer"),
+        (PROVIDER, "Provider"),
+        (DEVELOPER, "Developer"),
+        (ADMIN, "Administrator"),
+    )
+    role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, default = 3)
     email = models.EmailField(
         null=False, blank=False, unique=True, max_length=80, verbose_name="Email"
     )

@@ -94,6 +94,11 @@ class RegisterForm(forms.Form):
             attrs={"class": "form-control", "placeholder": "Password again"}
         ),
     )
+    role = forms.ChoiceField(choices=(
+        (2, "Provider"),
+        (3, "Developer"),
+    ), widget = forms.Select(attrs={"class": "form-control"}),
+    )
 
     def clean_email(self):
         email = self.cleaned_data.get("email")

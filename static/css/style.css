@@ -13099,4 +13099,17 @@ input:focus {
   padding-top: 5%;
   color: rebeccapurple;
 }
+
+button:disabled, button[disabled=disabled]{
+  border: 1px solid #999999;
+  background-color: #b2b3b8;
+  color: #666666;
+}
+
+button[disabled=disabled]:hover{
+  border: 1px solid #999999;
+  background-color: #5b5e69;
+  color: #666666;
+}
+
 /*# sourceMappingURL=style.css.map */

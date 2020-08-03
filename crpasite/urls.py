@@ -11,7 +11,7 @@ urlpatterns = (
         path("", home_page, name="home_url"),
         path("contact/", contact_page, name="contact_url"),
         path("accounts/", include("accounts.urls")),
-        path("products/", include("products.urls")),
+        path("products/", include("products.urls"), name="products"),
         path("addresses/", include("addresses.urls")),
         path("cart/", include("carts.urls")),
         path("search/", include("search.urls")),

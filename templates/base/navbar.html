@@ -46,9 +46,16 @@
                   <li><a href="{% url 'carts:home' %}">Cart</a></li>
                   <li><a href="{% url 'carts:checkout' %}">Checkout</a></li>
                   {% endif %}
+                  {% if request.user.role == 1 %}
+                  <li><a href="{% url 'accounts:reviewer_register' %}">New reviewer</a></li>
+                  {% endif %}
+                  {% if request.user.role == 2 %}
+                  <li><a href="{% url 'products:create' %}">New product</a></li>
+                  {% endif %}
                   {% if request.user.is_authenticated %}
                   <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
                   {% endif %}
+
                 </ul>
               </div>
             </div>
@@ -74,11 +81,14 @@
                     <li><a href="#">Catagories</a>
                       <ul class="submenu">
                         <li><a href="{% url "taxcategs:categoryterm_list" %}"> Navigate</a></li>
+                        {% if request.user.is_authenticated %}
                         <li><a href="{% url "taxcategs:categoryterm_create" %}"> Category proposal</a></li>
                         <li><a href="{% url "taxcategs:report_create" %}"> Review</a></li>
                         <li><a href="{% url "taxcategs:inputformatsupported_create" %}"> New Input Format Supported</a>
                         </li>
                         <li><a href="{% url "taxcategs:knowledgesource_create" %}"> New Knowledege Source</a></li>
+
+                        {% endif %}
                       </ul>
                     </li>
 

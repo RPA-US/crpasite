@@ -26,18 +26,18 @@ class TaxCateg(CategoryBase):
     def get_absolute_url(self):
         return reverse("taxcategs:categoryterm_create")
 
-    def clean(self):
-        categ_terms = CategoryTerm.objects.filter(
-            tax_categ=self, is_tax_categ=True, active=True
-        )
-        if not (len(categ_terms) == 1):
-            raise ValidationError(
-                "A taxonomic category always has to have at least one associated category term"
-            )
-        if not (categ_terms[0].term == self.name):
-            raise ValidationError(
-                "A taxonomic category must always have the same name as its category term"
-            )
+    # def clean(self):
+    #     categ_terms = CategoryTerm.objects.filter(
+    #         tax_categ=self, is_tax_categ=True, active=True
+    #     )
+    #     if not (len(categ_terms) == 1):
+    #         raise ValidationError(
+    #             "A taxonomic category always has to have at least one associated category term"
+    #         )
+    #     if not (categ_terms[0].term == self.name):
+    #         raise ValidationError(
+    #             "A taxonomic category must always have the same name as its category term"
+    #         )
 
 
 class KnowledgeSource(models.Model):
@@ -95,7 +95,7 @@ class CategoryTerm(models.Model):
     tax_categ = models.ForeignKey(TaxCateg, on_delete=models.CASCADE, blank=True, null=True)
     knowledge_source = models.ForeignKey(KnowledgeSource, on_delete=models.CASCADE)
     formats_supported = models.ManyToManyField(InputFormatSupported, blank=True)
-    creator = models.ForeignKey(
+    user = models.ForeignKey(
         UserModel, verbose_name="Creator", on_delete=models.CASCADE
     )
     categoryChars = ArrayField(models.CharField(max_length=200))
@@ -120,7 +120,7 @@ class CategoryTerm(models.Model):
         return self.term
 
     def get_absolute_url(self):
-        return reverse("taxcategs:categoryterm_create")
+        return reverse("taxcategs:categoryterm_detail", args=[self.pk])
 
     # def clean(self):
     #     if len(self.formats_supported) < 1:
@@ -190,7 +190,7 @@ class Report(models.Model):
     )
     explanation = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    reviewer = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserModel, verbose_name="Reviewer", on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Decision"
@@ -204,7 +204,7 @@ class Report(models.Model):
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(
+    user = models.ForeignKey(
         UserModel, verbose_name="Author", on_delete=models.CASCADE
     )
     category_term = models.ForeignKey(CategoryTerm, on_delete=models.CASCADE)

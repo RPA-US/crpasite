@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}
+Category detail
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="container">
+    <h1>Category Term</h1>
+    <br>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show"
+            role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p><strong>Term:</strong> {{ categoryTerm.term }}</p>
+    <p><strong>Description:</strong> {{ categoryTerm.description }}</p>
+    <p><strong>Taxonomic category:</strong> {{ categoryTerm.tax_categ }}</p>
+    <p><strong>Knowledge Source:</strong> {{ categoryTerm.knowledge_source }}</p>
+    {% if request.user.is_authenticated %}
+    <p><strong>Created at:</strong> {{ categoryTerm.created_at }}</p>
+    <p><strong>User:</strong> {{ categoryTerm.user }}</p>
+    {% endif %}
+    <h6><strong>Category characteristics</strong></h6>
+    {% if categoryTerm.categoryChars %}
+    <ol class="ordered-list">
+        {% for ch in categoryTerm.categoryChars %}
+        <li>{{ ch }}</li>
+        {% endfor %}
+    </ol>
+    {% else %}
+    <p><strong>Empty category characteristics list!!!</strong></p>
+    {% endif %}
+    {% if categoryTerm.formats_supported.all %}
+    <h6><strong>Input Format Supported</strong></h6>
+    <ol class="ordered-list">
+        {% for ifp in categoryTerm.formats_supported.all %}
+        <li>{{ ifp }}</li>
+        {% endfor %}
+    </ol>
+    {% else %}
+    <p><strong>Empty input formats supported list!!!</strong></p>
+    {% endif %}
+</div>
+{% endblock %}

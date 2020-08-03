@@ -1,10 +1,10 @@
 from django import forms
 from .models import CategoryTerm, KnowledgeSource, InputFormatSupported, Report, Comment
 
-
 class ProposalCategoryTermForm(forms.ModelForm):
     class Meta:
         model = CategoryTerm
+        exclude = ('user',)
         fields = (
             "term",
             "description",
@@ -49,7 +49,15 @@ class ProposalCategoryTermForm(forms.ModelForm):
                 }
             ),
         }
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        super(ProposalCategoryTermForm, self).__init__(*args, **kwargs)
 
+    def clean_term(self):
+        term = self.cleaned_data['term']
+        if CategoryTerm.objects.filter(user=self.user, term=term).exists():
+            raise forms.ValidationError("You have already written a proposal with same term.")
+        return term
 
 class InputFormatSupportedForm(forms.ModelForm):
     class Meta:
@@ -64,9 +72,9 @@ class KnowledgeSourceForm(forms.ModelForm):
 class ReportForm(forms.ModelForm):
     class Meta:
         model = Report
-        fields = ("decision", "result", "explanation", "reviewer")
+        fields = ("decision", "result", "explanation", "user")
 
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ("author", "category_term", "title", "text")
+        fields = ("user", "category_term", "title", "text")

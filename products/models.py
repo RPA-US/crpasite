@@ -84,9 +84,36 @@ class Product(models.Model):
     def __unicode__(self):
         return self.title
 
-    def clean(self):
-        if(len(self.categories)==0):
-            raise ValidationError('A product has to have at least one associated category')
+    def create_product(
+        self,
+        title,
+        slug,
+        description,
+        price,
+        image,
+        featured,
+        active,
+        categories,
+    ):
+        a = categories
+        b = len(categories) == 0
+        if a or b:
+            raise ValueError("A product has to have at least one associated category")
+
+        prod_obj = self.model(
+            title=title,
+            description=description,
+            price=price,
+            image=image,
+            categories=categories,
+        )
+        if not slug:
+            slug2 = unique_slug_generator(self)
+            prod_obj.set_slug(slug2)
+        prod_obj.active = is_active
+        prod_obj.featured = is_featured
+        prod_obj.save(using=self._db)
+        return prod_obj
 
     class Meta:
         verbose_name = "Product"

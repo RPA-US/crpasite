@@ -1,12 +1,12 @@
 from django.urls import path
-from .views import CategoriesListView, CategoryDetailView, AddCategoryTermProposalView, ReviewCategoryTermProposalView, AddInputFormatSupportedView, AddKnowledgeSourceView, AddReportView, AddCommentView
+from .views import CategoriesListView, CategoryDetailView, ReviewCategoryTermProposalView, AddInputFormatSupportedView, AddKnowledgeSourceView, AddReportView, AddCommentView, AddCategoryTermProposalView
 from django.contrib.auth.views import LogoutView
 
 app_name = "taxcategs"
 
 urlpatterns = [
     path('navigate/', CategoriesListView.as_view(), name="categoryterm_list"),
-    path('view/', CategoryDetailView.as_view(), name="categoryterm_detail"),
+    path('view/<int:pk>/', CategoryDetailView.as_view(), name="categoryterm_detail"),
     path('review/', ReviewCategoryTermProposalView.as_view(), name="review"),
 ]
 

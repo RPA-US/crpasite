@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block title %}
+New product
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+    <h3 class="mb-30">New product</h3>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show"
+            role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <div class="mt-10">
+            <label for="id_title">Title:</label>
+            {{ form.title }}
+            <div class="form-validation">{{ form.title.errors }}</div>
+        </div>
+        <div class="mt-10">
+            <label for="id_description">Description:</label>
+            {{ form.description }}
+            <div class="form-validation">{{ form.description.errors }}</div>
+        </div>
+        <div class="mt-10">
+            <label for="id_price">Price:</label>
+            {{ form.price }}
+            <div class="form-validation">{{ form.price.errors }}</div>
+        </div>
+
+        <div class"mt-10">
+            <label for="id_image">Image:</label>
+            {{form.image}}
+            <div class="form-validation">{{ form.featured.errors }}</div>
+        </div>
+
+        <div class="mt-10">
+            <label for="id_featured">Featured:</label>
+            {{ form.featured }}
+            <div class="form-validation">{{ form.featured.errors }}</div>
+        </div>
+        <div class="mt-10">
+            <label for="id_active">Active:</label>
+            {{ form.active }}
+            <div class="form-validation">{{ form.active.errors }}</div>
+        </div>
+
+        <div class="mt-10">
+            {{form.categories}}
+            <div class="form-validation">{{ form.categories.errors }}</div>
+        </div>
+        <!--label for="id_cat">Categories:</label>
+        <ul class="myclass" id="id_categories">
+            {% for x, y in form.fields.categories.choices %}
+            <li><label><input type="checkbox" id="id_cat" name="cat[]" value="{{ x }}"
+                        {% if form.fields.categories.value == x %} checked{% endif %}><span> {{ y }}</span></label></li>
+            {% endfor %}
+        </ul>
+        <div class="form-validation">{{ form.categories.errors }}</div>
+        <br>
+        <input type="hidden" id="id_categories" name="categories"-->
+        <button type="submit" value="submit" class="btn_3">
+            Save
+        </button>
+    </form>
+</div>
+
+<!--div class="input-group-icon mt-10">
+    <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
+    <div class="form-select" id="default-select">
+        <select id="id_formats_supported" name="formats_supported" required>
+            <option value="" disabled selected>Input format supported</option>
+            {% for x, y in form.fields.categories.choices %}
+            <option value="{{ x }}" {% if form.fields.formats_supported.value == x %} checked{% endif %}>
+        {{ y }}</option>
+        {% endfor %}
+        </select>
+</div>
+</div-->
+
+
+<script src="{% static "js/vendor/jquery-1.12.4.min.js" %}"></script>
+<script>
+    $(".btn_3").click(function () {
+        var ccc = $("input[id='id_cat']:checked").map(function () {
+            return this.value;
+        }).get();
+        var c = JSON.stringify(ccc);
+        $("#id_categories").val(c);
+    });
+    $('ul.myclass li').click(function () {
+        var $cb = $(this).find(":checkbox");
+        if (!$cb.prop("checked")) {
+            $cb.prop("checked", true);
+        } else {
+            $cb.prop("checked", false);
+        }
+    });
+</script>
+{% endblock %}

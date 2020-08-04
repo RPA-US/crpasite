@@ -1,9 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import get_user_model, authenticate, login
 from .forms import RegisterForm, LoginForm, GuestForm
+from django.views.generic import DetailView
 from .models import GuestEmail
 from django.utils.http import is_safe_url
 from django.contrib import messages
+from django.urls import reverse
+from django.shortcuts import HttpResponseRedirect
+from django.urls import reverse_lazy
 
 User = get_user_model()
 
@@ -120,3 +124,21 @@ def guest_register_view(request):
             return redirect("home_url")
 
     return render(request, "accounts/login.html", context)
+
+ 
+class AccountDetailView(DetailView):
+    def get(self, request, *args, **kwargs):
+        roles = {"1":"Reviewer","2":"Provider","3":"Developer","4":"Administrador"}
+        if self.request.user.is_authenticated:
+            user = get_object_or_404(User, pk=request.user.pk)
+        else:
+            user = None
+        rol = roles.get(str(user.role))
+        context = {'user': user, 'rol': rol}
+        return render(request, 'accounts/detail.html', context)
+
+
+def destroy(request):
+    User.objects.filter(pk=request.user.id).update(active=False)
+    messages.warning(request, "Deleted User.")
+    return HttpResponseRedirect(reverse_lazy('accounts:logout')) 

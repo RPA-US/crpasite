@@ -37,7 +37,7 @@
               </div>
               <div class="header-info-right">
                 <ul>
-                  <li><a href="{% url 'accounts:login' %}">My Account </a></li>
+                  <li><a href="{% url 'accounts:view' %}">My Account </a></li>
                   {% if user.is_superuser %}
                   <li><a href="{% url 'admin:index' %}">Dashboard</a></li>
                   {% else %}
@@ -84,6 +84,8 @@
                         {% if request.user.is_authenticated %}
                         <li><a href="{% url "taxcategs:categoryterm_create" %}"> Category proposal</a></li>
                         <li><a href="{% url "taxcategs:report_create" %}"> Review</a></li>
+                        <li><a href="{% url "taxcategs:categoryterm_proposalreview" %}"> Review categories</a></li>
+                        <li><a href="{% url "taxcategs:categoryterm_myproposal" %}"> My proposals</a></li>
                         <li><a href="{% url "taxcategs:inputformatsupported_create" %}"> New Input Format Supported</a>
                         </li>
                         <li><a href="{% url "taxcategs:knowledgesource_create" %}"> New Knowledege Source</a></li>

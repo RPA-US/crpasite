@@ -122,3 +122,8 @@ class GuestForm(forms.Form):
             attrs={"class": "form-control", "placeholder": "Your Email"}
         )
     )
+
+class DeactivateUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['active']

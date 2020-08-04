@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block title %}
+My proposals
+{% endblock %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}{% endif %}
+<div class="container">
+    <h1>My proposals</h1>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show"
+            role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="section-top-border">
+        <h3>Pending</h3><br />
+        <div class="progress-table-wrap">
+            <div class="progress-table">
+                {% if object_list %}
+                <div class="table-head">
+                    <div class="categoryterm_term">Term</div>
+                    <div class="categoryterm_tax">Taxonomic Category</div>
+                    <div class="categoryterm_knowledge">Knowledge Source</div>
+                    <div class="categoryterm_created">Created At</div>
+                </div>
+                {% for c in object_list %}
+                <div class="table-row">
+                    <div class="categoryterm_term"><a href="/categories/view/{{ c.pk }}/">{{ c.term }}</a></div>
+                    <div class="categoryterm_tax">{{ c.tax_categ }}</div>
+                    <div class="categoryterm_knowledge">{{ c.knowledge_source }}</div>
+                    <div class="categoryterm_created">{{ c.created_at }}</div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p>No categories yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="section-top-border">
+        <h3>Accepted: Taxonomic Categories</h3><br />
+        <div class="progress-table-wrap">
+            <div class="progress-table">
+                {% if activeCategTerms %}
+                <div class="table-head">
+                    <div class="categoryterm_term">Term</div>
+                    <div class="categoryterm_tax">Taxonomic Category</div>
+                    <div class="categoryterm_knowledge">Knowledge Source</div>
+                    <div class="categoryterm_created">Created At</div>
+                </div>
+                {% for ac in activeCategTerms %}
+                <div class="table-row">
+                    <div class="categoryterm_term"><a href="/categories/view/{{ ac.pk }}/">{{ ac.term }}</a></div>
+                    <div class="categoryterm_tax">{{ ac.tax_categ }}</div>
+                    <div class="categoryterm_knowledge">{{ ac.knowledge_source }}</div>
+                    <div class="categoryterm_created">{{ ac.created_at }}</div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p>No categories yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="section-top-border">
+        <h3>Accepted: Category Terms</h3><br />
+        <div class="progress-table-wrap">
+            <div class="progress-table">
+                {% if taxCategTerms %}
+                <div class="table-head">
+                    <div class="categoryterm_term">Term</div>
+                    <div class="categoryterm_tax">Taxonomic Category</div>
+                    <div class="categoryterm_knowledge">Knowledge Source</div>
+                    <div class="categoryterm_created">Created At</div>
+                </div>
+                {% for tx in taxCategTerms %}
+                <div class="table-row">
+                    <div class="categoryterm_term"><a href="/categories/view/{{ tx.pk }}/">{{ tx.term }}</a></div>
+                    <div class="categoryterm_tax">{{ tx.tax_categ }}</div>
+                    <div class="categoryterm_knowledge">{{ tx.knowledge_source }}</div>
+                    <div class="categoryterm_created">{{ tx.created_at }}</div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p>No categories yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

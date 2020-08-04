@@ -146,6 +146,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
 
-
+ACCOUNT_LOGOUT_ON_GET = True
 LOGIN_REDIRECT_URL = "home_url"
 LOGOUT_REDIRECT_URL = "accounts:login"

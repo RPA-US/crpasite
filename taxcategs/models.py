@@ -91,6 +91,7 @@ class CategoryTerm(models.Model):
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     is_tax_categ = models.BooleanField(default=False)
+    substitute_tax_categ = models.BooleanField(default=False)
     active = models.BooleanField(default=False)
     tax_categ = models.ForeignKey(TaxCateg, on_delete=models.CASCADE, blank=True, null=True)
     knowledge_source = models.ForeignKey(KnowledgeSource, on_delete=models.CASCADE)
@@ -108,6 +109,26 @@ class CategoryTerm(models.Model):
         if not self.request.user.is_authenticated:
             raise ValidationError("User must be authenticated.")
         validated_data.update({'user': self.request.user})
+        items = validated_data.pop('formats_supported', None)
+        action = CategoryTerm.objects.create(**validated_data)
+        if items is not None:
+            # items = [InputFormatSupported.objects.create(**item) for item in items]
+            # '*' is the "splat" operator: It takes a list as input, and expands it into actual positional arguments in the function call.
+            action.formats_supported.add(*items)
+        return action
+
+    def review(self, form):
+        validated_data = form.cleaned_data
+        if not CategoryTerm.objects.filter(pk=validated_data.get("pk")).exists():
+            raise ValidationError("A proposal cannot be reviwed if it is not created.")
+        # Si result: CT = "Taxonomic category proposal save as new category term" or TE = "Taxonomic category edited"
+        # guardamos el CategoryTerm
+        # elif result=NC:
+        # guardo con is_tax_categ=False
+        # eliif result=NT:
+        # guardo con is_tax_categ=True
+
+        # reconstruyo el Report a partir del objeto formulario y lo guardo asociandolo con el saved del category term
         items = validated_data.pop('formats_supported', None)
         action = CategoryTerm.objects.create(**validated_data)
         if items is not None:
@@ -183,9 +204,17 @@ class Report(models.Model):
             (tag, tag.value) for tag in ResultChoice
         ],  # Choices is a list of Tuple
     )
+    categ_term = models.ForeignKey(CategoryTerm, verbose_name="Proposal reviewed", on_delete=models.CASCADE)
     explanation = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(UserModel, verbose_name="Reviewer", on_delete=models.CASCADE)
+
+    def create(self, validated_data):
+        if (not self.request.user.is_authenticated) or request.user.role != "1":
+            raise ValidationError("Reviewer must be authenticated.")
+        validated_data.update({'user': self.request.user})
+        action = Report.objects.create(**validated_data)
+        return action
 
     class Meta:
         verbose_name = "Decision"

@@ -167,8 +167,8 @@
     }
 
 
-/* 6. Nice Selectorp  */
-  var nice_Select = $('select');
+/* 6. Nice Selector, excluding multiple selector  */
+  var nice_Select = $("select:not('.multipleselector')");
     if(nice_Select.length){
       nice_Select.niceSelect();
     }
@@ -349,9 +349,9 @@
           });
         }
 
-        // niceSelect js code
+        // niceSelect js code, excluding multiple selector
         $(document).ready(function () {
-          $('select').niceSelect();
+          $("select:not('.multipleselector')").niceSelect();
         });
 
         // menu fixed js code

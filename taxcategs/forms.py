@@ -1,15 +1,18 @@
 from django import forms
 from .models import CategoryTerm, KnowledgeSource, InputFormatSupported, Report, Comment
 
+
 class ProposalCategoryTermForm(forms.ModelForm):
     class Meta:
         model = CategoryTerm
-        exclude = ('user',)
+        exclude = (
+            "user",
+            "active",
+            "is_tax_categ",
+        )
         fields = (
             "term",
             "description",
-            "is_tax_categ",
-            "active",
             "tax_categ",
             "knowledge_source",
             "formats_supported",
@@ -35,11 +38,14 @@ class ProposalCategoryTermForm(forms.ModelForm):
                 }
             ),
             "tax_categ": forms.Select(attrs={"class": "form-control default-select"}),
-            "active": forms.CheckboxInput(
-                attrs={"class": "primary-checkbox", "checked": ""}
+            "formats_supported": forms.SelectMultiple(
+                attrs={
+                    "class": "multipleselector",
+                    "data-placeholder": "Click to select an option...",
+                    "multiple": "multiple",
+                }
             ),
-            "formats_supported": forms.CheckboxSelectMultiple(),
-             "categoryChars": forms.Textarea(
+            "categoryChars": forms.Textarea(
                 attrs={
                     "class": "single-input",
                     "placeholder": "Category characteristics (separated by commas)",
@@ -49,30 +55,53 @@ class ProposalCategoryTermForm(forms.ModelForm):
                 }
             ),
         }
+
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
+        self.user = kwargs.pop("user")
+        self.taxcategdecision = kwargs.pop("taxcategdecision")
         super(ProposalCategoryTermForm, self).__init__(*args, **kwargs)
 
     def clean_term(self):
-        term = self.cleaned_data['term']
-        if CategoryTerm.objects.filter(user=self.user, term=term).exists():
-            raise forms.ValidationError("You have already written a proposal with same term.")
+        term = self.cleaned_data["term"]
+        if CategoryTerm.objects.filter(term=term).exists():
+            raise forms.ValidationError(
+                "There is already a proposal with the same term."
+            )
         return term
+
+    def clean_formats_supported(self):
+        ifp = self.cleaned_data["formats_supported"]
+        if len(ifp) < 1:
+            raise forms.ValidationError(
+                "A category term cannot have less than one associated input format supported"
+            )
+        return ifp
+
+    def clean_categoryChars(self):
+        categChars = self.cleaned_data["categoryChars"]
+        if len(categChars) < 1:
+            raise ValidationError(
+                "A category term cannot have less than one category characteristic"
+            )
+        return categChars
 
 class InputFormatSupportedForm(forms.ModelForm):
     class Meta:
         model = InputFormatSupported
         fields = ("name", "slug", "parent")
 
+
 class KnowledgeSourceForm(forms.ModelForm):
     class Meta:
         model = KnowledgeSource
         fields = ("name", "url", "creator", "active")
 
+
 class ReportForm(forms.ModelForm):
     class Meta:
         model = Report
         fields = ("decision", "result", "explanation", "user")
+
 
 class CommentForm(forms.ModelForm):
     class Meta:

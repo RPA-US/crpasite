@@ -58,7 +58,7 @@ Create a category term proposal
             </div>
             <div class="form-validation">{{ form.knowledge_source.errors }}</div>
         </div>
-        <div class="input-group-icon mt-10">
+        <!--div class="input-group-icon mt-10">
             <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
             <div class="form-select" id="default-select">
                 <select id="id_formats_supported" name="formats_supported" required>
@@ -70,7 +70,21 @@ Create a category term proposal
                 </select>
             </div>
         </div>
-        <div class="form-validation">{{ form.formats_supported.errors }}</div>
+        <div class="form-validation">{{ form.formats_supported.errors }}</div-->
+        <div class="mt-10">
+            {{form.formats_supported.label}}
+            <select class="multipleselector" multiple data-placeholder="Click to select an option...">
+                {% for x, y in form.fields.formats_supported.choices %}
+                <option value="{{ x }}" {% if form.fields.formats_supported.value == x %} selected{% endif %}>
+                    {{ y }}</option>
+                {% endfor %}
+            </select>
+            <a class="dribbble" href="https://dribbble.com/shots/5112850-Multiple-select-animation-field"
+                target="_blank"><img
+                    src="https://cdn.dribbble.com/assets/dribbble-ball-1col-dnld-e29e0436f93d2f9c430fde5f3da66f94493fdca66351408ab0f96e2ec518ab17.png"
+                    alt=""></a>
+        </div>
+
         <div class="single-element-widget">
             <div class="col-lg-3 col-md-4 mt-sm-30">
                 <div class="switch-wrap d-flex justify-content-between">
@@ -91,16 +105,3 @@ Create a category term proposal
     </form>
 </div>
 {% endblock %}
-
-<select multiple data-placeholder="Add tools">
-    <option>Sketch</option>
-    <option selected>Framer X</option>
-    <option>Photoshop</option>
-    <option>Principle</option>
-    <option>Invision</option>
-</select>
-
-<!-- dribbble -->
-<a class="dribbble" href="https://dribbble.com/shots/5112850-Multiple-select-animation-field" target="_blank"><img
-        src="https://cdn.dribbble.com/assets/dribbble-ball-1col-dnld-e29e0436f93d2f9c430fde5f3da66f94493fdca66351408ab0f96e2ec518ab17.png"
-        alt=""></a>

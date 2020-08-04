@@ -99,20 +99,20 @@ class CategoryTerm(models.Model):
         UserModel, verbose_name="Creator", on_delete=models.CASCADE
     )
     categoryChars = ArrayField(models.CharField(max_length=200))
-    # knowledgeSource
-    # list of category terms
-    # list of category chars
-    # list of input format supported
 
     class Meta:
         verbose_name = "Category Term"
         verbose_name_plural = "Category Terms"
 
     def create(self, validated_data):
+        if not self.request.user.is_authenticated:
+            raise ValidationError("User must be authenticated.")
+        validated_data.update({'user': self.request.user})
         items = validated_data.pop('formats_supported', None)
         action = CategoryTerm.objects.create(**validated_data)
         if items is not None:
-            #items = [CheckItem.objects.create(**item) for item in items]
+            # items = [InputFormatSupported.objects.create(**item) for item in items]
+            # '*' is the "splat" operator: It takes a list as input, and expands it into actual positional arguments in the function call.
             action.formats_supported.add(*items)
         return action
 
@@ -122,14 +122,9 @@ class CategoryTerm(models.Model):
     def get_absolute_url(self):
         return reverse("taxcategs:categoryterm_detail", args=[self.pk])
 
-    # def clean(self):
-    #     if len(self.formats_supported) < 1:
-    #         raise ValidationError(
-    #             "A category term cannot have less than one associated input format supported"
-    #         )
-        # categ_chars = CategoryChar.objects.filter(category_term=self, active=True)
-        # if(len(categ_chars)<1):
-        #     raise ValidationError('A category term cannot have less than one category characteristic')
+    def clean(self):
+        if(len(self.categoryChars)<1):
+            raise ValidationError('A category term cannot have less than one category characteristic')
     
 
 # If you are using Django >= 1.9 with Postgres you can make use of ArrayField advantages

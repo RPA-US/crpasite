@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CategoriesListView, CategoryDetailView, ReviewCategoryTermProposalView, AddInputFormatSupportedView, AddKnowledgeSourceView, AddReportView, AddCommentView, AddCategoryTermProposalView
+from .views import CategoriesListView, CategoryDetailView, ReviewCategoryTermProposalView, AddInputFormatSupportedView, AddKnowledgeSourceView, AddReportView, AddCommentView, AddCategoryTermProposalView, select_proposal_view
 from django.contrib.auth.views import LogoutView
 
 app_name = "taxcategs"
@@ -11,7 +11,8 @@ urlpatterns = [
 ]
 
 urlpatterns += [   
-    path('proposal/', AddCategoryTermProposalView.as_view(), name='categoryterm_create'),
+    path('select/', select_proposal_view, name='categoryterm_create'),
+    path('proposal/', AddCategoryTermProposalView.as_view(), name='categoryterm_proposal'),
     path('input/', AddInputFormatSupportedView.as_view(), name='inputformatsupported_create'),
     path('knowledgesource/', AddKnowledgeSourceView.as_view(), name='knowledgesource_create'),
     path('report/', AddReportView.as_view(), name='report_create'),

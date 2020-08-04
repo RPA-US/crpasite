@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView, FormView, DeleteView
+from django.core.exceptions import ValidationError
 from .models import (
     TaxCateg,
     CategoryTerm,
@@ -60,24 +61,32 @@ class CategoryDetailView(DetailView):
         return render(request, 'categories/detail.html', context)
 
 class AddCategoryTermProposalView(CreateView):
-    # model = CategoryTerm
+    model = CategoryTerm
     form_class = ProposalCategoryTermForm
     template_name = "categories/create.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
+        # self.object = form.save(commit=False)
+        # self.object.user = self.request.user
+        # self.object.formats_supported.set(None)
+        # saved = self.object.save()
+        form.cleaned_data.update({'active': False})
+        if form.taxcategdecision == '1':
+            form.cleaned_data.update({'is_tax_categ': True})
+        else:
+            form.cleaned_data.update({'is_tax_categ': False})
+        self.object = CategoryTerm.create(self, form.cleaned_data)
         return HttpResponseRedirect(self.get_success_url())
 
     def get_initial(self, *args, **kwargs):
         initial = super(AddCategoryTermProposalView, self).get_initial(**kwargs)
-        initial['term'] = 'My term'
+        # initial['term'] = 'My term'
         return initial
 
     def get_form_kwargs(self, *args, **kwargs):
         kwargs = super(AddCategoryTermProposalView, self).get_form_kwargs(*args, **kwargs)
         kwargs['user'] = self.request.user
+        kwargs['taxcategdecision'] = self.request.GET["taxcateg"]
         return kwargs
 
     # fields = '__all__'
@@ -96,13 +105,13 @@ class AddCategoryTermProposalView(CreateView):
     #         return HttpResponseRedirect(reverse_lazy('categories:categoryterm_list', args=[cat_term.id]))
     #     return render(request, 'categories/create.html', {'form': form})
 
+
 class ReviewCategoryTermProposalView(FormView):
     model = CategoryTerm
     form_class = ProposalCategoryTermForm
     template_name = "categories/edit.html"
     # fields = '__all__'
     # fields = ('title', 'body')
-
 
 class AddInputFormatSupportedView(CreateView):
     model = InputFormatSupported
@@ -126,3 +135,7 @@ class AddCommentView(CreateView):
     model = Comment
     form_class = CommentForm
     template_name = "categories/create-comment.html"
+
+
+def select_proposal_view(request):
+    return render(request, "categories/proposal.html")

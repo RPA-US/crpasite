@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}
+Create a category term proposal
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+    <div class="section-top-border">
+        <h3>What kind of proposal would you like to register, {{request.user.first_name}}?</h3>
+        <br />
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show"
+                role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <div class="row gallery-item">
+            <div class="col-md-6">
+                <a href="{% url 'taxcategs:categoryterm_proposal'%}?taxcateg=1">
+                    <img src="{% static 'img/changetaxcateg1.jpg' %}" width="100%"
+                        alt="Substitute a existing taxonomic category">
+                </a>
+                <p>Substitute a existing taxonomic category</p>
+            </div>
+            <div class="col-md-6">
+                <a href="{% url 'taxcategs:categoryterm_proposal'%}?taxcateg=0">
+                    <img src="{% static 'img/newproposal1.jpg' %}" width="100%" alt="New category term proposal">
+                </a>
+                <p>New category term proposal</p>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

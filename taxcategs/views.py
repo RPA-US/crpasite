@@ -19,6 +19,7 @@ from taxcategs.forms import (
     CommentForm,
 )
 import datetime
+from django.core.paginator import Paginator
 from django.contrib.auth.decorators import permission_required
 from .forms import ProposalCategoryTermForm
 from django.db.models.signals import pre_save
@@ -65,32 +66,42 @@ class CategoriesToReviewListView(ListView):
     #     pub_date__year=2008,
     # ),
     # )
-    # q = CategoryTerm.objects.filter(active=True).exclude(pk__in=[e.categ_term for e in Report.objects.all()])
     # subs = Report.objects.all()
     # locs = []
     # for sub in subs:
     #     locs.append(Location.objects.get(id=sub.location_id, is_active=True))
     # queryset = locs
-    queryset = CategoryTerm.objects.filter(active=False)
-    paginate_by = 50
+    queryset = CategoryTerm.objects.filter(active=False).exclude(pk__in=[e.categ_term for e in Report.objects.all()])
+    paginate_by = 5
     template_name = "categories/list.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["categTerms"] = CategoryTerm.objects.filter(
-            active=True, is_tax_categ=True
-        ).all()
+        context["Title"] = "Proposals for review"
         return context
 
-# @receiver(pre_save, sender=CategoryTerm)
-# def handler(sender, instance, **kwargs):
-#     if not instance.subject_init:
-#         instance.subject_init = instance.subject_initials()
+class CategoriesAcceptedListView(ListView):
+    model = CategoryTerm
+    queryset = CategoryTerm.objects.filter(active=True)
+    paginate_by = 5
+    template_name = "categories/list.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["Title"] = "Accepted proposals"
+        return context
 
-# class CategoryDetailView(DetailView):
-#     model = TaxCateg
-#     template_name = "categories/detail.html"
+class CategoriesRefusedListView(ListView):
+    model = CategoryTerm
+    queryset = [e.categ_term for e in Report.objects.filter(decision='KO').all()]
+    paginate_by = 5
+    template_name = "categories/list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["Title"] = "Refused proposals"
+        return context
+
 
 class CategoryDetailView(DetailView):
     def get(self, request, *args, **kwargs):
@@ -210,3 +221,11 @@ def accept_proposal(request):
     context = {"form": form}
 
     return render(request, "accounts/register.html", context)
+
+    def listing(request):
+        contact_list = Contact.objects.all()
+        paginator = Paginator(contact_list, 25) # Show 25 contacts per page.
+
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'list.html', {'page_obj': page_obj})

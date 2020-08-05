@@ -6152,6 +6152,18 @@ input:focus {
   color: #888888;
 }
 
+.blog-pagination .page-item.activo .page-link {
+  background-color: #fbf9ff;
+  border-color: #f0e9ff;
+  color: #ff003c;
+}
+
+.blog-pagination .page-item.activo .page-link:hover {
+  background-color: #fcb6c6;
+  border-color: #f0e9ff;
+  color: #ff003c;
+}
+
 /* line 1027, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_blog_page.scss */
 .blog-pagination .page-item:last-child .page-link {
   margin-right: 0;
@@ -13133,6 +13145,20 @@ button[disabled=disabled]:hover{
   width: 34.74%;
 }
 
+
+.progress-table .categoryterm_1 {
+  width: 35%;
+  padding-left: 30px;
+}
+.progress-table .categoryterm_ {
+  width: 45%;
+}
+
+.progress-table .categoryterm_n {
+  width: 35%;
+  padding-right: 50px;
+}
+
 .progress-table .categoryterm_created {
   width: 30.36%;
   padding-right: 50px;
@@ -13141,7 +13167,10 @@ button[disabled=disabled]:hover{
 .progress-table .table-head .categoryterm_term,
 .progress-table .table-head .categoryterm_tax,
 .progress-table .table-head .categoryterm_knowledge,
-.progress-table .table-head .categoryterm_created {
+.progress-table .table-head .categoryterm_created
+.progress-table .table-head .categoryterm_1,
+.progress-table .table-head .categoryterm_,
+.progress-table .table-head .categoryterm_n {
   color: #415094;
   line-height: 40px;
   text-transform: uppercase;
@@ -13151,7 +13180,10 @@ button[disabled=disabled]:hover{
 .progress-table .table-row .categoryterm_term,
 .progress-table .table-row .categoryterm_tax,
 .progress-table .table-row .categoryterm_knowledge,
-.progress-table .table-row .categoryterm_created {
+.progress-table .table-row .categoryterm_created,
+.progress-table .table-row .categoryterm_1,
+.progress-table .table-row .categoryterm_,
+.progress-table .table-row .categoryterm_n {
   display: flex;
   align-items: center;
 }
@@ -13159,6 +13191,7 @@ button[disabled=disabled]:hover{
 .progress-table a {
   color: #2577fd;
 }
+
 /* Multiple select */
 
 .selectMultiple {

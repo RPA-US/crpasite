@@ -1,33 +1,107 @@
 {% extends 'base.html' %}
 {% block title %}
-Taxonomy
+{{Title}}
 {% endblock %}
 
 {% block content %}
 
-{% if request.user.is_authenticated %}{% endif %}
 
-
-<h1>Taxonomy</h1>
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show"
-        role="alert">
-        {{ message }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+<div class="container">
+    {% if request.user.role == 1 or 4 %}
+    <h1>{{Title}}</h1>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show"
+            role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="section-top-border">
+        <h3>Category terms</h3><br />
+        <div class="progress-table-wrap">
+            <div class="progress-table">
+                {% if object_list %}
+                <div class="table-head">
+                    <div class="categoryterm_1">Term</div>
+                    <div class="categoryterm_">Taxonomic Category</div>
+                    <div class="categoryterm_">Knowledge Source</div>
+                    <div class="categoryterm_">Created At</div>
+                    <div class="categoryterm_n">Replacement?</div>
+                </div>
+                {% for c in object_list %}
+                <div class="table-row">
+                    <div class="categoryterm_1"><a href="/categories/view/{{ c.pk }}/">{{ c.term }}</a></div>
+                    <div class="categoryterm_">{{ c.tax_categ }}</div>
+                    <div class="categoryterm_">{{ c.knowledge_source }}</div>
+                    <div class="categoryterm_">{{ c.created_at }}</div>
+                    <div class="categoryterm_n">{{ c.substitute_tax_categ }}</div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p>No categories yet.</p>
+                {% endif %}
+            </div>
+        </div>
     </div>
-    {% endfor %}
-</ul>
-{% endif %}
-<ul>
-    {% for c in object_list %}
-    <li>{{ c.name }}</li>
-    {% empty %}
-    <li>No categories yet.</li>
-    {% endfor %}
-</ul>
-{{ categTerms }}
+
+    <nav class="blog-pagination justify-content-center d-flex">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a href="?page=1" class="page-link">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-left"
+                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                        <path fill-rule="evenodd"
+                            d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                    </svg>
+                </a>
+            </li>
+            <li class="page-item">
+                <a href="?page={{ page_obj.previous_page_number }}" class="page-link" aria-label="Previous">
+                    <i class="ti-angle-left"></i></a>
+            </li>
+            {% endif %}
+            {% for i in page_obj.paginator.page_range %}
+            {% if page_obj.number == i %}
+            <li class="page-item activo"><a href="#" class="page-link">{{ i }}</a></li>
+            {% else %}
+            <li class="page-item"><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a href="?page={{ page_obj.next_page_number }}" class="page-link" aria-label="Next">
+                    <i class="ti-angle-right"></i>
+                </a>
+            </li>
+            <li class="page-item">
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="page-link" aria-label="Last">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-right"
+                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                        <path fill-rule="evenodd"
+                            d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+
+
+    {% else %}
+    <h2 class="form-validation">Reviewer must be authenticated</h2>
+    {% endif %}
+    {{qqq}}
+</div>
 {% endblock %}

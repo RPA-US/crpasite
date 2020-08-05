@@ -5,8 +5,8 @@ My proposals
 
 {% block content %}
 
-{% if request.user.is_authenticated %}{% endif %}
 <div class="container">
+    {% if request.user.is_authenticated %}
     <h1>My proposals</h1>
     {% if messages %}
     <ul class="messages">
@@ -97,5 +97,8 @@ My proposals
             </div>
         </div>
     </div>
+    {% else %}
+    <h2 class="form-validation">User must be authenticated</h2>
+    {% endif %}
 </div>
 {% endblock %}

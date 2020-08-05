@@ -53,6 +53,7 @@ class ProductForm(forms.ModelForm):
             "price",
             "categories",
             "image",
+            "component",
             "featured",
             "active",
         )
@@ -69,6 +70,9 @@ class ProductForm(forms.ModelForm):
             ),
             "image": forms.FileInput(
                 attrs={"class": "form-control", "placeholder": "Image"}
+            ),
+            "component": forms.FileInput(
+                attrs={"class": "form-control", "placeholder": "File"}
             ),
             "featured": forms.CheckboxInput(
                 attrs={"class": "primary-checkbox", "checked": "checked"}

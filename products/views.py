@@ -19,7 +19,6 @@ class ProductListView(ListView):
         context["cart"] = cart_obj
         return context
 
-
 class ProductDetailView(DetailView):
     model = Product
 

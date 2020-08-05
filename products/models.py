@@ -8,6 +8,8 @@ from django.db.models import Q
 from taxcategs.models import TaxCateg
 from accounts.models import User
 from django.core.exceptions import ValidationError
+from private_storage.storage.files import PrivateFileSystemStorage
+from private_storage.fields import PrivateFileField
 
 def get_filename_ext(filepath):
     base_name = os.path.basename(filepath)
@@ -59,7 +61,6 @@ class ProductManager(models.Manager):
     def search(self, query):
         return self.get_queryset().active().search(query)
 
-
 class Product(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField(blank=True)
@@ -71,6 +72,7 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     categories = models.ManyToManyField(TaxCateg, blank=True)
     user = models.ForeignKey(User, verbose_name="Provider", on_delete=models.CASCADE)
+    component = PrivateFileField("Component")
 
     # Manager
     objects = ProductManager()
@@ -87,19 +89,30 @@ class Product(models.Model):
         return self.title
 
     def create(self, validated_data):
-        if (not self.request.user.is_authenticated) or (not self.request.user.role == 2):
+        usr = self.request.user
+        if (not usr.is_authenticated) or (not usr.role == 2):
             raise ValidationError("Provider must be authenticated.")
         a = validated_data.get("categories")
         if (not a) or (len(a) == 0):
             raise ValidationError("A product has to have at least one associated category")
-        validated_data.update({'user': self.request.user})
+        validated_data.update({'user': usr})
         validated_data.update({'slug': unique_slug_generator_title(validated_data.get("title"), Product)})
         items = validated_data.pop('categories', None)
         action = Product.objects.create(**validated_data)
         if items is not None:
             # '*' is the "splat" operator: It takes a list as input, and expands it into actual positional arguments in the function call.
             action.categories.add(*items)
+        prodavail_user = ProductsAvailable.objects.filter(user=usr)
+        if prodavail_user:
+            ls = get_object_or_404(ProductsAvailable, user=usr)
+        else:
+            ls = ProductsAvailable.objects.create(user=usr)
+        ls.products.add(action)
+        # ls.save()
         return action
+    class Meta:
+        verbose_name = "Product"
+        verbose_name_plural = "Products"
 
     # def create_product(
     #     self,
@@ -132,6 +145,16 @@ class Product(models.Model):
     #     prod_obj.save(using=self._db)
     #     return prod_obj
 
+class ProductsAvailable(models.Model):
+    products = models.ManyToManyField(Product, verbose_name="Bought products", blank=True)
+    user = models.ForeignKey(User, verbose_name="Owner", on_delete=models.CASCADE) 
+
     class Meta:
-        verbose_name = "Product"
-        verbose_name_plural = "Products"
+        verbose_name = ("ProductsAvailable")
+        verbose_name_plural = ("ProductsAvailables")
+
+    def __str__(self):
+        return self.user.email
+
+    def get_absolute_url(self):
+        return reverse("ProductsAvailable_detail", kwargs={"pk": self.pk})

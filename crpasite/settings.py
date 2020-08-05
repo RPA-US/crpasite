@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "categories",
     "taxcategs",
     "categories.editor",
+    "private_storage",
 ]
 
 AUTH_USER_MODEL = "accounts.User"  # changes the built-in user model to ours
@@ -149,3 +150,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
 ACCOUNT_LOGOUT_ON_GET = True
 LOGIN_REDIRECT_URL = "home_url"
 LOGOUT_REDIRECT_URL = "accounts:login"
+
+PRIVATE_STORAGE_ROOT = os.path.join(BASE_DIR, "privatefiles")
+PRIVATE_STORAGE_AUTH_FUNCTION = 'products.permissions.allow_staff'

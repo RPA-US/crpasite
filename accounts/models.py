@@ -5,7 +5,6 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 
-
 class UserManager(BaseUserManager):
     def create_user(
         self,
@@ -48,16 +47,11 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    REVIEWER = 1
-    PROVIDER = 2
-    DEVELOPER = 3
-    ADMIN = 4
-
     ROLE_CHOICES = (
-        (REVIEWER, "Reviewer"),
-        (PROVIDER, "Provider"),
-        (DEVELOPER, "Developer"),
-        (ADMIN, "Administrator"),
+        (1, "Reviewer"),
+        (2, "Provider"),
+        (3, "Developer"),
+        (4, "Administrator"),
     )
     role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, default = 3)
     email = models.EmailField(

@@ -313,7 +313,6 @@ a:hover,
 }
 
 /* line 92, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
-a,
 button {
   color: #fff;
   outline: medium none;
@@ -13196,6 +13195,9 @@ button[disabled=disabled]:hover{
   color: #2577fd;
 }
 
+.container a {
+  color: #2577fd;
+}
 /* Multiple select */
 
 .selectMultiple {

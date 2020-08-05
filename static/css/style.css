@@ -13094,6 +13094,10 @@ input:focus {
 
 /* Customize */
 
+.hiper p a {
+  color: #ff003c;
+}
+
 .search-btn {
   background-color: transparent;
   border: transparent;

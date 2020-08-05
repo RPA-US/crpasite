@@ -6,6 +6,8 @@ from django.http import JsonResponse, HttpResponse
 def home_page(request):
     return render(request, "home.html", {})
 
+def termandconds_page(request):
+    return render(request, "termandconds.html", {})
 
 def contact_page(request):
     contact_form = ContactForm(request.POST or None)

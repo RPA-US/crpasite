@@ -2,13 +2,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import home_page, contact_page
+from .views import home_page, contact_page, termandconds_page
 
 
 urlpatterns = (
     [
         path("admin/", admin.site.urls),
         path("", home_page, name="home_url"),
+        path("termandconds", termandconds_page, name="termandconds_url"),
         path("contact/", contact_page, name="contact_url"),
         path("accounts/", include("accounts.urls")),
         path("products/", include("products.urls"), name="products"),

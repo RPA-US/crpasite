@@ -4,30 +4,45 @@ My account detail
 {% endblock %}
 
 {% block content %}
-
+{% load static %}
 <div class="container">
     <h1>Category Term</h1>
     <br>
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show"
-            role="alert">
-            {{ message }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+    <div class="row">
+        <div class="col-md-6">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show"
+                    role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <p><strong>First name:</strong> {{ user.first_name }}</p>
+            <p><strong>Last name:</strong> {{ user.last_name }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Role:</strong> {{ rol }}</p>
+            <br />
+
+            <a href="{% url 'accounts:delete' %}" class="genric-btn danger">Delete account</a>
+
         </div>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    <p><strong>First name:</strong> {{ user.first_name }}</p>
-    <p><strong>Last name:</strong> {{ user.last_name }}</p>
-    <p><strong>Email:</strong> {{ user.email }}</p>
-    <p><strong>Role:</strong> {{ rol }}</p>
-    <br />
-
-    <a href="{% url 'accounts:delete' %}" class="genric-btn danger">Delete account</a>
-
+        <div class="col-md-6">
+            {% if user.role == 1 %}
+            <img src="{% static 'img/profile/reviewer.png' %}" width=30% alt="">
+            {% elif user.role == 2 %}
+            <img src="{% static 'img/profile/developer.png' %}" width=30% alt="">
+            {% elif user.role == 3 %}
+            <img src="{% static 'img/profile/provider.png' %}" width=30% alt="">
+            {% elif user.role == 4 %}
+            <img src="{% static 'img/profile/admin.png' %}" width=30% alt="">
+            {% endif %}
+        </div>
+    </div>
 </div>
 {% endblock %}

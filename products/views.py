@@ -1,8 +1,13 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from .models import Product
 from carts.models import Cart
 from .forms import ProductForm
 from django.shortcuts import render
+from django.core.exceptions import ValidationError
+from django.core.files.storage import FileSystemStorage
+import os, tempfile, zipfile
+from django.http import HttpResponse, HttpResponseRedirect
+from wsgiref.util import FileWrapper
 
 class ProductListView(ListView):
     queryset = Product.objects.all()
@@ -27,6 +32,35 @@ class ProductDetailView(DetailView):
     template_name = "products/detail.html"
 
 
+class CreateProductView(CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = "products/create.html"
+
+    def form_valid(self, form):
+        if not self.request.user.role == 2:
+            raise ValidationError("Only providers can register products")
+        self.object = Product.create(self, form.cleaned_data)
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_initial(self, *args, **kwargs):
+        initial = super(CreateProductView, self).get_initial(**kwargs)
+        # initial['term'] = 'My term'
+        return initial
+
+    def get_form_kwargs(self, *args, **kwargs):
+        kwargs = super(CreateProductView, self).get_form_kwargs(*args, **kwargs)
+        kwargs['user'] = self.request.user
+        return kwargs
+
+def upload(request):
+    context = {}
+    if request.method == 'POST':
+        uploaded_file = request.FILES['document']
+        fs = FileSystemStorage()
+        name = fs.save(uploaded_file.name, uploaded_file)
+        context['url'] = fs.url(name)
+    return render(request, 'upload.html', context)
 
 def register_product(request):
     form = ProductForm(request.POST or None)
@@ -66,3 +100,35 @@ def register_product(request):
     context = {"form": form}
 
     return render(request, "products/create.html", context)
+
+def send_file(request):
+    """                                                                         
+    Send a file through Django without loading the whole file into              
+    memory at once. The FileWrapper will turn the file object into an           
+    iterator for chunks of 8KB.                                                 
+    """
+    filename = __file__ # Select your file here.                                
+    wrapper = FileWrapper(file(filename))
+    response = HttpResponse(wrapper, content_type='text/plain')
+    response['Content-Length'] = os.path.getsize(filename)
+    return response
+
+
+def send_zipfile(request):
+    """                                                                         
+    Create a ZIP file on disk and transmit it in chunks of 8KB,                 
+    without loading the whole file into memory. A similar approach can          
+    be used for large dynamic PDF files.                                        
+    """
+    temp = tempfile.TemporaryFile()
+    archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
+    for index in range(10):
+        filename = __file__ # Select your files here.                           
+        archive.write(filename, 'file%d.txt' % index)
+    archive.close()
+    wrapper = FileWrapper(temp)
+    response = HttpResponse(wrapper, content_type='application/zip')
+    response['Content-Disposition'] = 'attachment; filename=test.zip'
+    response['Content-Length'] = temp.tell()
+    temp.seek(0)
+    return response

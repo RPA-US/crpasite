@@ -13199,7 +13199,7 @@ button[disabled=disabled]:hover{
 /* Multiple select */
 
 .selectMultiple {
-  width: 240px;
+  width: 50%;
   position: relative;
 }
 .selectMultiple select {

@@ -55,55 +55,12 @@ New product
         </div>
 
         <div class="mt-10">
-            {{form.categories}}
             <div class="form-validation">{{ form.categories.errors }}</div>
+            {{form.categories}}
         </div>
-        <!--label for="id_cat">Categories:</label>
-        <ul class="myclass" id="id_categories">
-            {% for x, y in form.fields.categories.choices %}
-            <li><label><input type="checkbox" id="id_cat" name="cat[]" value="{{ x }}"
-                        {% if form.fields.categories.value == x %} checked{% endif %}><span> {{ y }}</span></label></li>
-            {% endfor %}
-        </ul>
-        <div class="form-validation">{{ form.categories.errors }}</div>
-        <br>
-        <input type="hidden" id="id_categories" name="categories"-->
         <button type="submit" value="submit" class="btn_3">
             Save
         </button>
     </form>
 </div>
-
-<!--div class="input-group-icon mt-10">
-    <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
-    <div class="form-select" id="default-select">
-        <select id="id_formats_supported" name="formats_supported" required>
-            <option value="" disabled selected>Input format supported</option>
-            {% for x, y in form.fields.categories.choices %}
-            <option value="{{ x }}" {% if form.fields.formats_supported.value == x %} checked{% endif %}>
-        {{ y }}</option>
-        {% endfor %}
-        </select>
-</div>
-</div-->
-
-
-<script src="{% static "js/vendor/jquery-1.12.4.min.js" %}"></script>
-<script>
-    $(".btn_3").click(function () {
-        var ccc = $("input[id='id_cat']:checked").map(function () {
-            return this.value;
-        }).get();
-        var c = JSON.stringify(ccc);
-        $("#id_categories").val(c);
-    });
-    $('ul.myclass li').click(function () {
-        var $cb = $(this).find(":checkbox");
-        if (!$cb.prop("checked")) {
-            $cb.prop("checked", true);
-        } else {
-            $cb.prop("checked", false);
-        }
-    });
-</script>
 {% endblock %}

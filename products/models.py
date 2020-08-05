@@ -2,11 +2,12 @@ import os
 import random
 from django.db import models
 from django.db.models.signals import pre_save
-from crpasite.utils import unique_slug_generator
+from crpasite.utils import unique_slug_generator_title
 from django.urls import reverse
 from django.db.models import Q
 from taxcategs.models import TaxCateg
-
+from accounts.models import User
+from django.core.exceptions import ValidationError
 
 def get_filename_ext(filepath):
     base_name = os.path.basename(filepath)
@@ -19,7 +20,6 @@ def upload_image_path(instance, filename):
     new_filename = random.randint(1, 123123123123)
     final_name = f"{new_filename}{ext}"
     return f"products/{final_name}"
-
 
 class ProductQuerySet(models.query.QuerySet):
     def active(self):
@@ -65,65 +65,73 @@ class Product(models.Model):
     slug = models.SlugField(blank=True)
     description = models.TextField()
     price = models.DecimalField(max_digits=20, decimal_places=4, default=39.99)
-    image = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
+    image = models.ImageField(upload_to=upload_image_path)
     featured = models.BooleanField(default=False)
     active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    categories = models.ManyToManyField(TaxCateg)
+    categories = models.ManyToManyField(TaxCateg, blank=True)
+    user = models.ForeignKey(User, verbose_name="Provider", on_delete=models.CASCADE)
 
     # Manager
     objects = ProductManager()
 
     def get_absolute_url(self):
+        return reverse("products:detail", args=[self.slug])
         # return f"/products/detail/{self.slug}/"
-        return reverse("products:detail", kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.title
 
+
     def __unicode__(self):
         return self.title
 
-    def create_product(
-        self,
-        title,
-        slug,
-        description,
-        price,
-        image,
-        featured,
-        active,
-        categories,
-    ):
-        a = categories
-        b = len(categories) == 0
-        if a or b:
-            raise ValueError("A product has to have at least one associated category")
+    def create(self, validated_data):
+        if (not self.request.user.is_authenticated) or (not self.request.user.role == 2):
+            raise ValidationError("Provider must be authenticated.")
+        a = validated_data.get("categories")
+        if (not a) or (len(a) == 0):
+            raise ValidationError("A product has to have at least one associated category")
+        validated_data.update({'user': self.request.user})
+        validated_data.update({'slug': unique_slug_generator_title(validated_data.get("title"), Product)})
+        items = validated_data.pop('categories', None)
+        action = Product.objects.create(**validated_data)
+        if items is not None:
+            # '*' is the "splat" operator: It takes a list as input, and expands it into actual positional arguments in the function call.
+            action.categories.add(*items)
+        return action
 
-        prod_obj = self.model(
-            title=title,
-            description=description,
-            price=price,
-            image=image,
-            categories=categories,
-        )
-        if not slug:
-            slug2 = unique_slug_generator(self)
-            prod_obj.set_slug(slug2)
-        prod_obj.active = is_active
-        prod_obj.featured = is_featured
-        prod_obj.save(using=self._db)
-        return prod_obj
+    # def create_product(
+    #     self,
+    #     title,
+    #     slug,
+    #     description,
+    #     price,
+    #     image,
+    #     featured,
+    #     active,
+    #     categories,
+    # ):
+    #     a = categories
+    #     b = len(categories) == 0
+    #     if a or b:
+    #         raise ValueError("A product has to have at least one associated category")
+
+    #     prod_obj = self.model(
+    #         title=title,
+    #         description=description,
+    #         price=price,
+    #         image=image,
+    #         categories=categories,
+    #     )
+    #     if not slug:
+    #         slug2 = unique_slug_generator(self)
+    #         prod_obj.set_slug(slug2)
+    #     prod_obj.active = is_active
+    #     prod_obj.featured = is_featured
+    #     prod_obj.save(using=self._db)
+    #     return prod_obj
 
     class Meta:
         verbose_name = "Product"
         verbose_name_plural = "Products"
-
-
-def product_pre_save_receiver(sender, instance, *args, **kwargs):
-    if not instance.slug:
-        instance.slug = unique_slug_generator(instance)
-
-
-pre_save.connect(product_pre_save_receiver, sender=Product)  # Signals
-

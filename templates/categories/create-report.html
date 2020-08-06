@@ -20,8 +20,9 @@ New report
     </ul>
     {% endif %}
     <form method="POST">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" value="submit" id="xvxv" class="btn_3">
+        {{ category_term_form }}
+        {{ report_form }}
+        <button type="submit" value="submit" class="btn_3">
             Save
         </button>
     </form>

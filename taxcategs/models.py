@@ -81,6 +81,10 @@ class InputFormatSupported(CategoryBase):
     def get_absolute_url(self):
         return reverse("taxcategs:categoryterm_create")  # , kwargs={"pk": self.pk})
 
+class DecisionChoice(Enum):
+    OK = "Accepted"
+    KO = "Refused"
+    KK = "Accepted with changes"
 
 class CategoryTerm(models.Model):
     """
@@ -93,13 +97,18 @@ class CategoryTerm(models.Model):
     is_tax_categ = models.BooleanField(default=False)
     substitute_tax_categ = models.BooleanField(default=False)
     active = models.BooleanField(default=False)
-    tax_categ = models.ForeignKey(TaxCateg, on_delete=models.CASCADE, blank=True, null=True)
+    tax_categ = models.ForeignKey(
+        TaxCateg, on_delete=models.CASCADE, blank=True, null=True
+    )
     knowledge_source = models.ForeignKey(KnowledgeSource, on_delete=models.CASCADE)
     formats_supported = models.ManyToManyField(InputFormatSupported, blank=True)
     user = models.ForeignKey(
         UserModel, verbose_name="Creator", on_delete=models.CASCADE
     )
     categoryChars = ArrayField(models.CharField(max_length=200))
+    decision = models.CharField(
+        max_length=30, choices=[(tag, tag.value) for tag in DecisionChoice], blank=True
+    )
 
     class Meta:
         verbose_name = "Category Term"
@@ -108,8 +117,8 @@ class CategoryTerm(models.Model):
     def create(self, validated_data):
         if not self.request.user.is_authenticated:
             raise ValidationError("User must be authenticated.")
-        validated_data.update({'user': self.request.user})
-        items = validated_data.pop('formats_supported', None)
+        validated_data.update({"user": self.request.user})
+        items = validated_data.pop("formats_supported", None)
         action = CategoryTerm.objects.create(**validated_data)
         if items is not None:
             # items = [InputFormatSupported.objects.create(**item) for item in items]
@@ -129,7 +138,7 @@ class CategoryTerm(models.Model):
         # guardo con is_tax_categ=True
 
         # reconstruyo el Report a partir del objeto formulario y lo guardo asociandolo con el saved del category term
-        items = validated_data.pop('formats_supported', None)
+        items = validated_data.pop("formats_supported", None)
         action = CategoryTerm.objects.create(**validated_data)
         if items is not None:
             # items = [InputFormatSupported.objects.create(**item) for item in items]
@@ -144,9 +153,11 @@ class CategoryTerm(models.Model):
         return reverse("taxcategs:categoryterm_detail", args=[self.pk])
 
     def clean(self):
-        if(len(self.categoryChars)<1):
-            raise ValidationError('A category term cannot have less than one category characteristic')
-    
+        if len(self.categoryChars) < 1:
+            raise ValidationError(
+                "A category term cannot have less than one category characteristic"
+            )
+
 
 # If you are using Django >= 1.9 with Postgres you can make use of ArrayField advantages
 
@@ -174,12 +185,6 @@ class CategoryTerm(models.Model):
 #         return self.name
 
 
-class DecisionChoice(Enum):
-    OK = "Accepted"
-    KO = "Refused"
-    KK = "Accepted with changes"
-
-
 class ResultChoice(Enum):
     NC = "New category term"
     NT = "New taxonomic category"
@@ -191,28 +196,25 @@ class Report(models.Model):
     """
     Report of the decision taken after reviewing the proposal.
     """
-
-    decision = models.CharField(
-        max_length=30,
-        choices=[
-            (tag, tag.value) for tag in DecisionChoice
-        ],  # Choices is a list of Tuple
-    )
     result = models.CharField(
         max_length=60,
         choices=[
             (tag, tag.value) for tag in ResultChoice
         ],  # Choices is a list of Tuple
     )
-    categ_term = models.ForeignKey(CategoryTerm, verbose_name="Proposal reviewed", on_delete=models.CASCADE)
+    categ_term = models.ForeignKey(
+        CategoryTerm, verbose_name="Proposal reviewed", on_delete=models.CASCADE
+    )
     explanation = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(UserModel, verbose_name="Reviewer", on_delete=models.CASCADE)
+    review_user = models.ForeignKey(
+        UserModel, verbose_name="Reviewer", on_delete=models.CASCADE
+    )
 
     def create(self, validated_data):
         if (not self.request.user.is_authenticated) or request.user.role != "1":
             raise ValidationError("Reviewer must be authenticated.")
-        validated_data.update({'user': self.request.user})
+        validated_data.update({"user": self.request.user})
         action = Report.objects.create(**validated_data)
         return action
 
@@ -228,9 +230,7 @@ class Report(models.Model):
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(
-        UserModel, verbose_name="Author", on_delete=models.CASCADE
-    )
+    user = models.ForeignKey(UserModel, verbose_name="Author", on_delete=models.CASCADE)
     category_term = models.ForeignKey(CategoryTerm, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     text = models.TextField()

@@ -1,0 +1,815 @@
+[{
+        "model": "accounts.user",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$180000$qczPRu5Yj1Np$2f+Jyrdt66ltERu2byXIu0e+SgqgO+pU4Pr24YWoW/M=",
+            "last_login": "2020-08-05T22:55:18.298Z",
+            "role": 4,
+            "email": "antonio@crpa.site",
+            "first_name": "Antonio",
+            "last_name": "Mart\u00ednez",
+            "active": true,
+            "staff": true,
+            "superuser": true,
+            "groups": [],
+            "user_permissions": []
+        }
+    }, {
+        "model": "accounts.user",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$180000$naiEV2rNGwvv$yeY8pT2I9bhOa8lBy77mgibxaISD4bz50BzGSiyN3i0=",
+            "last_login": "2020-08-05T17:49:33.427Z",
+            "role": 2,
+            "email": "jose@crpa.site",
+            "first_name": "Jos\u00e9",
+            "last_name": "P\u00e9rez Puebla",
+            "active": true,
+            "staff": false,
+            "superuser": false,
+            "groups": [],
+            "user_permissions": []
+        }
+    }, {
+        "model": "accounts.user",
+        "pk": 7,
+        "fields": {
+            "password": "pbkdf2_sha256$180000$zWntJk9aAgev$Qs+AHlWLffX2PPYCal/8wlYJTmORkx5iHAfU2FH5HGs=",
+            "last_login": "2020-08-04T18:25:37.441Z",
+            "role": 2,
+            "email": "martinez@crpa.site",
+            "first_name": "Antonio",
+            "last_name": "Mart\u00ednez Rojas",
+            "active": true,
+            "staff": false,
+            "superuser": false,
+            "groups": [],
+            "user_permissions": []
+        }
+    }, {
+        "model": "accounts.user",
+        "pk": 8,
+        "fields": {
+            "password": "pbkdf2_sha256$180000$4LV0zf4Joytb$PK8Dq9qmxm/Z1hAMonX4U0onZAoqIdGOEfZlg+/ZdFs=",
+            "last_login": "2020-08-04T18:36:52.081Z",
+            "role": 3,
+            "email": "juanjp@crpa.site",
+            "first_name": "ejefwjefoj",
+            "last_name": "oijefwjefoiefj",
+            "active": true,
+            "staff": false,
+            "superuser": false,
+            "groups": [],
+            "user_permissions": []
+        }
+    }, {
+        "model": "accounts.user",
+        "pk": 9,
+        "fields": {
+            "password": "pbkdf2_sha256$180000$moh0lwzlUV5j$Jn4FOeNhrnfyMsN1wvJGYXM3oeasInqoBrW4EQELdC4=",
+            "last_login": "2020-08-05T19:03:54.502Z",
+            "role": 2,
+            "email": "juanjp2@crpa.site",
+            "first_name": "Juan",
+            "last_name": "Jimenez Pedroso",
+            "active": true,
+            "staff": true,
+            "superuser": true,
+            "groups": [],
+            "user_permissions": []
+        }
+    }, {
+        "model": "accounts.user",
+        "pk": 10,
+        "fields": {
+            "password": "pbkdf2_sha256$180000$6RJTag47YeMK$WppaZXA82GccNQc35iDI8KenaLWbBsdWLWiSuqYQA0s=",
+            "last_login": "2020-08-05T23:17:36.009Z",
+            "role": 1,
+            "email": "pegupo@crpa.site",
+            "first_name": "Pedro",
+            "last_name": "Guti\u00e9rrez Pozo",
+            "active": true,
+            "staff": false,
+            "superuser": false,
+            "groups": [],
+            "user_permissions": []
+        }
+    }, {
+        "model": "accounts.user",
+        "pk": 11,
+        "fields": {
+            "password": "pbkdf2_sha256$180000$5mFnqaA96axJ$RzFAKZsBlEDm0CWNEVTDA7VlCZiQAMXStBkzczJ3nDI=",
+            "last_login": null,
+            "role": 3,
+            "email": "pedro@crpa.site",
+            "first_name": "Pedro",
+            "last_name": "Mart\u00edn Casilla",
+            "active": true,
+            "staff": false,
+            "superuser": false,
+            "groups": [],
+            "user_permissions": []
+        }
+    }, {
+        "model": "accounts.user",
+        "pk": 12,
+        "fields": {
+            "password": "pbkdf2_sha256$180000$ah2azWUkAg7D$Zspn97WTZ/70sqGAVyYjRB3zFCPN2t5hHPbGgPnUYQA=",
+            "last_login": "2020-08-05T23:25:12.394Z",
+            "role": 1,
+            "email": "amartinez@crpa.site",
+            "first_name": "Antonio",
+            "last_name": "Mart\u00ednez Mar\u00edn",
+            "active": true,
+            "staff": false,
+            "superuser": false,
+            "groups": [],
+            "user_permissions": []
+        }
+    }, {
+        "model": "accounts.user",
+        "pk": 13,
+        "fields": {
+            "password": "pbkdf2_sha256$180000$gTXlSqbTs9rs$3WBgSFc+WQQbHIsSFY7sIgug4SOOWDQ+GLfU6/DDMlU=",
+            "last_login": null,
+            "role": 1,
+            "email": "dsfadsdfds@mail.com",
+            "first_name": "dasfsfd",
+            "last_name": "sdfdsf",
+            "active": true,
+            "staff": false,
+            "superuser": false,
+            "groups": [],
+            "user_permissions": []
+        }
+    }, {
+        "model": "carts.cart",
+        "pk": 1,
+        "fields": {
+            "user": 9,
+            "subtotal": "0.0000",
+            "total": "0.0000",
+            "updated_at": "2020-08-05T10:26:30.813Z",
+            "created_at": "2020-08-05T10:26:30.813Z",
+            "products": []
+        }
+    }, {
+        "model": "carts.cart",
+        "pk": 2,
+        "fields": {
+            "user": 9,
+            "subtotal": "0.0000",
+            "total": "0.0000",
+            "updated_at": "2020-08-05T12:18:14.964Z",
+            "created_at": "2020-08-05T12:18:14.964Z",
+            "products": []
+        }
+    }, {
+        "model": "carts.cart",
+        "pk": 3,
+        "fields": {
+            "user": 9,
+            "subtotal": "0.0000",
+            "total": "0.0000",
+            "updated_at": "2020-08-05T15:19:37.123Z",
+            "created_at": "2020-08-05T14:59:31.539Z",
+            "products": []
+        }
+    }, {
+        "model": "carts.cart",
+        "pk": 4,
+        "fields": {
+            "user": null,
+            "subtotal": "0.0000",
+            "total": "0.0000",
+            "updated_at": "2020-08-05T15:03:17.207Z",
+            "created_at": "2020-08-05T15:03:17.207Z",
+            "products": []
+        }
+    }, {
+        "model": "carts.cart",
+        "pk": 5,
+        "fields": {
+            "user": null,
+            "subtotal": "0.0000",
+            "total": "0.0000",
+            "updated_at": "2020-08-05T15:13:24.211Z",
+            "created_at": "2020-08-05T15:13:24.211Z",
+            "products": []
+        }
+    }, {
+        "model": "carts.cart",
+        "pk": 6,
+        "fields": {
+            "user": 1,
+            "subtotal": "0.0000",
+            "total": "0.0000",
+            "updated_at": "2020-08-05T15:24:51.120Z",
+            "created_at": "2020-08-05T15:24:51.120Z",
+            "products": []
+        }
+    }, {
+        "model": "carts.cart",
+        "pk": 7,
+        "fields": {
+            "user": 9,
+            "subtotal": "0.0000",
+            "total": "0.0000",
+            "updated_at": "2020-08-05T15:30:11.611Z",
+            "created_at": "2020-08-05T15:30:11.611Z",
+            "products": []
+        }
+    }, {
+        "model": "carts.cart",
+        "pk": 8,
+        "fields": {
+            "user": null,
+            "subtotal": "0.0000",
+            "total": "0.0000",
+            "updated_at": "2020-08-05T15:38:17.328Z",
+            "created_at": "2020-08-05T15:38:17.328Z",
+            "products": []
+        }
+    }, {
+        "model": "carts.cart",
+        "pk": 9,
+        "fields": {
+            "user": 9,
+            "subtotal": "0.0000",
+            "total": "0.0000",
+            "updated_at": "2020-08-05T16:05:19.075Z",
+            "created_at": "2020-08-05T15:41:19.730Z",
+            "products": []
+        }
+    }, {
+        "model": "carts.cart",
+        "pk": 10,
+        "fields": {
+            "user": 9,
+            "subtotal": "0.0000",
+            "total": "0.0000",
+            "updated_at": "2020-08-05T17:26:01.565Z",
+            "created_at": "2020-08-05T17:26:01.565Z",
+            "products": []
+        }
+    }, {
+        "model": "carts.cart",
+        "pk": 11,
+        "fields": {
+            "user": 2,
+            "subtotal": "0.0000",
+            "total": "0.0000",
+            "updated_at": "2020-08-05T17:49:43.976Z",
+            "created_at": "2020-08-05T17:49:43.976Z",
+            "products": []
+        }
+    }, {
+        "model": "carts.cart",
+        "pk": 12,
+        "fields": {
+            "user": 9,
+            "subtotal": "0.0000",
+            "total": "0.0000",
+            "updated_at": "2020-08-05T17:52:05.540Z",
+            "created_at": "2020-08-05T17:52:05.540Z",
+            "products": []
+        }
+    }, {
+        "model": "carts.cart",
+        "pk": 13,
+        "fields": {
+            "user": 1,
+            "subtotal": "0.0000",
+            "total": "0.0000",
+            "updated_at": "2020-08-05T19:01:56.754Z",
+            "created_at": "2020-08-05T19:01:56.754Z",
+            "products": []
+        }
+    }, {
+        "model": "carts.cart",
+        "pk": 14,
+        "fields": {
+            "user": 9,
+            "subtotal": "0.0000",
+            "total": "0.0000",
+            "updated_at": "2020-08-05T19:03:58.042Z",
+            "created_at": "2020-08-05T19:03:58.042Z",
+            "products": []
+        }
+    },
+    {
+        "model": "taxcategs.taxcateg",
+        "pk": 1,
+        "fields": {
+            "parent": null,
+            "slug": "classification",
+            "active": true,
+            "name": "Classification",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 1,
+            "level": 0
+        }
+    }, {
+        "model": "taxcategs.taxcateg",
+        "pk": 2,
+        "fields": {
+            "parent": null,
+            "slug": "processing",
+            "active": true,
+            "name": "Processing",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 3,
+            "level": 0
+        }
+    }, {
+        "model": "taxcategs.taxcateg",
+        "pk": 3,
+        "fields": {
+            "parent": null,
+            "slug": "governance",
+            "active": true,
+            "name": "Governance",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 2,
+            "level": 0
+        }
+    }, {
+        "model": "taxcategs.inputformatsupported",
+        "pk": 1,
+        "fields": {
+            "parent": null,
+            "slug": "audio",
+            "active": true,
+            "name": "Audio",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 1,
+            "level": 0
+        }
+    }, {
+        "model": "taxcategs.inputformatsupported",
+        "pk": 2,
+        "fields": {
+            "parent": null,
+            "slug": "text",
+            "active": true,
+            "name": "Text",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 4,
+            "level": 0
+        }
+    }, {
+        "model": "taxcategs.inputformatsupported",
+        "pk": 3,
+        "fields": {
+            "parent": null,
+            "slug": "dataset",
+            "active": true,
+            "name": "Dataset",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 2,
+            "level": 0
+        }
+    }, {
+        "model": "taxcategs.inputformatsupported",
+        "pk": 4,
+        "fields": {
+            "parent": null,
+            "slug": "image",
+            "active": true,
+            "name": "Image",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 3,
+            "level": 0
+        }
+    }, {
+        "model": "taxcategs.knowledgesource",
+        "pk": 1,
+        "fields": {
+            "name": "Blue Prism",
+            "url": "https://digitalexchange.blueprism.com/dx/search",
+            "creator": 1,
+            "created_at": "2020-08-03T16:45:00.451Z",
+            "active": true
+        }
+    }, {
+        "model": "taxcategs.knowledgesource",
+        "pk": 2,
+        "fields": {
+            "name": "UiPath",
+            "url": "https://docs.uipath.com/activities",
+            "creator": 1,
+            "created_at": "2020-08-03T16:45:15.356Z",
+            "active": true
+        }
+    }, {
+        "model": "taxcategs.knowledgesource",
+        "pk": 3,
+        "fields": {
+            "name": "Automation Anywhere",
+            "url": "https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/aae-client/bot-creator/using-the-workbench/cloud-commands-panel.html",
+            "creator": 1,
+            "created_at": "2020-08-03T16:46:00.412Z",
+            "active": true
+        }
+    },
+    {
+        "model": "taxcategs.categoryterm",
+        "pk": 18,
+        "fields": {
+            "term": "Cachuela",
+            "description": "fdsfd",
+            "created_at": "2020-08-04T10:20:56.036Z",
+            "is_tax_categ": false,
+            "substitute_tax_categ": false,
+            "active": true,
+            "tax_categ": 1,
+            "knowledge_source": 1,
+            "user": 1,
+            "categoryChars": "[\"sdfsdf\"]",
+            "formats_supported": [1, 4]
+        }
+    }, {
+        "model": "taxcategs.categoryterm",
+        "pk": 24,
+        "fields": {
+            "term": "asdasd",
+            "description": "dasdsad",
+            "created_at": "2020-08-04T10:52:28.336Z",
+            "is_tax_categ": false,
+            "substitute_tax_categ": false,
+            "active": false,
+            "tax_categ": 3,
+            "knowledge_source": 1,
+            "user": 1,
+            "categoryChars": "[\"dsadadsad\"]",
+            "formats_supported": [3, 4]
+        }
+    }, {
+        "model": "taxcategs.categoryterm",
+        "pk": 25,
+        "fields": {
+            "term": "cv bxcvb",
+            "description": "xcvbxcvbcxb",
+            "created_at": "2020-08-04T12:10:27.149Z",
+            "is_tax_categ": true,
+            "substitute_tax_categ": false,
+            "active": false,
+            "tax_categ": 3,
+            "knowledge_source": 1,
+            "user": 2,
+            "categoryChars": "[\"xcvbxcvxb\"]",
+            "formats_supported": [1, 4]
+        }
+    }, {
+        "model": "taxcategs.categoryterm",
+        "pk": 26,
+        "fields": {
+            "term": "dsfasd",
+            "description": "fsafasdf",
+            "created_at": "2020-08-04T12:14:54.636Z",
+            "is_tax_categ": true,
+            "substitute_tax_categ": false,
+            "active": false,
+            "tax_categ": 3,
+            "knowledge_source": 1,
+            "user": 2,
+            "categoryChars": "[\"erwrdrfsf\"]",
+            "formats_supported": [3, 4, 2]
+        }
+    }, {
+        "model": "taxcategs.categoryterm",
+        "pk": 27,
+        "fields": {
+            "term": "sdfasdf",
+            "description": "asdfsafdsaf",
+            "created_at": "2020-08-04T12:16:03.931Z",
+            "is_tax_categ": false,
+            "substitute_tax_categ": false,
+            "active": false,
+            "tax_categ": 3,
+            "knowledge_source": 1,
+            "user": 1,
+            "categoryChars": "[\"dfdfd\"]",
+            "formats_supported": [3]
+        }
+    }, {
+        "model": "taxcategs.categoryterm",
+        "pk": 28,
+        "fields": {
+            "term": "asdfasdfasdfasdfasf",
+            "description": "dsfasdfasdfsdf",
+            "created_at": "2020-08-04T12:16:37.724Z",
+            "is_tax_categ": false,
+            "substitute_tax_categ": false,
+            "active": false,
+            "tax_categ": 1,
+            "knowledge_source": 3,
+            "user": 1,
+            "categoryChars": "[\"eefdfsdfsdfsdfds\"]",
+            "formats_supported": [1, 4]
+        }
+    }, {
+        "model": "taxcategs.categoryterm",
+        "pk": 29,
+        "fields": {
+            "term": "fasdfasdfasd",
+            "description": "fsafasdfasd",
+            "created_at": "2020-08-04T12:17:11.923Z",
+            "is_tax_categ": false,
+            "substitute_tax_categ": false,
+            "active": false,
+            "tax_categ": 3,
+            "knowledge_source": 1,
+            "user": 1,
+            "categoryChars": "[\"sadfsdfasfdsf\"]",
+            "formats_supported": [4]
+        }
+    }, {
+        "model": "taxcategs.categoryterm",
+        "pk": 30,
+        "fields": {
+            "term": "redfwweffweewfw",
+            "description": "eewffweefw",
+            "created_at": "2020-08-04T12:17:48.022Z",
+            "is_tax_categ": true,
+            "substitute_tax_categ": false,
+            "active": false,
+            "tax_categ": 1,
+            "knowledge_source": 2,
+            "user": 1,
+            "categoryChars": "[\"fdsfdsfsdfsdfsdf\"]",
+            "formats_supported": [3, 2]
+        }
+    }, {
+        "model": "taxcategs.categoryterm",
+        "pk": 31,
+        "fields": {
+            "term": "ASDadsad",
+            "description": "aSDADSADADDSDASdsd",
+            "created_at": "2020-08-04T12:18:15.258Z",
+            "is_tax_categ": false,
+            "substitute_tax_categ": false,
+            "active": false,
+            "tax_categ": 1,
+            "knowledge_source": 3,
+            "user": 1,
+            "categoryChars": "[\"dsds\"]",
+            "formats_supported": [3, 2]
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 1,
+        "fields": {
+            "title": "sadsa",
+            "slug": "sadsa",
+            "description": "assadas",
+            "price": "39.9922",
+            "image": "products/53572889133.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-08-05T10:06:53.214Z",
+            "user": 9,
+            "component": "0",
+            "categories": [1, 3, 2]
+        }
+    }, {
+        "model": "products.product",
+        "pk": 2,
+        "fields": {
+            "title": "Tesseract OCR",
+            "slug": "tesseract-ocr",
+            "description": "sadsadsad",
+            "price": "39.9900",
+            "image": "products/89038664573.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-08-05T10:13:14.520Z",
+            "user": 9,
+            "component": "0",
+            "categories": [2]
+        }
+    }, {
+        "model": "products.product",
+        "pk": 3,
+        "fields": {
+            "title": "NLP conversational",
+            "slug": "nlp-conversational",
+            "description": "sadsadsad",
+            "price": "39.9900",
+            "image": "products/68779139573.png",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-08-05T10:14:47.013Z",
+            "user": 9,
+            "component": "0",
+            "categories": [2]
+        }
+    }, {
+        "model": "products.product",
+        "pk": 4,
+        "fields": {
+            "title": "Damian SpeechToText",
+            "slug": "damian-speechtotext",
+            "description": "sadsadsad",
+            "price": "39.9900",
+            "image": "products/101042126148.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-08-05T10:18:37.028Z",
+            "user": 9,
+            "component": "0",
+            "categories": [2]
+        }
+    }, {
+        "model": "products.product",
+        "pk": 5,
+        "fields": {
+            "title": "IBM SpeechToText",
+            "slug": "ibm-speechtotext",
+            "description": "sadsadsad",
+            "price": "39.9900",
+            "image": "products/34150884124.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-08-05T10:19:25.607Z",
+            "user": 9,
+            "component": "0",
+            "categories": [2]
+        }
+    }, {
+        "model": "products.product",
+        "pk": 6,
+        "fields": {
+            "title": "Monitoring robots",
+            "slug": "monitoring-robots",
+            "description": "sadsadsad",
+            "price": "39.9900",
+            "image": "products/98884961927.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-08-05T10:22:04.956Z",
+            "user": 9,
+            "component": "0",
+            "categories": [3]
+        }
+    }, {
+        "model": "products.product",
+        "pk": 7,
+        "fields": {
+            "title": "Workflow ETSII",
+            "slug": "workflow-etsii",
+            "description": "sadsadsad",
+            "price": "39.9900",
+            "image": "products/64529240777.png",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-08-05T10:25:28.552Z",
+            "user": 9,
+            "component": "0",
+            "categories": [3]
+        }
+    }, {
+        "model": "products.product",
+        "pk": 8,
+        "fields": {
+            "title": "Workflow Appian",
+            "slug": "workflow-appian",
+            "description": "sadsadsad",
+            "price": "39.9900",
+            "image": "products/59928368463.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-08-05T10:26:30.133Z",
+            "user": 9,
+            "component": "0",
+            "categories": [3]
+        }
+    }, {
+        "model": "products.product",
+        "pk": 9,
+        "fields": {
+            "title": "Tesseract OCR 2",
+            "slug": "tesseract-ocr-2",
+            "description": "cjaoijciodjodia",
+            "price": "39.9900",
+            "image": "products/72945674220.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-08-05T12:18:14.312Z",
+            "user": 9,
+            "component": "0",
+            "categories": [2]
+        }
+    }, {
+        "model": "products.product",
+        "pk": 10,
+        "fields": {
+            "title": "asdfsadfadf",
+            "slug": "asdfsadfadf",
+            "description": "adfadsfsa",
+            "price": "39.9900",
+            "image": "products/77701082523.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-08-05T14:17:49.471Z",
+            "user": 9,
+            "component": "0",
+            "categories": [2]
+        }
+    }, {
+        "model": "products.product",
+        "pk": 11,
+        "fields": {
+            "title": "tototototo",
+            "slug": "tototototo",
+            "description": "dansniodiuashedljsa",
+            "price": "123213.0000",
+            "image": "products/61160802509.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-08-05T15:30:10.956Z",
+            "user": 9,
+            "component": "0",
+            "categories": [3]
+        }
+    }, {
+        "model": "products.product",
+        "pk": 12,
+        "fields": {
+            "title": "Tesseract OCR 3",
+            "slug": "tesseract-ocr-3",
+            "description": "adadsadad",
+            "price": "123333.0000",
+            "image": "products/45426605923.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-08-05T16:05:18.392Z",
+            "user": 9,
+            "component": "Tesseract_OCR_f1AfiNs.zip",
+            "categories": [3]
+        }
+    }, {
+        "model": "products.product",
+        "pk": 13,
+        "fields": {
+            "title": "dada",
+            "slug": "dada",
+            "description": "dada",
+            "price": "39.9900",
+            "image": "products/103003762411.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-08-05T16:09:53.684Z",
+            "user": 9,
+            "component": "Tesseract_OCR_zjD4WCy.zip",
+            "categories": [1]
+        }
+    }, {
+        "model": "products.product",
+        "pk": 14,
+        "fields": {
+            "title": "daoifjaosijfodsia",
+            "slug": "daoifjaosijfodsia",
+            "description": "ojdsaoijdosajdisao",
+            "price": "39.9900",
+            "image": "products/30319532152.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-08-05T17:23:34.606Z",
+            "user": 9,
+            "component": "Tesseract_OCR_5bWQ6Ez.zip",
+            "categories": [3]
+        }
+    }, {
+        "model": "products.product",
+        "pk": 16,
+        "fields": {
+            "title": "dfnefnu9erwhpfiuew",
+            "slug": "dfnefnu9erwhpfiuew",
+            "description": "fruhefr8ufrh8er",
+            "price": "39.9900",
+            "image": "products/44310082156.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-08-05T17:25:45.269Z",
+            "user": 9,
+            "component": "Tesseract_OCR_lUDSbUk.zip",
+            "categories": [3]
+        }
+    }, {
+        "model": "products.productsavailable",
+        "pk": 1,
+        "fields": {
+            "user": 9,
+            "products": [16]
+        }
+    }
+]

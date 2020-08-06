@@ -12,6 +12,7 @@ from .models import (
 )
 from taxcategs.forms import (
     ProposalCategoryTermForm,
+    ProposalReviewForm,
     InputFormatSupportedForm,
     KnowledgeSourceForm,
     ReportForm,
@@ -57,27 +58,6 @@ class ProposalListView(ListView):
         ).all()
         return context
 
-class CategoriesToReviewListView(ListView):
-    model = CategoryTerm
-    # Blog.objects.exclude(
-    # entry__in=Entry.objects.filter(
-    #     headline__contains='Lennon',
-    #     pub_date__year=2008,
-    # ),
-    # )
-    # subs = Report.objects.all()
-    # locs = []
-    # for sub in subs:
-    #     locs.append(Location.objects.get(id=sub.location_id, is_active=True))
-    # queryset = locs
-    queryset = CategoryTerm.objects.filter(active=False).exclude(pk__in=[e.categ_term for e in Report.objects.all()])
-    paginate_by = 5
-    template_name = "categories/list.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["Title"] = "Proposals for review"
-        return context
 
 class CategoriesAcceptedListView(ListView):
     model = CategoryTerm
@@ -90,16 +70,6 @@ class CategoriesAcceptedListView(ListView):
         context["Title"] = "Accepted proposals"
         return context
 
-class CategoriesRefusedListView(ListView):
-    model = CategoryTerm
-    queryset = [e.categ_term for e in Report.objects.filter(decision='KO').all()]
-    paginate_by = 5
-    template_name = "categories/list.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["Title"] = "Refused proposals"
-        return context
 
 
 class CategoryDetailView(DetailView):
@@ -157,7 +127,6 @@ class AddCategoryTermProposalView(CreateView):
     #         return HttpResponseRedirect(reverse_lazy('categories:categoryterm_list', args=[cat_term.id]))
     #     return render(request, 'categories/create.html', {'form': form})
 
-
 class ReviewCategoryTermProposalView(FormView):
     model = CategoryTerm
     form_class = ProposalCategoryTermForm
@@ -176,7 +145,6 @@ class AddKnowledgeSourceView(CreateView):
     form_class = KnowledgeSourceForm
     template_name = "categories/create-source.html"
 
-
 class AddReportView(CreateView):
     model = Report
     form_class = ReportForm
@@ -188,6 +156,54 @@ class AddCommentView(CreateView):
     form_class = CommentForm
     template_name = "categories/create-comment.html"
 
+class CategoriesRefusedListView(ListView):
+    queryset = CategoryTerm.objects.filter(decision='KO').all()
+    paginate_by = 5
+    template_name = "categories/list.html"
+
+class CategoriesToReviewListView(ListView):
+    # Blog.objects.exclude(
+    # entry__in=Entry.objects.filter(
+    #     headline__contains='Lennon',
+    #     pub_date__year=2008,
+    # ),
+    # )
+    # subs = Report.objects.all()
+    # locs = []
+    # for sub in subs:
+    #     locs.append(Location.objects.get(id=sub.location_id, is_active=True))
+    # queryset = locs
+    queryset = CategoryTerm.objects.filter(active=False, decision__isnull=True)#exclude(decision__exact="")
+    paginate_by = 5
+    template_name = "categories/list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["Title"] = "Proposals for review"
+        return context
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["Title"] = "Refused proposals"
+        return context
+
+def multiple_forms(request):
+    if request.method == 'POST':
+        report_form = ReportForm(request.POST)
+        category_term_form = ProposalReviewForm(request.POST)
+        if report_form.is_valid() or category_term_form.is_valid():
+            # Do the needful
+            return HttpResponseRedirect(reverse('taxcategs:proposalsToReview') )
+    else:
+        report_form = ReportForm()
+        category_term_form = ProposalReviewForm()
+
+    context = {
+        'report_form': report_form,
+        'category_term_form': category_term_form,
+    }
+
+    return render(request, 'categories/create-report.html', context)
 
 def select_proposal_view(request):
     return render(request, "categories/proposal.html")

@@ -9,7 +9,8 @@ class ProposalCategoryTermForm(forms.ModelForm):
             "user",
             "active",
             "is_tax_categ",
-            "substitute_tax_categ"
+            "substitute_tax_categ",
+            "decision"
         )
         fields = (
             "term",
@@ -102,6 +103,7 @@ class ProposalReviewForm(forms.ModelForm):
             "knowledge_source",
             "formats_supported",
             "categoryChars",
+            "decision"
         )
 
         widgets = {
@@ -142,9 +144,7 @@ class ProposalReviewForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop("user")
-        self.taxcategdecision = kwargs.pop("taxcategdecision")
-        super(ProposalCategoryTermForm, self).__init__(*args, **kwargs)
+        super(ProposalReviewForm, self).__init__(*args, **kwargs)
 
     def clean_term(self):
         term = self.cleaned_data["term"]
@@ -185,7 +185,7 @@ class KnowledgeSourceForm(forms.ModelForm):
 class ReportForm(forms.ModelForm):
     class Meta:
         model = Report
-        fields = ("decision", "result", "explanation", "user")
+        fields = ("result", "explanation", "review_user")
 
 
 class CommentForm(forms.ModelForm):

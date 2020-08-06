@@ -44,13 +44,9 @@ def register_page_reviewer(request):
     form = RegisterForm(request.POST or None)
 
     if form.is_valid():
-        if request.user.is_authenticated():
-            principal_role = request.user.role == "1"
-        else:
-            principal_role = False
         data = form.cleaned_data
         # Checking: user cannot create a Reviewer account, only Reviewers can create others Reviewers accounts
-        if principal_role:
+        if request.user.is_authenticated and (request.user.role == 1):
             password = data.get("password")
             first_name = data.get("first_name")
             last_name = data.get("last_name")
@@ -63,7 +59,7 @@ def register_page_reviewer(request):
             new_user = None
         if new_user is not None:
             messages.success(request, "Reviewer created.")
-            return redirect("accounts:login")
+            return redirect("accounts:reviewer_register")
 
         messages.warning(request, "Create Error !")
 

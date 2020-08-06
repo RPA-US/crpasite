@@ -45,13 +45,17 @@ class UserManager(BaseUserManager):
         )
         return user_obj
 
+REVIEWER = 1
+PROVIDER = 2
+DEVELOPER = 3
+ADMIN = 4
 
 class User(AbstractBaseUser, PermissionsMixin):
     ROLE_CHOICES = (
-        (1, "Reviewer"),
-        (2, "Provider"),
-        (3, "Developer"),
-        (4, "Administrator"),
+        (REVIEWER, "Reviewer"),
+        (PROVIDER, "Provider"),
+        (DEVELOPER, "Developer"),
+        (ADMIN, "Administrator"),
     )
     role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, default = 3)
     email = models.EmailField(

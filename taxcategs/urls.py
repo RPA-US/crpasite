@@ -1,5 +1,5 @@
-from django.urls import path
-from .views import CategoriesListView, CategoryDetailView, ReviewCategoryTermProposalView, AddInputFormatSupportedView, AddKnowledgeSourceView, AddReportView, AddCommentView, AddCategoryTermProposalView, select_proposal_view, ReviewCategoryTermProposalView, ProposalListView, CategoriesAcceptedListView, multiple_forms, CategoriesToReviewListView,  CategoriesRefusedListView
+from django.urls import path, re_path
+from .views import CategoriesListView, CategoryDetailView, ReviewCategoryTermProposalView, AddInputFormatSupportedView, AddKnowledgeSourceView, AddReportView, AddCommentView, AddCategoryTermProposalView, select_proposal_view, ReviewCategoryTermProposalView, ProposalListView, review_multiple_form, CategoriesListReview
 from django.contrib.auth.views import LogoutView
 
 app_name = "taxcategs"
@@ -7,19 +7,17 @@ app_name = "taxcategs"
 urlpatterns = [
     path('navigate/', CategoriesListView.as_view(), name="categoryterm_list"),
     path('view/<int:pk>/', CategoryDetailView.as_view(), name="categoryterm_detail"),
-    path('review/', multiple_forms, name="review"),
+    path('review/<int:id>/', review_multiple_form, name="review"),
 ]
 
 urlpatterns += [   
     path('select/', select_proposal_view, name='categoryterm_create'),
     path('proposal/', AddCategoryTermProposalView.as_view(), name='categoryterm_proposal'),
-    path('myproposals/', ProposalListView.as_view(), name='categoryterm_myproposal'),
-    path('acceptedProposals/', CategoriesAcceptedListView.as_view(), name='categoryterm_proposalaccepted'),
+    re_path(r'^myproposals/(?:(?P<status>\d)/)?$', ProposalListView.as_view(), name='categoryterm_myproposal'),
     path('input/', AddInputFormatSupportedView.as_view(), name='inputformatsupported_create'),
     path('knowledgesource/', AddKnowledgeSourceView.as_view(), name='knowledgesource_create'),
     path('report/', AddReportView.as_view(), name='report_create'),
     path('comment/', AddCommentView.as_view(), name='comment_create'),
     path('edit/', ReviewCategoryTermProposalView.as_view(), name='categoryterm_edit'),
-    path('proposalsToReview/', CategoriesToReviewListView.as_view(), name='categoryterm_proposalreview'),
-    path('refusedProposals/', CategoriesRefusedListView.as_view(), name='categoryterm_proposalrefused'),
+    re_path(r'^reviewproposals/(?:(?P<status>\d)/)?$', CategoriesListReview.as_view(), name='categoryterm_proposalreview'),
 ]

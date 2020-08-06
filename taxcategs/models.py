@@ -81,17 +81,18 @@ class InputFormatSupported(CategoryBase):
     def get_absolute_url(self):
         return reverse("taxcategs:categoryterm_create")  # , kwargs={"pk": self.pk})
 
-class DecisionChoice(Enum):
-    OK = "Accepted"
-    KO = "Refused"
-    KK = "Accepted with changes"
+DECISION_CHOICES = (
+        ("1", "Accepted"),
+        ("2", "Refused"),
+        ("3", "Accepted with changes"),
+    )
 
 class CategoryTerm(models.Model):
     """
     Equivalent categories associated with the same taxonomic category. 
     """
 
-    term = models.CharField(max_length=50, unique=True)
+    term = models.CharField(max_length=50)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     is_tax_categ = models.BooleanField(default=False)
@@ -106,38 +107,17 @@ class CategoryTerm(models.Model):
         UserModel, verbose_name="Creator", on_delete=models.CASCADE
     )
     categoryChars = ArrayField(models.CharField(max_length=200))
-    decision = models.CharField(
-        max_length=30, choices=[(tag, tag.value) for tag in DecisionChoice], blank=True
-    )
+    decision = models.CharField(max_length=5, choices=DECISION_CHOICES, blank=True)
 
     class Meta:
         verbose_name = "Category Term"
         verbose_name_plural = "Category Terms"
 
     def create(self, validated_data):
+        self.validate_unique()
         if not self.request.user.is_authenticated:
             raise ValidationError("User must be authenticated.")
         validated_data.update({"user": self.request.user})
-        items = validated_data.pop("formats_supported", None)
-        action = CategoryTerm.objects.create(**validated_data)
-        if items is not None:
-            # items = [InputFormatSupported.objects.create(**item) for item in items]
-            # '*' is the "splat" operator: It takes a list as input, and expands it into actual positional arguments in the function call.
-            action.formats_supported.add(*items)
-        return action
-
-    def review(self, form):
-        validated_data = form.cleaned_data
-        if not CategoryTerm.objects.filter(pk=validated_data.get("pk")).exists():
-            raise ValidationError("A proposal cannot be reviwed if it is not created.")
-        # Si result: CT = "Taxonomic category proposal save as new category term" or TE = "Taxonomic category edited"
-        # guardamos el CategoryTerm
-        # elif result=NC:
-        # guardo con is_tax_categ=False
-        # eliif result=NT:
-        # guardo con is_tax_categ=True
-
-        # reconstruyo el Report a partir del objeto formulario y lo guardo asociandolo con el saved del category term
         items = validated_data.pop("formats_supported", None)
         action = CategoryTerm.objects.create(**validated_data)
         if items is not None:
@@ -185,23 +165,18 @@ class CategoryTerm(models.Model):
 #         return self.name
 
 
-class ResultChoice(Enum):
-    NC = "New category term"
-    NT = "New taxonomic category"
-    CT = "Taxonomic category proposal save as new category term"
-    TE = "Taxonomic category edited"
-
+RESULT_CHOICES = (
+        ("1", "New category term"),
+        ("2", "Taxonomic category proposal save as new category term"),
+        ("3", "New taxonomic category"),
+        ("4", "Taxonomic category edited"),
+    )
 
 class Report(models.Model):
     """
     Report of the decision taken after reviewing the proposal.
     """
-    result = models.CharField(
-        max_length=60,
-        choices=[
-            (tag, tag.value) for tag in ResultChoice
-        ],  # Choices is a list of Tuple
-    )
+    result = models.CharField(max_length=5, choices=RESULT_CHOICES, blank=True)
     categ_term = models.ForeignKey(
         CategoryTerm, verbose_name="Proposal reviewed", on_delete=models.CASCADE
     )
@@ -210,13 +185,6 @@ class Report(models.Model):
     review_user = models.ForeignKey(
         UserModel, verbose_name="Reviewer", on_delete=models.CASCADE
     )
-
-    def create(self, validated_data):
-        if (not self.request.user.is_authenticated) or request.user.role != "1":
-            raise ValidationError("Reviewer must be authenticated.")
-        validated_data.update({"user": self.request.user})
-        action = Report.objects.create(**validated_data)
-        return action
 
     class Meta:
         verbose_name = "Decision"

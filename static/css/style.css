@@ -13198,6 +13198,11 @@ button[disabled=disabled]:hover{
 .container a {
   color: #2577fd;
 }
+
+.button-group-area a {
+  color: #ffffffc7;
+}
+
 /* Multiple select */
 
 .selectMultiple {

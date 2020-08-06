@@ -10,6 +10,7 @@ from accounts.models import User
 from django.core.exceptions import ValidationError
 from private_storage.storage.files import PrivateFileSystemStorage
 from private_storage.fields import PrivateFileField
+from django.shortcuts import get_object_or_404
 
 def get_filename_ext(filepath):
     base_name = os.path.basename(filepath)

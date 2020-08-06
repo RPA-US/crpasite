@@ -21,16 +21,6 @@
                 <div class="flag">
                   <a href="/termandconds"><img src="{% static "img/icon/header_icon.png" %}" alt="" width="100em"></a>
                 </div>
-                <!--div class="select-this">
-                  <form action="#">
-                    <div class="select-itms">
-                      <select name="select" id="select1">
-                        <option value="">USA</option>
-                        <option value="">SPAIN</option>
-                      </select>
-                    </div>
-                  </form>
-                </div-->
                 <ul class="contact-now">
                   <li>+34 954556817</li>
                 </ul>
@@ -83,7 +73,6 @@
                         <li><a href="{% url "taxcategs:categoryterm_list" %}"> Navigate</a></li>
                         {% if request.user.is_authenticated %}
                         <li><a href="{% url "taxcategs:categoryterm_create" %}"> Category proposal</a></li>
-                        <li><a href="{% url "taxcategs:report_create" %}"> Review</a></li>
                         <li><a href="{% url "taxcategs:categoryterm_proposalreview" %}"> Review categories</a></li>
                         <li><a href="{% url "taxcategs:categoryterm_myproposal" %}"> My proposals</a></li>
                         <li><a href="{% url "taxcategs:inputformatsupported_create" %}"> New Input Format Supported</a>

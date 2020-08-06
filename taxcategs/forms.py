@@ -95,12 +95,12 @@ class ProposalReviewForm(forms.ModelForm):
             "active",
             "is_tax_categ",
             "substitute_tax_categ"
+            "knowledge_source",
         )
         fields = (
             "term",
             "description",
             "tax_categ",
-            "knowledge_source",
             "formats_supported",
             "categoryChars",
             "decision"
@@ -132,6 +132,11 @@ class ProposalReviewForm(forms.ModelForm):
                     "multiple": "multiple",
                 }
             ),
+            "decision": forms.Select(
+                attrs={
+                    "class": "cat_decision",
+                }
+            ),
             "categoryChars": forms.Textarea(
                 attrs={
                     "class": "single-input",
@@ -148,9 +153,9 @@ class ProposalReviewForm(forms.ModelForm):
 
     def clean_term(self):
         term = self.cleaned_data["term"]
-        if CategoryTerm.objects.filter(term=term).exists():
+        if not CategoryTerm.objects.filter(term=term).exists():
             raise forms.ValidationError(
-                "There is already a proposal with the same term."
+                "Reviewer cannot edit the term of the category proposal."
             )
         return term
 
@@ -170,6 +175,14 @@ class ProposalReviewForm(forms.ModelForm):
             )
         return categChars
 
+    def clean_decision(self):
+        d = self.cleaned_data["decision"]
+        if not d:
+            raise forms.ValidationError(
+                "Reviewer cannot review a proposal without taking a decision."
+            )
+        return d
+
 class InputFormatSupportedForm(forms.ModelForm):
     class Meta:
         model = InputFormatSupported
@@ -185,7 +198,19 @@ class KnowledgeSourceForm(forms.ModelForm):
 class ReportForm(forms.ModelForm):
     class Meta:
         model = Report
-        fields = ("result", "explanation", "review_user")
+        fields = ("result", "explanation",)
+        exclude = ("review_user","categ_term",)
+        widgets = {
+            "explanation": forms.Textarea(
+                attrs={
+                    "class": "single-input",
+                    "placeholder": "Explanation of the decision taken and its result",
+                    "onfocus": "this.placeholder = ''",
+                    "onblur": "this.placeholder = 'Explanation of the decision taken and its result'",
+                    "rows": "5",
+                }
+            ),
+        }
 
 
 class CommentForm(forms.ModelForm):

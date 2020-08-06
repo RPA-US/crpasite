@@ -4,8 +4,9 @@ New report
 {% endblock %}
 
 {% block content %}
+{% load static %}
 <div class="container">
-    <h3 class="mb-30">New report</h3>
+    <h3 class="mb-30">New report {{ reptaxcateg }}</h3>
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -20,11 +21,114 @@ New report
     </ul>
     {% endif %}
     <form method="POST">{% csrf_token %}
-        {{ category_term_form }}
-        {{ report_form }}
-        <button type="submit" value="submit" class="btn_3">
-            Save
-        </button>
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    {{ category_term_form.term.label_tag }}
+                    {{ category_term_form.term }}
+                    <div class="form-validation">{{ category_term_form.term.errors }}</div>
+                </p>
+            </div>
+            <div class="col-md-12">
+                <p>
+                    {{ category_term_form.description.label_tag }}
+                    {{ category_term_form.description }}
+                    <div class="form-validation">{{ category_term_form.description.errors }}</div>
+                </p>
+            </div>
+            <div class="col-md-12">
+                <p>
+                    <div>{{ category_term_form.tax_categ.label_tag }}</div>
+                    {{ category_term_form.tax_categ }}
+                    <div class="form-validation">{{ category_term_form.tax_categ.errors }}</div>
+                </p>
+            </div>
+            <div class="col-md-12">
+                <p>
+                    <div>{{ category_term_form.knowledge_source.label_tag }}</div>
+                    {{ category_term_form.knowledge_source }}
+                    <div class="form-validation">{{ category_term_form.knowledge_source.errors }}</div>
+                </p>
+            </div>
+            <div class="col-md-12">
+                <p>
+                    {{ category_term_form.formats_supported.label_tag }}
+                    {{ category_term_form.formats_supported }}
+                    <div class="form-validation">{{ category_term_form.formats_supported.errors }}</div>
+                </p>
+            </div>
+            <div class="col-md-12">
+                <p>
+                    {{ category_term_form.categoryChars.label_tag }}
+                    {{ category_term_form.categoryChars }}
+                    <div class="form-validation">{{ category_term_form.categoryChars.errors }}</div>
+                </p>
+            </div>
+            <div class="col-md-12">
+                <h3>Category term report</h3><br>
+            </div>
+            <div class="col-md-12">
+                <p>
+                    <div>{{ category_term_form.decision.label_tag }}</div>
+                    {{ category_term_form.decision }}
+                    <div class="form-validation">{{ category_term_form.decision.errors }}</div>
+                </p>
+            </div>
+
+            <div class="col-md-12 cat_result">
+                <p>
+                    <div>{{ report_form.result.label_tag }}</div>
+                    <select name="result" id="id_result" style="display: none;">
+                        {% for x, y in report_form.fields.result.choices %}
+                        {% if reptaxcateg and x > "2" %}
+                        <option value="{{ x }}" {% if report_form.fields.result.value == x %} selected{% endif %}>
+                            {{ y }}
+                        </option>
+                        {% elif not reptaxcateg and x < "3" %}
+                        <option value="{{ x }}" {% if report_form.fields.result.value == x %} selected{% endif %}>
+                            {{ y }}
+                        </option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                    <div class="form-validation">{{ report_form.result.errors }}</div>
+                </p>
+            </div>
+
+            <div class="col-md-12">
+                <p>
+                    <div>{{ report_form.explanation.label_tag }}</div>
+                    {{ report_form.explanation }}
+                    <div class="form-validation">{{ report_form.explanation.errors }}</div>
+                </p>
+            </div>
+            <div class="sup11"></div>
+
+            <div class="col-md-12">
+                <button type="submit" value="submit" class="btn_3">
+                    Save
+                </button>
+            </div>
+        </div>
     </form>
 </div>
+
+<script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        var decision = $('.cat_decision'); // input field decision
+        var result = $('.cat_result'); //Input field result
+        $(decision).focus(function () {
+            a = decision.val() == "1";
+            b = decision.val() == "3";
+            if (a || b) {
+                $(".sup12").remove();
+                result.show();
+            } else {
+                result.hide();
+                $(".sup11").after("<input class='sup12' type='hidden' name='result' id='id_result'>");
+            }
+        });
+    });
+</script>
 {% endblock %}

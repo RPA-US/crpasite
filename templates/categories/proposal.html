@@ -23,18 +23,24 @@ Create a category term proposal
         </ul>
         {% endif %}
         <div class="row gallery-item">
-            <div class="col-md-6">
+            <div class="col-md-4">
+                <a href="{% url 'taxcategs:categoryterm_proposal'%}?taxcateg=0">
+                    <img src="{% static 'img/newproposal1.jpg' %}" width="100%" alt="New category term proposal">
+                </a>
+                <p>New category term proposal</p>
+            </div>
+            <div class="col-md-4">
+                <a href="{% url 'taxcategs:categoryterm_proposal'%}?taxcateg=2">
+                    <img src="{% static 'img/tax.jpg' %}" width="100%" alt="New taxonomic category proposal">
+                </a>
+                <p>New taxonomic category proposal</p>
+            </div>
+            <div class="col-md-4">
                 <a href="{% url 'taxcategs:categoryterm_proposal'%}?taxcateg=1">
                     <img src="{% static 'img/changetaxcateg1.jpg' %}" width="100%"
                         alt="Substitute a existing taxonomic category">
                 </a>
                 <p>Substitute a existing taxonomic category</p>
-            </div>
-            <div class="col-md-6">
-                <a href="{% url 'taxcategs:categoryterm_proposal'%}?taxcateg=0">
-                    <img src="{% static 'img/newproposal1.jpg' %}" width="100%" alt="New category term proposal">
-                </a>
-                <p>New category term proposal</p>
             </div>
         </div>
     </div>

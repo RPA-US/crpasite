@@ -10,7 +10,7 @@ class ProposalCategoryTermForm(forms.ModelForm):
             "active",
             "is_tax_categ",
             "substitute_tax_categ",
-            "decision"
+            "decision",
         )
         fields = (
             "term",
@@ -61,6 +61,10 @@ class ProposalCategoryTermForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop("user")
         self.taxcategdecision = kwargs.pop("taxcategdecision")
+        if self.taxcategdecision == "2":
+            self.base_fields['tax_categ'].label = "Parent category"
+        else:
+            self.base_fields['tax_categ'].label = "Taxonomic category"
         super(ProposalCategoryTermForm, self).__init__(*args, **kwargs)
 
     def clean_term(self):

@@ -29,4 +29,8 @@ $(document).ready(function () {
         }, 1000);
     }
 
+    /* Forms select input. Label before selectable */
+    $("select:not('.multipleselector')").before("<br/>")
+    $(".nice-select").after("<br/>")
+
 });

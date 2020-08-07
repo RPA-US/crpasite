@@ -28,19 +28,18 @@
               <div class="header-info-right">
                 <ul>
                   <li><a href="{% url 'accounts:view' %}">My Account </a></li>
+                  {% if request.user.role == 1 %}
+                  <li><a href="{% url 'accounts:reviewer_register' %}">New reviewer</a></li>
+                  {% endif %}
+                  {% if request.user.role == 2 %}
+                  <li><a href="{% url 'products:create' %}">New product</a></li>
+                  {% endif %}
                   {% if user.is_superuser %}
                   <li><a href="{% url 'admin:index' %}">Dashboard</a></li>
                   {% else %}
                   <li><a href="{% url 'products:list' %}">Taxonomy </a></li>
                   <li><a href="{% url 'products:list' %}">Shopping</a></li>
                   <li><a href="{% url 'carts:home' %}">Cart</a></li>
-                  <li><a href="{% url 'carts:checkout' %}">Checkout</a></li>
-                  {% endif %}
-                  {% if request.user.role == 1 %}
-                  <li><a href="{% url 'accounts:reviewer_register' %}">New reviewer</a></li>
-                  {% endif %}
-                  {% if request.user.role == 2 %}
-                  <li><a href="{% url 'products:create' %}">New product</a></li>
                   {% endif %}
                   {% if request.user.is_authenticated %}
                   <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
@@ -68,72 +67,61 @@
                 <nav>
                   <ul id="navigation">
                     <li><a href="/">Home</a></li>
-                    <li><a href="#">Catagories</a>
-                      <ul class="submenu">
-                        <li><a href="{% url "taxcategs:categoryterm_list" %}"> Navigate</a></li>
-                        {% if request.user.is_authenticated %}
-                        <li><a href="{% url "taxcategs:categoryterm_create" %}"> Category proposal</a></li>
-                        <li><a href="{% url "taxcategs:categoryterm_proposalreview" %}"> Review categories</a></li>
-                        <li><a href="{% url "taxcategs:categoryterm_myproposal" %}"> My proposals</a></li>
-                        <li><a href="{% url "taxcategs:inputformatsupported_create" %}"> New Input Format Supported</a>
-                        </li>
-                        <li><a href="{% url "taxcategs:knowledgesource_create" %}"> New Knowledege Source</a></li>
-
-                        {% endif %}
-                      </ul>
+                    <li class="{% if request.path == products_list_url %}noactive{% endif %}">
+                      <a href="{% url "products:list" %}">Products</a>
                     </li>
 
                     <li class="hot"><a href="#">Latest</a>
-                      <ul class="submenu">
-                        <li><a href="product_list.html"> Product list</a></li>
-                        <li><a href="single-product.html"> Product Details</a></li>
-                      </ul>
                     </li>
-                    <!--li><a href="blog.html">Blog</a>
+                    <li><a href="#">Categories</a>
+                      <ul class="submenu">
+                        <li><a href="{% url "taxcategs:categoryterm_list" %}"> Navigate</a></li>
+                        {% if request.user.role != 1 %}
+                        <li><a href="{% url "taxcategs:categoryterm_myproposal" %}"> My proposals</a></li>
+                        {% endif %}
+                    </li>
+                  </ul>
+                  </li>
+                  <!--li><a href="blog.html">Blog</a>
                       <ul class="submenu">
                         <li><a href="blog.html">Blog</a></li>
                         <li><a href="single-blog.html">Blog Details</a></li>
                       </ul>
                     </li-->
-                    <li><a href="#">Pages</a>
+                  <li><a href="#">Proposals</a>
+                    {% if request.user.is_authenticated %}
+                    <ul class="submenu">
+                      {% if request.user.role == 1 %}
+                      <li><a href="{% url "taxcategs:categoryterm_proposalreview" %}"> Review categories</a></li>
+                      {% else %}
+                      <li><a href="{% url "taxcategs:categoryterm_create" %}"> Category proposal</a></li>
+                      {% endif %}
+                      <li><a href="{% url "taxcategs:knowledgesource_create" %}"> New Knowledege Source</a></li>
+                      <li><a href="{% url "taxcategs:inputformatsupported_create" %}"> New Input Format Supported</a>
+                    </ul>
+                    {% endif %}
+                  </li>
+                  <li class="{% if request.path == contact_url %}noactive{% endif %}">
+                    <a href="{% url "contact_url" %}">Contact</a>
+                  </li>
+                  <div id="mobile-elements">
+                    <li><a href="#">Options</a>
                       <ul class="submenu">
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href="cart.html">Card</a></li>
-                        <li><a href="elements.html">Element</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="confirmation.html">Confirmation</a></li>
-                        <li><a href="cart.html">Shopping Cart</a></li>
-                        <li><a href="checkout.html">Product Checkout</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="single-blog.html">Blog Details</a></li>
-                        <li><a href="product_list.html"> Product list</a></li>
-                        <li><a href="single-product.html"> Product Details</a></li>
+                        {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                        {% else %}
+                        <li class="{% if request.path == login_url %}noactive{% endif %}">
+                          <a href="{% url 'accounts:login' %}">Login</a>
+                        </li>
+                        <li class="{% if request.path == register_url %}noactive{% endif %}">
+                          <a href="{% url 'accounts:register' %}">Register</a>
+                        </li>
+                        {% endif %}
+                        <li><a href="{% url 'carts:home' %}">Cart</a></li>
+                        <li><a href="{% url 'search:products' %}">Search</a></li>
                       </ul>
                     </li>
-                    <li class="{% if request.path == products_list_url %}noactive{% endif %}">
-                      <a href="{% url "products:list" %}">Products</a>
-                    </li>
-                    <li class="{% if request.path == contact_url %}noactive{% endif %}">
-                      <a href="{% url "contact_url" %}">Contact</a>
-                    </li>
-                    <div id="mobile-elements">
-                      <li><a href="#">Options</a>
-                        <ul class="submenu">
-                          {% if request.user.is_authenticated %}
-                          <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
-                          {% else %}
-                          <li class="{% if request.path == login_url %}noactive{% endif %}">
-                            <a href="{% url 'accounts:login' %}">Login</a>
-                          </li>
-                          <li class="{% if request.path == register_url %}noactive{% endif %}">
-                            <a href="{% url 'accounts:register' %}">Register</a>
-                          </li>
-                          {% endif %}
-                          <li><a href="{% url 'carts:home' %}">Cart</a></li>
-                          <li><a href="{% url 'search:products' %}">Search</a></li>
-                        </ul>
-                      </li>
-                    </div>
+                  </div>
                   </ul>
 
                 </nav>

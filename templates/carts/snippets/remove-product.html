@@ -2,5 +2,5 @@
   data-endpoint="{% url 'carts:home_api' %}">
   {% csrf_token %}
   <input class="cart-item-product-id" type="hidden" name="product_id" value="{{ product_id }}">
-  <button type="submit" class="btn btn-danger">Remove</button>
+  <button type="submit" class="genric-btn danger-border circle">Remove</button>
 </form>

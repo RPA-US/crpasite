@@ -96,11 +96,19 @@ class AddCategoryTermProposalView(CreateView):
         # saved = self.object.save()
         form.cleaned_data.update({"active": False})
         form.cleaned_data.update({"is_tax_categ": False})
-        if form.taxcategdecision == "1":
+        if form.taxcategdecision == "1" or form.taxcategdecision == "2":
             form.cleaned_data.update({"substitute_tax_categ": True})
         else:
             form.cleaned_data.update({"substitute_tax_categ": False})
-        self.object = CategoryTerm.create(self, form.cleaned_data)
+        cat_term = CategoryTerm.create(self, form.cleaned_data)
+        if form.taxcategdecision == "2":
+            if cat_term.tax_categ:
+                taxcateg = TaxCateg.objects.create(name=cat_term.term, active=False, parent=cat_term.tax_categ)
+            else:
+                taxcateg = TaxCateg.objects.create(name=cat_term.term, active=False)
+            cat_term.tax_categ = taxcateg
+            cat_term.save(update_fields=['tax_categ'])
+        self.object = cat_term
         return HttpResponseRedirect(self.get_success_url())
 
     def get_initial(self, *args, **kwargs):
@@ -131,7 +139,6 @@ class AddCategoryTermProposalView(CreateView):
     #         cat_term.save()
     #         return HttpResponseRedirect(reverse_lazy('categories:categoryterm_list', args=[cat_term.id]))
     #     return render(request, 'categories/create.html', {'form': form})
-
 
 # TODO
 class ReviewCategoryTermProposalView(FormView):
@@ -230,6 +237,13 @@ def review_multiple_form(request, id):
                     raise ValidationError("The report cannot have a reason for acceptance if the proposal has been rejected")
 
             categterm.save()
+            if res == "3":
+                TaxCateg.objects.create(name=categterm.name)
+            elif res == "4":
+                old_categs = CategoryTerm.objects.filter(is_tax_categ=True, tax_categ=categterm.tax_categ) #.update(is_tax_categ=False)
+                old_categ = old_categs[0]
+                old_categ.is_tax_categ = False
+                TaxCateg.objects.filter(name=old_categ.name).update(name=categterm.name)
             rep_validated_data.update({"categ_term": categterm})
             rep_validated_data.update({"review_user": request.user})
             saved_rep = Report.objects.create(**rep_validated_data)
@@ -247,14 +261,13 @@ def review_multiple_form(request, id):
 
     return render(request, "categories/create-report.html", context)
 
-
 def select_proposal_view(request):
     return render(request, "categories/proposal.html")
 
 
 def listing(request):
-    contact_list = Contact.objects.all()
-    paginator = Paginator(contact_list, 25)  # Show 25 contacts per page.
+    category_list = CategoryTerm.objects.all()
+    paginator = Paginator(category_list, 25)  # Show 25 categories per page.
 
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)

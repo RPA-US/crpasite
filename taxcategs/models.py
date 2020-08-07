@@ -25,19 +25,19 @@ class TaxCateg(CategoryBase):
 
     def get_absolute_url(self):
         return reverse("taxcategs:categoryterm_create")
-
-    # def clean(self):
-    #     categ_terms = CategoryTerm.objects.filter(
-    #         tax_categ=self, is_tax_categ=True, active=True
-    #     )
-    #     if not (len(categ_terms) == 1):
-    #         raise ValidationError(
-    #             "A taxonomic category always has to have at least one associated category term"
-    #         )
-    #     if not (categ_terms[0].term == self.name):
-    #         raise ValidationError(
-    #             "A taxonomic category must always have the same name as its category term"
-    #         )
+    
+    def clean(self):
+        categ_terms = CategoryTerm.objects.filter(
+            tax_categ=self, is_tax_categ=True, active=True
+        )
+        if not (len(categ_terms) == 1):
+            raise ValidationError(
+                "A taxonomic category always has to have at least one associated category term"
+            )
+        if not (categ_terms[0].term == self.name):
+            raise ValidationError(
+                "A taxonomic category must always have the same name as its category term"
+            )
 
 
 class KnowledgeSource(models.Model):
@@ -114,7 +114,7 @@ class CategoryTerm(models.Model):
         verbose_name_plural = "Category Terms"
 
     def create(self, validated_data):
-        self.validate_unique()
+        CategoryTerm.term_unique(self, validated_data.get("term"))
         if not self.request.user.is_authenticated:
             raise ValidationError("User must be authenticated.")
         validated_data.update({"user": self.request.user})
@@ -126,6 +126,10 @@ class CategoryTerm(models.Model):
             action.formats_supported.add(*items)
         return action
 
+    def term_unique(self, term):
+        if CategoryTerm.objects.filter(term=term).exists():
+            raise ValidationError('The term of the category term already exists')
+
     def __str__(self):
         return self.term
 
@@ -133,6 +137,10 @@ class CategoryTerm(models.Model):
         return reverse("taxcategs:categoryterm_detail", args=[self.pk])
 
     def clean(self):
+        if(self.is_tax_categ and (not self.active)):
+             raise ValidationError(
+                "For a category to be taxonomical, it always has to be active"
+            )
         if len(self.categoryChars) < 1:
             raise ValidationError(
                 "A category term cannot have less than one category characteristic"
@@ -169,7 +177,7 @@ RESULT_CHOICES = (
         ("1", "New category term"),
         ("2", "Taxonomic category proposal save as new category term"),
         ("3", "New taxonomic category"),
-        ("4", "Taxonomic category edited"),
+        ("4", "Taxonomic category replaced"),
     )
 
 class Report(models.Model):

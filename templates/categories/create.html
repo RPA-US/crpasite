@@ -21,7 +21,6 @@ Create a category term proposal
     {% endif %}
     <form method="POST">{% csrf_token %}
         {{ form.as_p }}
-        {{request.taxcategdecision}}
         <button type="submit" value="submit" class="btn_3">
             Save
         </button>

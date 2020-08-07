@@ -204,7 +204,6 @@ class Report(models.Model):
     def get_absolute_url(self):
         return reverse("taxcategs:categoryterm_create")
 
-
 class Comment(models.Model):
     user = models.ForeignKey(UserModel, verbose_name="Author", on_delete=models.CASCADE)
     category_term = models.ForeignKey(CategoryTerm, on_delete=models.CASCADE)

@@ -100,11 +100,11 @@ class ProposalReviewForm(forms.ModelForm):
             "is_tax_categ",
             "substitute_tax_categ"
             "knowledge_source",
+            "tax_categ",
         )
         fields = (
             "term",
             "description",
-            "tax_categ",
             "formats_supported",
             "categoryChars",
             "decision"
@@ -117,6 +117,7 @@ class ProposalReviewForm(forms.ModelForm):
                     "placeholder": "Term",
                     "onfocus": "this.placeholder = ''",
                     "onblur": "this.placeholder = 'Term'",
+                    "readonly":""
                 }
             ),
             "description": forms.Textarea(

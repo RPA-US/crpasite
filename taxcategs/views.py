@@ -184,7 +184,7 @@ class CategoriesListReview(ListView):
         if status and status == "1":
             q = CategoryTerm.objects.filter(active=True) # ACCEPTED
         elif status == "2":
-            q = CategoryTerm.objects.filter(decision="2") #REJECTED
+            q = CategoryTerm.objects.filter(decision=2) #REJECTED
         else:
             q =  CategoryTerm.objects.filter(active=False, decision__exact="")  # exclude(decision__exact="") # PENDING
         return q
@@ -192,6 +192,7 @@ class CategoriesListReview(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         status = self.request.GET.get("status", None)
+        context["statusnumber"] = status
         if status and status == "1":
             c = "Accepted proposals"
         elif status == "2":
@@ -214,8 +215,11 @@ def review_multiple_form(request, id):
             res = rep_validated_data.get("result")
             categterm.description = categterm_validated_data.get("description")
             categterm.categoryChars = categterm_validated_data.get("categoryChars")
+            categterm.formats_supported.clear()
+            categterm.formats_supported.add(*categterm_validated_data.get("formats_supported"))
+            categterm.decision = categterm_validated_data.get("decision")
             desc = categterm_validated_data.get("decision")
-            if desc == "1" or desc == "2":
+            if desc == "1" or desc == "3":
                 context = {
                     "report_form": report_form,
                     "category_term_form": category_term_form,
@@ -235,17 +239,19 @@ def review_multiple_form(request, id):
             else:
                 if res:
                     raise ValidationError("The report cannot have a reason for acceptance if the proposal has been rejected")
-
+            
             categterm.save()
             if res == "3":
-                TaxCateg.objects.create(name=categterm.name)
+                TaxCateg.objects.filter(name=categterm.term).update(active=True)
             elif res == "4":
                 old_categs = CategoryTerm.objects.filter(is_tax_categ=True, tax_categ=categterm.tax_categ) #.update(is_tax_categ=False)
                 old_categ = old_categs[0]
                 old_categ.is_tax_categ = False
-                TaxCateg.objects.filter(name=old_categ.name).update(name=categterm.name)
+                TaxCateg.objects.filter(name=old_categ.term).update(name=categterm.name)
             rep_validated_data.update({"categ_term": categterm})
             rep_validated_data.update({"review_user": request.user})
+            if Report.objects.filter(categ_term=categterm).exists():
+                raise ValidationError("Cannot exist two report for the same proposal")
             saved_rep = Report.objects.create(**rep_validated_data)
 
             return HttpResponseRedirect(reverse("taxcategs:categoryterm_proposalreview"))
@@ -255,6 +261,7 @@ def review_multiple_form(request, id):
         
     context = {
         "reptaxcateg": categterm.substitute_tax_categ,
+        "taxonomicategory": categterm.tax_categ,
         "report_form": report_form,
         "category_term_form": category_term_form,
     }

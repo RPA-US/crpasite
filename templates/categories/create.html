@@ -19,6 +19,28 @@ Create a category term proposal
         {% endfor %}
     </ul>
     {% endif %}
+
+    {% if request.taxcategdecision == 1 %}
+    <ul class="messages">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{reptaxcateg}}
+            This proposal is intended to replace the taxonomic category {{taxonomicategory}}.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    </ul>
+    {% elif request.taxcategdecision == 2 %}
+    <ul class="messages">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{reptaxcateg}}
+            This proposal is intended to be a new taxonomic category.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    </ul>
+    {% endif %}
     <form method="POST">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" value="submit" class="btn_3">

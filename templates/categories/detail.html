@@ -56,5 +56,8 @@ Category detail
     {% elif categoryTerm.substitute_tax_categ %}
     <p class="form-validation">Pretends to be a existing taxonomic category</p>
     {% endif %}
+    {% if request.user.role == 1 and not categoryTerm.active %}
+    <a href="/categories/review/{{ categoryTerm.pk }}/" class="genric-btn primary-border">Review</a>
+    {% endif %}
 </div>
 {% endblock %}

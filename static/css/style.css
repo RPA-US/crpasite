@@ -13199,6 +13199,10 @@ button[disabled=disabled]:hover{
   color: #2577fd;
 }
 
+a.btn {
+  color: #ffffff;
+}
+
 .button-group-area a {
   color: #ffffffc7;
 }

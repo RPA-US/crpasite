@@ -1,0 +1,8 @@
+{% if c.children.count %}
+<ul>
+    {% for child in c.children.all %}
+    <li><a href="{{ child.get_absolute_url }}">{{ child }}</a></li>
+    {% include 'categories/snippets/taxcateg-child.html' with c=child %}
+    {% endfor %}
+</ul>
+{% endif %}

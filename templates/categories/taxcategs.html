@@ -1,14 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'categories/base.html' %}
 {% block title %}
-{{Title}}
+Taxonomy of Cognitive RPA components
 {% endblock %}
 
 {% block content %}
-
+{% load static %}
 
 <div class="container">
     {% if request.user.role == 1 or 4 %}
-    <h1>{{Title}}</h1>
+    <h1>Taxonomy of Cognitive RPA components</h1>
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -22,39 +22,72 @@
         {% endfor %}
     </ul>
     {% endif %}
-    <div class="section-top-border">
-        <h3>Category terms</h3><br />
-        <div class="progress-table-wrap">
-            <div class="progress-table">
-                {% if object_list %}
-                <div class="table-head">
-                    <div class="categoryterm_1">Term</div>
-                    <div class="categoryterm_">Taxonomic Category</div>
-                    <div class="categoryterm_">Knowledge Source</div>
-                    <div class="categoryterm_">Created At</div>
-                    <div class="categoryterm_n">Replacement?</div>
+
+    <!-- ================================================================================================================ -->
+
+    {% for category in object_list %}
+    <h1>{{ category }}</h1>
+    {% include 'categories/snippets/taxcateg-child.html' with c=category %}
+    {% endfor %}
+    <!-- ================================================================================================================ -->
+    <section class="product_list section_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="product_sidebar">
+                        <div class="single_sedebar">
+                            <form action="#">
+                                <input type="text" name="#" placeholder="Search keyword">
+                                <i class="ti-search"></i>
+                            </form>
+                        </div>
+                        <div class="single_sedebar">
+                            <div class="select_option">
+                                <div class="select_option_list">Category <i class="right fas fa-caret-down"></i> </div>
+                                <div class="select_option_dropdown">
+                                    <p><a href="#">Category 1</a></p>
+                                    <p><a href="#">Category 2</a></p>
+                                    <p><a href="#">Category 3</a></p>
+                                    <p><a href="#">Category 4</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single_sedebar">
+                            <div class="select_option">
+                                <div class="select_option_list">Type <i class="right fas fa-caret-down"></i> </div>
+                                <div class="select_option_dropdown">
+                                    <p><a href="#">Type 1</a></p>
+                                    <p><a href="#">Type 2</a></p>
+                                    <p><a href="#">Type 3</a></p>
+                                    <p><a href="#">Type 4</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                {% for c in object_list %}
-                <div class="table-row">
-                    <div class="categoryterm_1"><a href="/categories/view/{{ c.pk }}/">{{ c.term }}</a></div>
-                    <div class="categoryterm_">{{ c.tax_categ }}</div>
-                    <div class="categoryterm_">{{ c.knowledge_source }}</div>
-                    <div class="categoryterm_">{{ c.created_at }}</div>
-                    {% if Title == 'Proposals for review' %}
-                    <div class="categoryterm_">{{ c.substitute_tax_categ }}</div>
-                    <div class="categoryterm_n"><a href="/categories/review/{{ c.pk }}/">Review</div>
-                    {% else %}
-                    <div class="categoryterm_n">{{ c.substitute_tax_categ }}</div>
-                    {% endif %}
+                <div class="col-md-8">
+                    <div class="product_list">
+                        <div class="row">
+                            {% for object in object_list %}
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="single_product_item">
+                                    {% include "products/snippets/card.html" with instance=object %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="load_more_btn text-center">
+                            <a href="#" class="btn_3">Load More</a>
+                        </div>
+                    </div>
                 </div>
-                {% endfor %}
-                {% else %}
-                <p>No categories yet.</p>
-                {% endif %}
             </div>
         </div>
-    </div>
+    </section>
 
+    <!-- ================================================================================================================ -->
+    <!-- ========================================== PAGINATION ========================================================== -->
+    <!-- ================================================================================================================ -->
     <nav class="blog-pagination justify-content-center d-flex">
         <ul class="pagination">
             {% if page_obj.has_previous %}
@@ -102,11 +135,9 @@
         </ul>
     </nav>
 
-
-
     {% else %}
     <h2 class="form-validation">Reviewer must be authenticated</h2>
     {% endif %}
-    {{qqq}}
 </div>
+
 {% endblock %}

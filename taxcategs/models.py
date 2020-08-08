@@ -24,13 +24,13 @@ class TaxCateg(CategoryBase):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("taxcategs:categoryterm_create")
+        return reverse("taxcategs:taxcategory_detail", kwargs={"pk": self.pk})
     
     def clean(self):
         categ_terms = CategoryTerm.objects.filter(
             tax_categ=self, is_tax_categ=True, active=True
         )
-        if not (len(categ_terms) == 1):
+        if len(categ_terms) != 1:
             raise ValidationError(
                 "A taxonomic category always has to have at least one associated category term"
             )

@@ -1,5 +1,5 @@
 from django import forms
-from .models import CategoryTerm, KnowledgeSource, InputFormatSupported, Report, Comment
+from .models import CategoryTerm, KnowledgeSource, InputFormatSupported, Report, Comment, TaxCateg
 
 
 class ProposalCategoryTermForm(forms.ModelForm):
@@ -39,7 +39,6 @@ class ProposalCategoryTermForm(forms.ModelForm):
                     "rows": "5",
                 }
             ),
-            "tax_categ": forms.Select(attrs={"class": "form-control default-select"}),
             "formats_supported": forms.SelectMultiple(
                 attrs={
                     "class": "multipleselector",
@@ -62,9 +61,9 @@ class ProposalCategoryTermForm(forms.ModelForm):
         self.user = kwargs.pop("user")
         self.taxcategdecision = kwargs.pop("taxcategdecision")
         if self.taxcategdecision == "2":
-            self.base_fields['tax_categ'].label = "Parent category"
+            self.base_fields['tax_categ'] = forms.ModelChoiceField(label="Parent category",queryset=TaxCateg.objects.filter(active=True), widget=forms.Select(attrs={"class": "form-control default-select"}))
         else:
-            self.base_fields['tax_categ'].label = "Taxonomic category"
+            self.base_fields['tax_categ'] = forms.ModelChoiceField(label="Taxonomic category",queryset=TaxCateg.objects.filter(active=True), widget=forms.Select(attrs={"class": "form-control default-select"}))
         super(ProposalCategoryTermForm, self).__init__(*args, **kwargs)
 
     def clean_term(self):

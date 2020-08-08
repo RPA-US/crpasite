@@ -1,0 +1,26 @@
+{% extends 'categories/base.html' %}
+{% block title %}
+Taxonomy of Cognitive RPA components
+{% endblock %}
+
+{% block content %}
+{% load static %}
+{% load category_tags %}
+<div class="container">
+  <h1>Taxonomy of Cognitive RPA components</h1>
+  <center>
+    <div id="d3Hierarchy"></div>
+  </center>
+</div>
+{{ taxcateg_hierarchy }}
+{% endblock %}
+{% block bottom %}
+
+<script src="{% static 'js/d3.min.js' %}"></script>
+<script src="{% static 'js/taxonomy.js' %}"></script>
+<script>
+var taxonomy_data = {{ taxcateg_hierarchy|safe }}
+console.log(taxonomy_data)
+taxonomytree(taxonomy_data);
+</script>
+{% endblock bottom %}

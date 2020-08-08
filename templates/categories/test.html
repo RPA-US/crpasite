@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+
+    <script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script>
+        $(function () {
+            $('select, ul').dropdown({
+                toggleText: "Choose One",
+                nested: true
+            });
+        });
+    </script>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        a {
+            color: #555;
+        }
+
+        .wrap {
+            padding: 20px;
+            margin-bottom: 150px;
+            background: #eee;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================================================================================================================ -->
+
+    <div class="wrap">
+        <ul>
+            <li data-dropdown='{"value":"Shift 1"}' data-dropdown-text="Shift 1">
+                <ul>
+                    <li data-dropdown='{"value":"7:00 AM"}' data-dropdown-text="7:00 AM">
+                        <ul>
+                            <li data-dropdown='{"value":"West Wing Shift"}'>
+                                West Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"East Wing Shift"}'>
+                                East Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"North Wing Shift"}'>
+                                North Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"South Wing Shift"}'>
+                                South Wing Shift
+                            </li>
+                        </ul>
+                    </li>
+                    <li data-dropdown='{"value":"8:00 AM"}' data-dropdown-text="8:00 AM">
+                        <ul>
+                            <li data-dropdown='{"value":"West Wing Shift"}'>
+                                West Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"East Wing Shift"}'>
+                                East Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"North Wing Shift"}'>
+                                North Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"South Wing Shift"}'>
+                                South Wing Shift
+                            </li>
+                        </ul>
+                    </li>
+                    <li data-dropdown='{"value":"9:00 AM"}' data-dropdown-text="9:00 AM">
+                        <ul>
+                            <li data-dropdown='{"value":"West Wing Shift"}'>
+                                West Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"East Wing Shift"}'>
+                                East Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"North Wing Shift"}'>
+                                North Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"South Wing Shift"}'>
+                                South Wing Shift
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li data-dropdown='{"value":"Shift 2"}' data-dropdown-text="Shift 2">
+                <ul>
+                    <li data-dropdown='{"value":"10:00 AM"}' data-dropdown-text="10:00 AM">
+                        <ul>
+                            <li data-dropdown='{"value":"West Wing Shift"}'>
+                                West Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"East Wing Shift"}'>
+                                East Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"North Wing Shift"}'>
+                                North Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"South Wing Shift"}'>
+                                South Wing Shift
+                            </li>
+                        </ul>
+                    </li>
+                    <li data-dropdown='{"value":"11:00 AM"}' data-dropdown-text="11:00 AM">
+                        <ul>
+                            <li data-dropdown='{"value":"West Wing Shift"}'>
+                                West Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"East Wing Shift"}'>
+                                East Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"North Wing Shift"}'>
+                                North Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"South Wing Shift"}'>
+                                South Wing Shift
+                            </li>
+                        </ul>
+                    </li>
+                    <li data-dropdown='{"value":"12:00 PM"}' data-dropdown-text="12:00 PM">
+                        <ul>
+                            <li data-dropdown='{"value":"West Wing Shift"}'>
+                                West Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"East Wing Shift"}'>
+                                East Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"North Wing Shift"}'>
+                                North Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"South Wing Shift"}'>
+                                South Wing Shift
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li data-dropdown='{"value":"Shift 3"}' data-dropdown-text="Shift 3">
+                <ul>
+                    <li data-dropdown='{"value":"1:00 PM"}' data-dropdown-text="1:00 PM">
+                        <ul>
+                            <li data-dropdown='{"value":"West Wing Shift"}'>
+                                West Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"East Wing Shift"}'>
+                                East Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"North Wing Shift"}'>
+                                North Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"South Wing Shift"}'>
+                                South Wing Shift
+                            </li>
+                        </ul>
+                    </li>
+                    <li data-dropdown='{"value":"2:00 PM"}' data-dropdown-text="2:00 PM">
+                        <ul>
+                            <li data-dropdown='{"value":"West Wing Shift"}'>
+                                West Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"East Wing Shift"}'>
+                                East Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"North Wing Shift"}'>
+                                North Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"South Wing Shift"}'>
+                                South Wing Shift
+                            </li>
+                        </ul>
+                    </li>
+                    <li data-dropdown='{"value":"3:00 PM"}' data-dropdown-text="3:00 PM">
+                        <ul>
+                            <li data-dropdown='{"value":"West Wing Shift"}'>
+                                West Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"East Wing Shift"}'>
+                                East Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"North Wing Shift"}'>
+                                North Wing Shift
+                            </li>
+                            <li data-dropdown='{"value":"South Wing Shift"}'>
+                                South Wing Shift
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+</body>

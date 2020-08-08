@@ -23,9 +23,11 @@ Category detail
         {% endfor %}
     </ul>
     {% endif %}
+    <p><strong>Taxonomic category:</strong>
+        <a href="/categories/navigate/#{{categoryTerm.tax_categ.pk}}">{{ categoryTerm.tax_categ }}</a>
+    </p>
     <p><strong>Term:</strong> {{ categoryTerm.term }}</p>
     <p><strong>Description:</strong> {{ categoryTerm.description }}</p>
-    <p><strong>Taxonomic category:</strong> {{ categoryTerm.tax_categ }}</p>
     <p><strong>Knowledge Source:</strong> {{ categoryTerm.knowledge_source }}</p>
     {% if request.user.is_authenticated %}
     <p><strong>Created at:</strong> {{ categoryTerm.created_at }}</p>
@@ -54,10 +56,19 @@ Category detail
     {% if categoryTerm.is_tax_categ %}
     <p class="form-validation">Represents its taxonomic category</p>
     {% elif categoryTerm.substitute_tax_categ %}
-    <p class="form-validation">Pretends to be a existing taxonomic category</p>
+    <p class="form-validation">Pretends to be a taxonomic category</p>
     {% endif %}
-    {% if request.user.role == 1 and not categoryTerm.active %}
-    <a href="/categories/review/{{ categoryTerm.pk }}/" class="genric-btn primary-border">Review</a>
-    {% endif %}
+    <div class="col-md-10">
+        <div class="button-group-area mt-10">
+            {% if request.user.role == 1 and not categoryTerm.active %}
+            <a href="/categories/review/{{ categoryTerm.pk }}/" class="genric-btn primary-border">Review</a>
+            {% else %}
+            <a href="/categories/select/" class="genric-btn primary-border">Register proposal</a>
+            {% endif %}
+            {% if taxonomic_categ_pk %}
+            <a href="/categories/navigate/#{{ taxonomic_categ_pk }}" class="genric-btn primary-border">Back</a>
+            {% endif %}
+        </div>
+    </div>
 </div>
 {% endblock %}

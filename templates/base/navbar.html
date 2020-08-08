@@ -37,7 +37,7 @@
                   {% if user.is_superuser %}
                   <li><a href="{% url 'admin:index' %}">Dashboard</a></li>
                   {% else %}
-                  <li><a href="{% url 'products:list' %}">Taxonomy </a></li>
+                  <li><a href="{% url "taxcategs:categoryterm_list" %}">Taxonomy </a></li>
                   <li><a href="{% url 'products:list' %}">Shopping</a></li>
                   <li><a href="{% url 'carts:home' %}">Cart</a></li>
                   {% endif %}
@@ -73,10 +73,10 @@
 
                     <li class="hot"><a href="#">Latest</a>
                     </li>
-                    <li><a href="#">Categories</a>
+                    <li><a href="{% url "taxcategs:categoryterm_list" %}">Categories</a>
                       <ul class="submenu">
                         <li><a href="{% url "taxcategs:categoryterm_list" %}"> Navigate</a></li>
-                        {% if request.user.role != 1 %}
+                        {% if request.user.is_authenticated and request.user.role != 1 %}
                         <li><a href="{% url "taxcategs:categoryterm_myproposal" %}"> My proposals</a></li>
                         {% endif %}
                     </li>
@@ -88,41 +88,44 @@
                         <li><a href="single-blog.html">Blog Details</a></li>
                       </ul>
                     </li-->
-                  <li><a href="#">Proposals</a>
-                    {% if request.user.is_authenticated %}
+                  {% if request.user.is_authenticated %}
+                  {% if request.user.role == 1 %}
+                  <li><a href="{% url "taxcategs:categoryterm_proposalreview" %}">Proposals</a>
                     <ul class="submenu">
-                      {% if request.user.role == 1 %}
                       <li><a href="{% url "taxcategs:categoryterm_proposalreview" %}"> Review categories</a></li>
                       {% else %}
-                      <li><a href="{% url "taxcategs:categoryterm_create" %}"> Category proposal</a></li>
+                      <li><a href="{% url "taxcategs:categoryterm_create" %}">Proposals</a>
+                        <ul class="submenu">
+                          <li><a href="{% url "taxcategs:categoryterm_create" %}"> Category proposal</a></li>
+                          {% endif %}
+                          <li><a href="{% url "taxcategs:knowledgesource_create" %}"> New Knowledege Source</a></li>
+                          <li><a href="{% url "taxcategs:inputformatsupported_create" %}"> New Input Format
+                              Supported</a>
+                        </ul>
+                      </li>
                       {% endif %}
-                      <li><a href="{% url "taxcategs:knowledgesource_create" %}"> New Knowledege Source</a></li>
-                      <li><a href="{% url "taxcategs:inputformatsupported_create" %}"> New Input Format Supported</a>
+                      <li class="{% if request.path == contact_url %}noactive{% endif %}">
+                        <a href="{% url "contact_url" %}">Contact</a>
+                      </li>
+                      <div id="mobile-elements">
+                        <li><a href="#">Options</a>
+                          <ul class="submenu">
+                            {% if request.user.is_authenticated %}
+                            <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                            {% else %}
+                            <li class="{% if request.path == login_url %}noactive{% endif %}">
+                              <a href="{% url 'accounts:login' %}">Login</a>
+                            </li>
+                            <li class="{% if request.path == register_url %}noactive{% endif %}">
+                              <a href="{% url 'accounts:register' %}">Register</a>
+                            </li>
+                            {% endif %}
+                            <li><a href="{% url 'carts:home' %}">Cart</a></li>
+                            <li><a href="{% url 'search:products' %}">Search</a></li>
+                          </ul>
+                        </li>
+                      </div>
                     </ul>
-                    {% endif %}
-                  </li>
-                  <li class="{% if request.path == contact_url %}noactive{% endif %}">
-                    <a href="{% url "contact_url" %}">Contact</a>
-                  </li>
-                  <div id="mobile-elements">
-                    <li><a href="#">Options</a>
-                      <ul class="submenu">
-                        {% if request.user.is_authenticated %}
-                        <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
-                        {% else %}
-                        <li class="{% if request.path == login_url %}noactive{% endif %}">
-                          <a href="{% url 'accounts:login' %}">Login</a>
-                        </li>
-                        <li class="{% if request.path == register_url %}noactive{% endif %}">
-                          <a href="{% url 'accounts:register' %}">Register</a>
-                        </li>
-                        {% endif %}
-                        <li><a href="{% url 'carts:home' %}">Cart</a></li>
-                        <li><a href="{% url 'search:products' %}">Search</a></li>
-                      </ul>
-                    </li>
-                  </div>
-                  </ul>
 
                 </nav>
               </div>

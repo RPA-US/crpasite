@@ -10,7 +10,8 @@
 // http://ionden.com/a/plugins/licence-en.html
 // =====================================================================================================================
 
-;(function(factory) {
+;
+(function (factory) {
     if (typeof define === "function" && define.amd) {
         define(["jquery"], function (jQuery) {
             return factory(jQuery, document, window, navigator);
@@ -20,7 +21,7 @@
     } else {
         factory(jQuery, document, window, navigator);
     }
-} (function ($, document, window, navigator, undefined) {
+}(function ($, document, window, navigator, undefined) {
     "use strict";
 
     // =================================================================================================================
@@ -42,7 +43,7 @@
             }
         }
         return false;
-    } ());
+    }());
     if (!Function.prototype.bind) {
         Function.prototype.bind = function bind(that) {
 
@@ -58,7 +59,7 @@
 
                     if (this instanceof bound) {
 
-                        var F = function(){};
+                        var F = function () {};
                         F.prototype = target.prototype;
                         var self = new F();
 
@@ -86,7 +87,7 @@
         };
     }
     if (!Array.prototype.indexOf) {
-        Array.prototype.indexOf = function(searchElement, fromIndex) {
+        Array.prototype.indexOf = function (searchElement, fromIndex) {
             var k;
             if (this == null) {
                 throw new TypeError('"this" is null or not defined');
@@ -753,7 +754,7 @@
             if ($.contains(this.$cache.cont[0], e.target) || this.dragging) {
                 this.callOnFinish();
             }
-            
+
             this.dragging = false;
         },
 
@@ -1144,7 +1145,7 @@
                 return;
             }
 
-            if (this.coords.x_pointer < 0 || isNaN(this.coords.x_pointer)  ) {
+            if (this.coords.x_pointer < 0 || isNaN(this.coords.x_pointer)) {
                 this.coords.x_pointer = 0;
             } else if (this.coords.x_pointer > this.coords.w_rs) {
                 this.coords.x_pointer = this.coords.w_rs;
@@ -2188,7 +2189,8 @@
         },
 
         calcGridLabels: function () {
-            var i, label, start = [], finish = [],
+            var i, label, start = [],
+                finish = [],
                 num = this.coords.big_num;
 
             for (i = 0; i < num; i++) {
@@ -2265,7 +2267,7 @@
             } else {
                 this.coords.w_handle = this.$cache.s_from.outerWidth(false);
             }
-            this.coords.p_handle = this.toFixed(this.coords.w_handle  / this.coords.w_rs * 100);
+            this.coords.p_handle = this.toFixed(this.coords.w_handle / this.coords.w_rs * 100);
             this.coords.grid_gap = this.toFixed((this.coords.p_handle / 2) - 0.1);
 
             this.$cache.grid[0].style.width = this.toFixed(100 - this.coords.p_handle) + "%";
@@ -2323,7 +2325,7 @@
     };
 
     $.fn.ionRangeSlider = function (options) {
-        return this.each(function() {
+        return this.each(function () {
             if (!$.data(this, "ionRangeSlider")) {
                 $.data(this, "ionRangeSlider", new IonRangeSlider(this, options, plugin_count++));
             }
@@ -2340,27 +2342,29 @@
 
     // MIT license
 
-    (function() {
+    (function () {
         var lastTime = 0;
         var vendors = ['ms', 'moz', 'webkit', 'o'];
-        for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-            window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-            window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
-                || window[vendors[x]+'CancelRequestAnimationFrame'];
+        for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+            window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+            window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] ||
+                window[vendors[x] + 'CancelRequestAnimationFrame'];
         }
 
         if (!window.requestAnimationFrame)
-            window.requestAnimationFrame = function(callback, element) {
+            window.requestAnimationFrame = function (callback, element) {
                 var currTime = new Date().getTime();
                 var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-                var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+                var id = window.setTimeout(function () {
+                        callback(currTime + timeToCall);
+                    },
                     timeToCall);
                 lastTime = currTime + timeToCall;
                 return id;
             };
 
         if (!window.cancelAnimationFrame)
-            window.cancelAnimationFrame = function(id) {
+            window.cancelAnimationFrame = function (id) {
                 clearTimeout(id);
             };
     }());
@@ -2372,72 +2376,72 @@
 // Trigger
 
 $(function () {
-  
-var $range = $(".js-range-slider"),
-    $inputFrom = $(".js-input-from"),
-    $inputTo = $(".js-input-to"),
-    instance,
-    min = 0,
-    max = 1000,
-    from = 10,
-    to = 100;
 
-$range.ionRangeSlider({
-    type: "double",
-    min: min,
-    max: max,
-    from: 0,
-    to: 500,
-  prefix: 'tk. ',
-    onStart: updateInputs,
-    onChange: updateInputs,
-    step: 1,
-    prettify_enabled: true,
-    prettify_separator: ".",
-  values_separator: " - ",
-  force_edges: true
-  
+    var $range = $(".js-range-slider"),
+        $inputFrom = $(".js-input-from"),
+        $inputTo = $(".js-input-to"),
+        instance,
+        min = 0,
+        max = 1000,
+        from = 10,
+        to = 100;
 
-});
+    $range.ionRangeSlider({
+        type: "double",
+        min: min,
+        max: max,
+        from: 0,
+        to: 500,
+        prefix: 'tk. ',
+        onStart: updateInputs,
+        onChange: updateInputs,
+        step: 1,
+        prettify_enabled: true,
+        prettify_separator: ".",
+        values_separator: " - ",
+        force_edges: true
 
-instance = $range.data("ionRangeSlider");
 
-function updateInputs (data) {
-    from = data.from;
-    to = data.to;
-    
-    $inputFrom.prop("value", from);
-    $inputTo.prop("value", to); 
-}
+    });
 
-$inputFrom.on("input", function () {
-    var val = $(this).prop("value");
-    
-    // validate
-    if (val < min) {
-        val = min;
-    } else if (val > to) {
-        val = to;
+    instance = $range.data("ionRangeSlider");
+
+    function updateInputs(data) {
+        from = data.from;
+        to = data.to;
+
+        $inputFrom.prop("value", from);
+        $inputTo.prop("value", to);
     }
-    
-    instance.update({
-        from: val
-    });
-});
 
-$inputTo.on("input", function () {
-    var val = $(this).prop("value");
-    
-    // validate
-    if (val < from) {
-        val = from;
-    } else if (val > max) {
-        val = max;
-    }
-    
-    instance.update({
-        to: val
-    });
-});
+    $inputFrom.on("input", function () {
+        var val = $(this).prop("value");
 
+        // validate
+        if (val < min) {
+            val = min;
+        } else if (val > to) {
+            val = to;
+        }
+
+        instance.update({
+            from: val
+        });
     });
+
+    $inputTo.on("input", function () {
+        var val = $(this).prop("value");
+
+        // validate
+        if (val < from) {
+            val = from;
+        } else if (val > max) {
+            val = max;
+        }
+
+        instance.update({
+            to: val
+        });
+    });
+
+});

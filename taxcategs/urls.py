@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .views import CategoriesListView, CategoryDetailView, ReviewCategoryTermProposalView, AddInputFormatSupportedView, AddKnowledgeSourceView, AddReportView, AddCommentView, AddCategoryTermProposalView, select_proposal_view, ReviewCategoryTermProposalView, ProposalListView, review_multiple_form, CategoriesListReview
+from .views import CategoriesListView, CategoryDetailView, ReviewCategoryTermProposalView, AddInputFormatSupportedView, AddKnowledgeSourceView, AddReportView, AddCommentView, AddCategoryTermProposalView, select_proposal_view, ReviewCategoryTermProposalView, ProposalListView, review_multiple_form, CategoriesListReview, TaxCategoryDetailView, taxonomy_view
 from django.contrib.auth.views import LogoutView
 
 app_name = "taxcategs"
@@ -7,7 +7,9 @@ app_name = "taxcategs"
 urlpatterns = [
     path('navigate/', CategoriesListView.as_view(), name="categoryterm_list"),
     path('view/<int:pk>/', CategoryDetailView.as_view(), name="categoryterm_detail"),
+    path('detail/<int:pk>/', TaxCategoryDetailView.as_view(), name="taxcategory_detail"),
     path('review/<int:id>/', review_multiple_form, name="review"),
+    path('listview/', taxonomy_view, name="animated_taxonomy"),
 ]
 
 urlpatterns += [   

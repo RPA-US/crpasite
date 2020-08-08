@@ -87,6 +87,13 @@ DECISION_CHOICES = (
         ("3", "Accepted with changes"),
     )
 
+
+def upload_image_path(instance, filename):
+    name, ext = get_filename_ext(filename)
+    new_filename = random.randint(1, 123123123123)
+    final_name = f"{new_filename}{ext}"
+    return f"categories/{final_name}"
+
 class CategoryTerm(models.Model):
     """
     Equivalent categories associated with the same taxonomic category. 
@@ -99,7 +106,7 @@ class CategoryTerm(models.Model):
     substitute_tax_categ = models.BooleanField(default=False)
     active = models.BooleanField(default=False)
     tax_categ = models.ForeignKey(
-        TaxCateg, on_delete=models.CASCADE, blank=True, null=True
+        TaxCateg, on_delete=models.CASCADE, blank=True, null=True, limit_choices_to={'active': True},
     )
     knowledge_source = models.ForeignKey(KnowledgeSource, on_delete=models.CASCADE)
     formats_supported = models.ManyToManyField(InputFormatSupported, blank=True)
@@ -108,10 +115,21 @@ class CategoryTerm(models.Model):
     )
     categoryChars = ArrayField(models.CharField(max_length=200))
     decision = models.CharField(max_length=5, choices=DECISION_CHOICES, blank=True)
+    image = models.ImageField(upload_to=upload_image_path, blank=True)
 
     class Meta:
         verbose_name = "Category Term"
         verbose_name_plural = "Category Terms"
+
+    @property
+    def image_url(self):
+        """
+        Return self.photo.url if self.image is not None, 
+        'url' exist and has a value, else, return None.
+        """
+        if self.image:
+            return getattr(self.image, 'url', None)
+        return None
 
     def create(self, validated_data):
         CategoryTerm.term_unique(self, validated_data.get("term"))

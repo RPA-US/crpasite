@@ -3,46 +3,6 @@ from .models import Product
 from taxcategs import models as tax_categ
 from django.core.exceptions import ValidationError
 
-# class ProductForm(forms.Form):
-#     title = forms.CharField(
-#         label="Title",
-#         widget=forms.TextInput(
-#             attrs={"class": "form-control", "placeholder": "Title"}
-#         ),
-#     )
-#     description = forms.CharField(
-#         label="Description",
-#         widget=forms.Textarea(
-#             attrs={"class": "form-control", "placeholder": "Description"}
-#         ),
-#     )
-#     price = forms.DecimalField(
-#         widget=forms.NumberInput(attrs={"class": "form-control", "placeholder": "Price"})
-#     )
-#     image = forms.ImageField(
-#         label = "Image",
-#         widget = forms.FileInput(attrs={"class": "form-control", "placeholder": "Image"})
-#     )
-#     featured = forms.BooleanField(
-#         label="Featured",
-#         widget=forms.CheckboxInput(
-#             attrs={"class": "primary-checkbox", "checked": "checked"}
-#         ),
-#     )
-#     active = forms.BooleanField(
-#         label="Active",
-#         widget=forms.CheckboxInput(
-#             attrs={"class": "primary-checkbox", "checked": "checked"}
-#         ),
-#     )
-#     categories = forms.SelectMultiple(
-#                 attrs={
-#                     "class": "multipleselector",
-#                     "data-placeholder": "Click to select an option...",
-#                     "multiple": "multiple",
-#                 }
-#             ),
-
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product

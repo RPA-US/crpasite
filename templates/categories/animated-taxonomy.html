@@ -8,14 +8,15 @@ Taxonomy of Cognitive RPA components
 {% load category_tags %}
 <div class="container">
   <h1>Taxonomy of Cognitive RPA components</h1>
-  <center>
-    <div id="d3Hierarchy"></div>
-  </center>
+  <div class="col-md-12">
+    <center>
+      <div id="d3Hierarchy"></div>
+    </center>
+  </div>
 </div>
-{{ taxcateg_hierarchy }}
+{{taxcateg_hierarchy}}
 {% endblock %}
 {% block bottom %}
-
 <script src="{% static 'js/d3.min.js' %}"></script>
 <script src="{% static 'js/taxonomy.js' %}"></script>
 <script>

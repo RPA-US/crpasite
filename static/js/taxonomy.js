@@ -1,8 +1,7 @@
-// Data about the company in the form of a tree
 /*
- * name: employee
+ * name: category
  * img: url
- * children: [{subordinates}]
+ * children: [{subcategories}]
  */
 
 function taxonomytree(data) {
@@ -12,7 +11,7 @@ function taxonomytree(data) {
     var size = 800;
 
     var radius = 40;
-    var fontSize = 15;
+    var fontSize = 20;
     var id = 0;
     var animationDuration = 750;
     var root;
@@ -93,7 +92,7 @@ function taxonomytree(data) {
             .attr("transform", function (d) {
                 return "translate(" + source.fromX + "," + source.fromY + ")";
             })
-            .on("click", click);
+            
 
         // Set the node's image
         nodeEnter.append("image")
@@ -101,10 +100,14 @@ function taxonomytree(data) {
                 return d.img
             })
             .attr("r", 1e-6)
-            .attr("clip-path", "url(#circle)");
+            .attr("clip-path", "url(#circle)")
+            .on("click", click);
 
         // Set the node's text
-        nodeEnter.append("text")
+        nodeEnter.append("a")
+            .attr("xlink:href", function (d) {
+                return d.pk;
+            }).append("text")
             .attr("y", function (d) {
                 return -(radius + fontSize)
             })
@@ -112,8 +115,11 @@ function taxonomytree(data) {
             .text(function (d) {
                 return d.name;
             })
+            .attr("xlink:href", function (d) {
+                return d.pk;
+            })
             .style("fill-opacity", 1e-6)
-            .style("font-size", fontSize);
+            .style("font-size", fontSize + "px");
 
         // Update the node after entry
         var nodeUpdate = node.transition()

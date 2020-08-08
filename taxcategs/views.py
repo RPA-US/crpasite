@@ -10,6 +10,7 @@ from .models import (
     Report,
     Comment,
 )
+from products.models import Product
 from django.core.exceptions import ValidationError
 from django.contrib import messages
 from taxcategs.forms import (
@@ -31,7 +32,7 @@ from django.dispatch import receiver
 # TODO
 class CategoriesListView(ListView):
     model = TaxCateg
-    template_name = "categories/animated-taxonomy.html"
+    template_name = "categories/taxcategs.html"
     paginate_by = 50
 
     def get_queryset(self):
@@ -44,6 +45,19 @@ class CategoriesListView(ListView):
         # )
         return context
 
+class ProductNavigateCategoryView(ListView):
+    model = Product
+    template_name = "products/list.html"
+    paginate_by = 15
+    
+    def get_queryset(self):
+        return Product.objects.filter(categories__in=[self.kwargs["pk"]])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        categoryTerm = get_object_or_404(CategoryTerm, tax_categ__pk=self.kwargs["pk"], active=True, is_tax_categ=True)
+        context["categoryTerm"] = categoryTerm
+        return context
 
 class ProposalListView(ListView):
     model = CategoryTerm
@@ -319,6 +333,7 @@ def taxonomy_view(request):
     taxcateg_tree = {}
     taxcateg_tree['pk'] = 0
     taxcateg_tree['name'] = "Taxonomy"
+    taxcateg_tree['img'] = "/media/products/1459495222.jpg"
     h = []
     for t in TaxCateg.objects.filter(active=True, level=0):
         h.append(get_taxcateg_tree(t))
@@ -329,12 +344,17 @@ def taxonomy_view(request):
 
 def get_taxcateg_tree(taxcateg):   
     temp_obj = {}
-    if taxcateg:
+    if taxcateg.active:
+        c = CategoryTerm.objects.get(term=taxcateg.name, active=True)
         temp_obj['pk'] = taxcateg.pk
-    temp_obj['name'] = taxcateg.name
-    it = taxcateg.children.all()
-    if it:
-        temp_obj['children'] = [get_taxcateg_tree(child) for child in it]
+        temp_obj['name'] = taxcateg.name
+        if c.image_url:
+            temp_obj['img'] = c.image.url
+        else:
+            temp_obj['img'] = '/media/products/101042126148.jpg'
+        it = taxcateg.children.all()
+        if it:
+            temp_obj['children'] = [get_taxcateg_tree(child) for child in it]
     return temp_obj
 
 def listing(request):

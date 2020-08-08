@@ -1,5 +1,12 @@
 from django import forms
-from .models import CategoryTerm, KnowledgeSource, InputFormatSupported, Report, Comment, TaxCateg
+from .models import (
+    CategoryTerm,
+    KnowledgeSource,
+    InputFormatSupported,
+    Report,
+    Comment,
+    TaxCateg,
+)
 
 
 class ProposalCategoryTermForm(forms.ModelForm):
@@ -39,6 +46,9 @@ class ProposalCategoryTermForm(forms.ModelForm):
                     "rows": "5",
                 }
             ),
+            "image": forms.FileInput(
+                attrs={"class": "form-control", "placeholder": "Image"}
+            ),
             "formats_supported": forms.SelectMultiple(
                 attrs={
                     "class": "multipleselector",
@@ -61,9 +71,9 @@ class ProposalCategoryTermForm(forms.ModelForm):
         self.user = kwargs.pop("user")
         self.taxcategdecision = kwargs.pop("taxcategdecision")
         if self.taxcategdecision == "2":
-            self.base_fields['tax_categ'] = forms.ModelChoiceField(label="Parent category",queryset=TaxCateg.objects.filter(active=True), widget=forms.Select(attrs={"class": "form-control default-select"}))
+            self.base_fields["tax_categ"].label = "Parent category"
         else:
-            self.base_fields['tax_categ'] = forms.ModelChoiceField(label="Taxonomic category",queryset=TaxCateg.objects.filter(active=True), widget=forms.Select(attrs={"class": "form-control default-select"}))
+            self.base_fields["tax_categ"].label = "Taxonomic category"
         super(ProposalCategoryTermForm, self).__init__(*args, **kwargs)
 
     def clean_term(self):
@@ -90,6 +100,7 @@ class ProposalCategoryTermForm(forms.ModelForm):
             )
         return categChars
 
+
 class ProposalReviewForm(forms.ModelForm):
     class Meta:
         model = CategoryTerm
@@ -97,8 +108,7 @@ class ProposalReviewForm(forms.ModelForm):
             "user",
             "active",
             "is_tax_categ",
-            "substitute_tax_categ"
-            "knowledge_source",
+            "substitute_tax_categ" "knowledge_source",
             "tax_categ",
         )
         fields = (
@@ -106,7 +116,7 @@ class ProposalReviewForm(forms.ModelForm):
             "description",
             "formats_supported",
             "categoryChars",
-            "decision"
+            "decision",
         )
 
         widgets = {
@@ -116,7 +126,7 @@ class ProposalReviewForm(forms.ModelForm):
                     "placeholder": "Term",
                     "onfocus": "this.placeholder = ''",
                     "onblur": "this.placeholder = 'Term'",
-                    "readonly":""
+                    "readonly": "",
                 }
             ),
             "description": forms.Textarea(
@@ -136,11 +146,7 @@ class ProposalReviewForm(forms.ModelForm):
                     "multiple": "multiple",
                 }
             ),
-            "decision": forms.Select(
-                attrs={
-                    "class": "cat_decision",
-                }
-            ),
+            "decision": forms.Select(attrs={"class": "cat_decision",}),
             "categoryChars": forms.Textarea(
                 attrs={
                     "class": "single-input",
@@ -187,6 +193,7 @@ class ProposalReviewForm(forms.ModelForm):
             )
         return d
 
+
 class InputFormatSupportedForm(forms.ModelForm):
     class Meta:
         model = InputFormatSupported
@@ -202,8 +209,14 @@ class KnowledgeSourceForm(forms.ModelForm):
 class ReportForm(forms.ModelForm):
     class Meta:
         model = Report
-        fields = ("result", "explanation",)
-        exclude = ("review_user","categ_term",)
+        fields = (
+            "result",
+            "explanation",
+        )
+        exclude = (
+            "review_user",
+            "categ_term",
+        )
         widgets = {
             "explanation": forms.Textarea(
                 attrs={

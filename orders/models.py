@@ -72,6 +72,7 @@ class Order(models.Model):
 
     objects = OrderManager()
 
+    # CHECKOUT DONE When standing at checkout view, we click on checkout 1
     def check_done(self):
         if (
             self.billing_profile
@@ -82,6 +83,7 @@ class Order(models.Model):
             return True
         return False
 
+# When we are in cart list view and click checkout 3
     def update_total(self):
         cart_total = self.cart.total
         shipping_total = self.shipping_total
@@ -89,14 +91,14 @@ class Order(models.Model):
         self.order_total = new_total
         self.save()
         return new_total
-
+    # CHECKOUT DONE 2
     def mark_paid(self):
         if self.check_done():
             self.status = "paid"
             self.save()
         return self.status
 
-
+# When we are in cart list view and click checkout 1
 def pre_save_create_order_code(sender, instance, *args, **kwargs):
     if not instance.order_code:
         instance.order_code = unique_order_code_generator(instance)
@@ -109,7 +111,7 @@ def pre_save_create_order_code(sender, instance, *args, **kwargs):
 
 pre_save.connect(pre_save_create_order_code, sender=Order)
 
-
+# When a product is added to cart
 def post_save_cart_total(sender, instance, created, *args, **kwargs):
     if not created:
         cart_obj = instance
@@ -122,7 +124,10 @@ def post_save_cart_total(sender, instance, created, *args, **kwargs):
 
 post_save.connect(post_save_cart_total, sender=Cart)
 
-
+# When we are in cart list view and click checkout 2, 4
+# When click on User Address standing at Shipping Addres
+# When click on Save in  Shipping Addres
+# CHECKOUT DONE 3
 def post_save_order(sender, instance, created, *args, **kwargs):
     if created:
         instance.update_total()

@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from products.models import Product
+from products.models import Product, ProductsAvailable
 from .models import Cart
 from orders.models import Order
 from accounts.forms import LoginForm, GuestForm
@@ -112,9 +112,16 @@ def checkout_home(request):
         is_done = order_obj.check_done()
         if is_done:
             order_obj.mark_paid()
-            request.session["cart_items"] = 0
-            del request.session["cart_id"]
-            return redirect("carts:success")
+            # Add product to available list
+            if request.user.is_authenticated:
+                user = request.user
+                if ProductsAvailable.objects.filter(user=user).exists:
+                    p = ProductsAvailable.objects.get(user=user)
+                    p.products.add(cart_obj.products)
+                else:
+                    ProductsAvailable.objects.create(user=user, products=cart_obj.products)
+            del request.session["cart_id"] 
+            return redirect("carts:success", kwargs={"order_code": order_obj.order_code})
 
     context = {
         "object": order_obj,
@@ -128,6 +135,6 @@ def checkout_home(request):
     return render(request, "carts/checkout.html", context)
 
 
-def checkout_done_view(request):
-    context = {"order_code": request.POST.get("order_code")}
+def checkout_done_view(request, **kwargs):
+    context = {"order_code": kwargs["order_code"]}
     return render(request, "carts/checkout-done.html", context)

@@ -8,6 +8,7 @@ from django.core.files.storage import FileSystemStorage
 import os, tempfile, zipfile
 from django.http import HttpResponse, HttpResponseRedirect
 from wsgiref.util import FileWrapper
+from taxcategs.models import TaxCateg
 
 class ProductListView(ListView):
     queryset = Product.objects.all()
@@ -17,6 +18,7 @@ class ProductListView(ListView):
         context = super(ProductListView, self).get_context_data()
         cart_obj, new_obj = Cart.objects.new_or_get(self.request)
         context["cart"] = cart_obj
+        context["level_zero"] = TaxCateg.objects.filter(active=True, level=0).all()
         return context
 
 class ProductDetailView(DetailView):

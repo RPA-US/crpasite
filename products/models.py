@@ -148,7 +148,7 @@ class Product(models.Model):
 
 class ProductsAvailable(models.Model):
     products = models.ManyToManyField(Product, verbose_name="Bought products", blank=True)
-    user = models.ForeignKey(User, verbose_name="Owner", on_delete=models.CASCADE) 
+    user = models.OneToOneField(User, verbose_name="Owner", on_delete=models.CASCADE) 
 
     class Meta:
         verbose_name = ("ProductsAvailable")

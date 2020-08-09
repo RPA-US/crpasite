@@ -6,19 +6,62 @@ Products List
 
 {% block content %}
 <div class="container">
-
-    <div class="tab-content" id="nav-tabContent">
-        <!-- card one -->
-        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-            <div class="row">
-                {% for object in object_list %}
-                <div class="col-xl-4 col-lg-4 col-md-6">
-                    {% include "products/snippets/card.html" with instance=object %}
+    <h1>Cognitive RPA components</h1><br><br><br>
+    {% if object_list %}
+    <section class="product_list">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="product_sidebar">
+                    <div class="single_sedebar">
+                        <form method="GET" action="{% url 'search:products' %}">
+                            <input type="text" name="q" placeholder="Search keyword">
+                            <button class="search-btn" type="submit" style="color:#000;"><i
+                                    class="ti-search"></i></button>
+                        </form>
+                    </div>
+                    <div class="single_sedebar">
+                        <div class="select_option">
+                            <div class="select_option_list">Category <i class="right fas fa-caret-down"></i> </div>
+                            <div class="select_option_dropdown">
+                                    {% for category in level_zero %}
+                                    <p><a href="{{ category.get_absolute_url }}">{{ category }}</a></p>
+                                    {% include 'categories/snippets/taxcateg-child.html' with c=category sufix=">"%}
+                                    {% endfor %}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                {% endfor %}
+            </div>
+            <div class="col-md-9">
+                <div class="product_list">
+
+                    <div class="single_product_item">
+                        <div class="tab-content" id="nav-tabContent">
+                            <!-- card one -->
+                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                                aria-labelledby="nav-home-tab">
+                                <div class="row">
+                                    {% for object in object_list %}
+                                    <div class="col-xl-4 col-lg-4 col-md-6">
+                                        {% include "products/snippets/card.html" with instance=object %}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        {% elif categoryTerm %}
+                        <h2>No products available for category <a
+                                href="/categories/view/{{categoryTerm.pk}}/">{{categoryTerm.term}}</a></h2>
+                        {% else %}
+                        <h2>No products available</h2>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+</div>
+</div>
+</section>
 </div>
 {% endblock %}
 

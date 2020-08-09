@@ -57,6 +57,7 @@ class ProductNavigateCategoryView(ListView):
         context = super().get_context_data(**kwargs)
         categoryTerm = get_object_or_404(CategoryTerm, tax_categ__pk=self.kwargs["pk"], active=True, is_tax_categ=True)
         context["categoryTerm"] = categoryTerm
+        context["level_zero"] = TaxCateg.objects.filter(active=True, level=0).all()
         return context
 
 class ProposalListView(ListView):
@@ -107,7 +108,7 @@ class TaxCategoryDetailView(DetailView):
     def get(self, request, *args, **kwargs):
         # if self.request.user.is_authenticated:
         categoryTerm = get_object_or_404(
-            CategoryTerm, tax_categ=kwargs["pk"], is_tax_categ=True
+            CategoryTerm, tax_categ=kwargs["pk"], is_tax_categ=True, active=True
         )
         # else:
         #     return CategoryTerm.objects.none()
@@ -156,6 +157,11 @@ class AddCategoryTermProposalView(CreateView):
         kwargs["user"] = self.request.user
         kwargs["taxcategdecision"] = self.request.GET["taxcateg"]
         return kwargs
+
+    def get_context_data(self, **kwargs):
+        ctx = super(AddCategoryTermProposalView, self).get_context_data(**kwargs)
+        ctx['level_zero'] = TaxCateg.objects.filter(active=True, level=0).all()
+        return ctx
 
     # fields = '__all__'
     # fields = ('title', 'body')

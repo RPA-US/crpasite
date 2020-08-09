@@ -33,7 +33,6 @@ Create a category term proposal
     {% elif request.taxcategdecision == 2 %}
     <ul class="messages">
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            {{reptaxcateg}}
             This proposal is intended to be a new taxonomic category.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">×</span>
@@ -42,7 +41,42 @@ Create a category term proposal
     </ul>
     {% endif %}
     <form method="POST">{% csrf_token %}
-        {{ form.as_p }}
+        <p>
+            {{ form.term.label_tag }}
+            {{ form.term }}
+            <div class="form-validation">{{ form.term.errors }}</div>
+        </p>
+        <p>
+            {{ form.description.label_tag }}
+            {{ form.description }}
+            <div class="form-validation">{{ form.description.errors }}</div>
+        </p>
+        <p>
+            {{ form.tax_categ.label_tag }}
+            <select name="result" id="id_result" style="display: none;">
+                {% for category in level_zero %}
+                <option value="{{ category.pk }}" {% if form.fields.tax_categ.value == category.pk %}
+                    selected{% endif %}>{{ category }}</option>
+                {% include 'categories/snippets/taxcateg-child-form.html' with c=category sufix=">" val=form.fields.tax_categ.value %}
+                {% endfor %}
+            </select>
+            <div class="form-validation">{{ form.tax_categ.errors }}</div>
+        </p>
+        <p>
+            {{ form.knowledge_source.label_tag }}
+            {{ form.knowledge_source }}
+            <div class="form-validation">{{ form.knowledge_source.errors }}</div>
+        </p>
+        <p>
+            {{ form.formats_supported.label_tag }}
+            {{ form.formats_supported }}
+            <div class="form-validation">{{ form.formats_supported.errors }}</div>
+        </p>
+        <p>
+            {{ form.categoryChars.label_tag }}
+            {{ form.categoryChars }}
+            <div class="form-validation">{{ form.categoryChars.errors }}</div>
+        </p>
         <button type="submit" value="submit" class="btn_3">
             Save
         </button>

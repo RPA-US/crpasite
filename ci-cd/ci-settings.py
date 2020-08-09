@@ -43,7 +43,11 @@ INSTALLED_APPS = [
     "tags",
     "billing",
     "orders",
-    "addresses"
+    "addresses",
+    "categories",
+    "taxcategs",
+    "categories.editor",
+    "private_storage",
 ]
 
 AUTH_USER_MODEL = "accounts.User"  # changes the built-in user model to ours
@@ -113,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en"
 
-TIME_ZONE = "Europe/Istanbul"
+TIME_ZONE = "Europe/Madrid"
 
 USE_I18N = True
 
@@ -139,3 +143,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
 
 LOGIN_REDIRECT_URL = "home_url"
 LOGOUT_REDIRECT_URL = "accounts:login"
+
+PRIVATE_STORAGE_ROOT = os.path.join(BASE_DIR, "privatefiles")
+PRIVATE_STORAGE_AUTH_FUNCTION = 'products.permissions.allow_staff'

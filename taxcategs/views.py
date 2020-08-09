@@ -29,7 +29,6 @@ from .forms import ProposalCategoryTermForm
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
-# TODO
 class CategoriesListView(ListView):
     model = TaxCateg
     template_name = "categories/taxcategs.html"
@@ -37,13 +36,6 @@ class CategoriesListView(ListView):
 
     def get_queryset(self):
         return TaxCateg.objects.filter(active=True, level=0)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # context["categTerms"] = CategoryTerm.objects.filter(
-        #     active=True, is_tax_categ=True
-        # )
-        return context
 
 class CommentListView(ListView):
     model = Comment
@@ -343,7 +335,6 @@ def select_proposal_view(request):
 
 def taxonomy_view(request):
     taxcateg_tree = {}
-    taxcateg_tree['pk'] = 0
     taxcateg_tree['name'] = "Taxonomy"
     taxcateg_tree['img'] = "/media/products/1459495222.jpg"
     h = []

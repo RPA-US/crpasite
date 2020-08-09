@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block title %}
-{{status}}
+Purchased products
 {% endblock %}
 
 {% block content %}
 
 
 <div class="container">
-    {% if request.user.role == 1 or 4 %}
+    {% if object_list %}
     <div class="row">
         <div class="col-md-7">
             <h1>Purchased products</h1>
@@ -57,11 +57,11 @@
                     <div class="categoryterm_">{{ c.price }}</div>
                     {% endif %}
                     <div class="categoryterm_">
-                    {% if c.categories.all|length > 0 %}
-                    {{c.categories.all|join:", "}}
-                    {% else %}
-                    {{c.categories.all}}
-                    {% endif %}
+                        {% if c.categories.all|length > 0 %}
+                        {{c.categories.all|join:", "}}
+                        {% else %}
+                        {{c.categories.all}}
+                        {% endif %}
                     </div>
                     <div class="categoryterm_n"><a href="/products/private-data/{{c.component}}">Download</a></div>
 
@@ -124,11 +124,8 @@
         </ul>
     </nav>
 
-
-
     {% else %}
-    <h2 class="form-validation">Reviewer must be authenticated</h2>
+    <h2 class="form-validation">No purchased products</h2>
     {% endif %}
-    {{qqq}}
 </div>
 {% endblock %}

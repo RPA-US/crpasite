@@ -27,7 +27,11 @@ class MyProductListView(ListView):
     paginate_by = 50
 
     def get_queryset(self):
-        return ProductsAvailable.objects.get(user=self.request.user).products.all()
+        if self.request.user.is_authenticated and ProductsAvailable.objects.filter(user=self.request.user).exists():
+            q = ProductsAvailable.objects.get(user=self.request.user).products.all()
+        else:
+            q = []
+        return q
 
 class ProductDetailView(DetailView):
     model = Product

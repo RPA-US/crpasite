@@ -81,10 +81,6 @@ class InputFormatSupported(CategoryBase):
     def get_absolute_url(self):
         return reverse("taxcategs:categoryterm_create")  # , kwargs={"pk": self.pk})
 
-    def clean(self):
-        if not self.request.user.is_authenticated:
-            raise ValidationError("User must be authenticated.")
-
 DECISION_CHOICES = (
         ("1", "Accepted"),
         ("2", "Refused"),

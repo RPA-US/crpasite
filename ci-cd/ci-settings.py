@@ -35,8 +35,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # our apps
     "accounts",
+    "categories",
+    "categories.editor",
+    "taxcategs",
+    "private_storage",
     "carts",
     "products",
     "search",
@@ -44,10 +47,6 @@ INSTALLED_APPS = [
     "billing",
     "orders",
     "addresses",
-    "categories",
-    "taxcategs",
-    "categories.editor",
-    "private_storage",
 ]
 
 AUTH_USER_MODEL = "accounts.User"  # changes the built-in user model to ours

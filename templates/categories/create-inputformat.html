@@ -6,6 +6,7 @@ New input format supported
 {% block content %}
 <div class="container">
     <h3 class="mb-30">New input format supported</h3>
+    {% if request.user.is_authenticated %}
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -21,9 +22,13 @@ New input format supported
     {% endif %}
     <form method="POST">{% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" value="submit" id="xvxv" class="btn_3">
+        <br><br>
+        <button type="submit" value="submit" class="btn_3">
             Save
         </button>
     </form>
+    {% else %}
+    <p>To register an input format supported, you must to be logged in</p>
+    {% endif %}
 </div>
 {% endblock %}

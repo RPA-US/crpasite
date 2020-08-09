@@ -45,6 +45,23 @@ class CategoriesListView(ListView):
         # )
         return context
 
+class CommentListView(ListView):
+    model = Comment
+    template_name = "categories/comment-list.html"
+    paginate_by = 10
+
+    def get_queryset(self):
+        status = self.request.GET.get("mine", None)
+        categ_term = self.request.GET.get("categterm", None)
+        if self.request.user.is_authenticated and status:
+            q = Comment.objects.filter(user=self.request.user)
+        elif categ_term:
+            q = Comment.objects.filter(category_term__pk=categ_term)
+        else:
+            q = Comment.objects.all()
+        return q
+
+
 class ProductNavigateCategoryView(ListView):
     model = Product
     template_name = "products/list.html"
@@ -106,12 +123,9 @@ class CategoryDetailView(DetailView):
 
 class TaxCategoryDetailView(DetailView):
     def get(self, request, *args, **kwargs):
-        # if self.request.user.is_authenticated:
         categoryTerm = get_object_or_404(
             CategoryTerm, tax_categ=kwargs["pk"], is_tax_categ=True, active=True
         )
-        # else:
-        #     return CategoryTerm.objects.none()
         context = {"categoryTerm": categoryTerm, "taxonomic_categ_pk": kwargs["pk"]}
         return render(request, "categories/detail.html", context)
 
@@ -122,10 +136,6 @@ class AddCategoryTermProposalView(CreateView):
     template_name = "categories/create.html"
 
     def form_valid(self, form):
-        # self.object = form.save(commit=False)
-        # self.object.user = self.request.user
-        # self.object.formats_supported.set(None)
-        # saved = self.object.save()
         form.cleaned_data.update({"active": False})
         form.cleaned_data.update({"is_tax_categ": False})
         if form.taxcategdecision == "1" or form.taxcategdecision == "2":
@@ -180,42 +190,38 @@ class AddCategoryTermProposalView(CreateView):
     #     return render(request, 'categories/create.html', {'form': form})
 
 
-# TODO
-class ReviewCategoryTermProposalView(FormView):
-    model = CategoryTerm
-    form_class = ProposalCategoryTermForm
-    template_name = "categories/edit.html"
-    # fields = '__all__'
-    # fields = ('title', 'body')
-
-
-# TODO
 class AddInputFormatSupportedView(CreateView):
     model = InputFormatSupported
     form_class = InputFormatSupportedForm
     template_name = "categories/create-inputformat.html"
 
 
-# TODO
 class AddKnowledgeSourceView(CreateView):
     model = KnowledgeSource
     form_class = KnowledgeSourceForm
     template_name = "categories/create-source.html"
 
+    def form_valid(self, form):
+        if not self.request.user.is_authenticated:
+            raise ValidationError("User must be authenticated.")
+        self.object = form.save(commit=False)
+        self.object.creator = self.request.user
+        saved = self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
 
-# TODO
-class AddReportView(CreateView):
-    model = Report
-    form_class = ReportForm
-    template_name = "categories/create-report.html"
 
-
-# TODO
 class AddCommentView(CreateView):
     model = Comment
     form_class = CommentForm
     template_name = "categories/create-comment.html"
 
+    def form_valid(self, form):
+        if not self.request.user.is_authenticated:
+            raise ValidationError("User must be authenticated.")
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        saved = self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
 
 class CategoriesListReview(ListView):
     model = CategoryTerm
@@ -363,11 +369,11 @@ def get_taxcateg_tree(taxcateg):
             temp_obj['children'] = [get_taxcateg_tree(child) for child in it]
     return temp_obj
 
-def listing(request):
-    category_list = CategoryTerm.objects.all()
-    paginator = Paginator(category_list, 25)  # Show 25 categories per page.
+# def listing(request):
+#     category_list = CategoryTerm.objects.all()
+#     paginator = Paginator(category_list, 25)  # Show 25 categories per page.
 
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
-    return render(request, "list.html", {"page_obj": page_obj})
+#     page_number = request.GET.get("page")
+#     page_obj = paginator.get_page(page_number)
+#     return render(request, "list.html", {"page_obj": page_obj})
 

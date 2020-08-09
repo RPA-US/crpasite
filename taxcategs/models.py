@@ -51,7 +51,7 @@ class KnowledgeSource(models.Model):
         UserModel, verbose_name="Creator", on_delete=models.CASCADE
     )
     created_at = models.DateTimeField(auto_now_add=True)
-    active = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = "Knowledge Source"
@@ -80,6 +80,10 @@ class InputFormatSupported(CategoryBase):
 
     def get_absolute_url(self):
         return reverse("taxcategs:categoryterm_create")  # , kwargs={"pk": self.pk})
+
+    def clean(self):
+        if not self.request.user.is_authenticated:
+            raise ValidationError("User must be authenticated.")
 
 DECISION_CHOICES = (
         ("1", "Accepted"),
@@ -224,8 +228,9 @@ class Report(models.Model):
 
 class Comment(models.Model):
     user = models.ForeignKey(UserModel, verbose_name="Author", on_delete=models.CASCADE)
-    category_term = models.ForeignKey(CategoryTerm, on_delete=models.CASCADE)
+    category_term = models.ForeignKey(CategoryTerm, on_delete=models.CASCADE, limit_choices_to={'active': True})
     title = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
 
     class Meta:

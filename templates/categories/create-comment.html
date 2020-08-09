@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}
-New knowledge source
+New comment
 {% endblock %}
 
 {% block content %}
 <div class="container">
-    <h3 class="mb-30">New knowledge source</h3>
+    <h3 class="mb-30">New comment</h3>
     {% if request.user.is_authenticated %}
     {% if messages %}
     <ul class="messages">
@@ -22,12 +22,13 @@ New knowledge source
     {% endif %}
     <form method="POST">{% csrf_token %}
         {{ form.as_p }}
+        <br><br>
         <button type="submit" value="submit" id="xvxv" class="btn_3">
             Save
         </button>
     </form>
     {% else %}
-    <p>To register a knowledge source, you must to be logged in</p>
+    <p>To write a comment, you must to be logged in</p>
     {% endif %}
 </div>
 {% endblock %}

@@ -1,0 +1,8 @@
+{% if c.active and c.children.count %}
+{% for child in c.children.all %}
+<li><a href="/categories/navigate/{{ child.pk }}/">{{sufix}} {{ child }}</a></li>
+<ul>
+    {% include 'categories/snippets/taxcateg-child.html' with c=child sufix=sufix|add:">"%}
+</ul>
+{% endfor %}
+{% endif %}

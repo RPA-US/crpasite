@@ -7,137 +7,16 @@ Taxonomy of Cognitive RPA components
 {% load static %}
 
 <div class="container">
-    {% if request.user.role == 1 or 4 %}
-    <h1>Taxonomy of Cognitive RPA components</h1>
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show"
-            role="alert">
-            {{ message }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        {% endfor %}
-    </ul>
-    {% endif %}
-
-    <!-- ================================================================================================================ -->
 
     {% for category in object_list %}
-    <h1>{{ category }}</h1>
-    {% include 'categories/snippets/taxcateg-child.html' with c=category %}
-    {% endfor %}
-    <!-- ================================================================================================================ -->
-    <section class="product_list section_padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="product_sidebar">
-                        <div class="single_sedebar">
-                            <form action="#">
-                                <input type="text" name="#" placeholder="Search keyword">
-                                <i class="ti-search"></i>
-                            </form>
-                        </div>
-                        <div class="single_sedebar">
-                            <div class="select_option">
-                                <div class="select_option_list">Category <i class="right fas fa-caret-down"></i> </div>
-                                <div class="select_option_dropdown">
-                                    <p><a href="#">Category 1</a></p>
-                                    <p><a href="#">Category 2</a></p>
-                                    <p><a href="#">Category 3</a></p>
-                                    <p><a href="#">Category 4</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_sedebar">
-                            <div class="select_option">
-                                <div class="select_option_list">Type <i class="right fas fa-caret-down"></i> </div>
-                                <div class="select_option_dropdown">
-                                    <p><a href="#">Type 1</a></p>
-                                    <p><a href="#">Type 2</a></p>
-                                    <p><a href="#">Type 3</a></p>
-                                    <p><a href="#">Type 4</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="product_list">
-                        <div class="row">
-                            {% for object in object_list %}
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    {% include "products/snippets/card.html" with instance=object %}
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                        <div class="load_more_btn text-center">
-                            <a href="#" class="btn_3">Load More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================================================================================================================ -->
-    <!-- ========================================== PAGINATION ========================================================== -->
-    <!-- ================================================================================================================ -->
-    <nav class="blog-pagination justify-content-center d-flex">
-        <ul class="pagination">
-            {% if page_obj.has_previous %}
-            <li class="page-item">
-                <a href="?page=1" class="page-link">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-left"
-                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
-                        <path fill-rule="evenodd"
-                            d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
-                    </svg>
-                </a>
-            </li>
-            <li class="page-item">
-                <a href="?page={{ page_obj.previous_page_number }}" class="page-link" aria-label="Previous">
-                    <i class="ti-angle-left"></i></a>
-            </li>
-            {% endif %}
-            {% for i in page_obj.paginator.page_range %}
-            {% if page_obj.number == i %}
-            <li class="page-item activo"><a href="#" class="page-link">{{ i }}</a></li>
-            {% else %}
-            <li class="page-item"><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
-            {% endif %}
-            {% endfor %}
-            {% if page_obj.has_next %}
-            <li class="page-item">
-                <a href="?page={{ page_obj.next_page_number }}" class="page-link" aria-label="Next">
-                    <i class="ti-angle-right"></i>
-                </a>
-            </li>
-            <li class="page-item">
-                <a href="?page={{ page_obj.paginator.num_pages }}" class="page-link" aria-label="Last">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-right"
-                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
-                        <path fill-rule="evenodd"
-                            d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
-                    </svg>
-                </a>
-            </li>
-            {% endif %}
+    <ul>
+        <li>{{ category }}</li>
+        <ul>
+            {% include 'categories/snippets/taxcateg-child.html' with c=category sufix=">"%}
         </ul>
-    </nav>
+    </ul>
+    {% endfor %}
 
-    {% else %}
-    <h2 class="form-validation">Reviewer must be authenticated</h2>
-    {% endif %}
 </div>
 
 {% endblock %}

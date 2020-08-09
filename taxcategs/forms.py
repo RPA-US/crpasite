@@ -197,13 +197,50 @@ class ProposalReviewForm(forms.ModelForm):
 class InputFormatSupportedForm(forms.ModelForm):
     class Meta:
         model = InputFormatSupported
-        fields = ("name", "slug", "parent")
+        exclude = ("slug",)
+        fields = ("name", "parent")
+        widgets = {
+            "name": forms.TextInput(
+                attrs={
+                    "class": "single-input",
+                    "placeholder": "Name",
+                    "onfocus": "this.placeholder = ''",
+                    "onblur": "this.placeholder = 'Name'",
+                }
+            ),
+        }
+
 
 
 class KnowledgeSourceForm(forms.ModelForm):
     class Meta:
         model = KnowledgeSource
-        fields = ("name", "url", "creator", "active")
+        exclude = (
+            "creator",
+            "active",
+        )
+        fields = (
+            "name",
+            "url",
+        )
+        widgets = {
+            "name": forms.TextInput(
+                attrs={
+                    "class": "single-input",
+                    "placeholder": "Name",
+                    "onfocus": "this.placeholder = ''",
+                    "onblur": "this.placeholder = 'Name'",
+                }
+            ),
+            "url": forms.URLInput(
+                attrs={
+                    "class": "single-input",
+                    "placeholder": "URL",
+                    "onfocus": "this.placeholder = ''",
+                    "onblur": "this.placeholder = 'URL'",
+                }
+            ),
+        }
 
 
 class ReportForm(forms.ModelForm):
@@ -233,4 +270,24 @@ class ReportForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ("user", "category_term", "title", "text")
+        exclude = ("user",)
+        fields = ("title", "text","category_term",)
+        widgets = {
+            "title": forms.TextInput(
+                attrs={
+                    "class": "single-input",
+                    "placeholder": "Title of the comment",
+                    "onfocus": "this.placeholder = ''",
+                    "onblur": "this.placeholder = 'Title of the comment'",
+                }
+            ),
+            "text": forms.Textarea(
+                attrs={
+                    "class": "single-input",
+                    "placeholder": "Comment...",
+                    "onfocus": "this.placeholder = ''",
+                    "onblur": "this.placeholder = 'Comment...'",
+                    "rows": "5",
+                }
+            ),
+        }

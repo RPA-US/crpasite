@@ -10,12 +10,12 @@ class Address(models.Model):
         BillingProfile, null=True, blank=False, on_delete=models.SET_NULL
     )
     address_type = models.CharField(max_length=120, choices=ADDRESS_TYPES)
-    address_line_1 = models.CharField(max_length=120)
+    address_line_1 = models.CharField(max_length=120, default="Avd. Reina Mercedes s/n")
     address_line_2 = models.CharField(max_length=120, null=True, blank=True)
-    city = models.CharField(max_length=120)
-    country = models.CharField(max_length=120, default="Turkey")
-    state = models.CharField(max_length=120)
-    postal_code = models.CharField(max_length=120)
+    city = models.CharField(max_length=120, default="Seville")
+    country = models.CharField(max_length=120, default="Spain")
+    state = models.CharField(max_length=120, default="Spain")
+    postal_code = models.CharField(max_length=120, default="41012")
 
     def __str__(self):
         return str(self.billing_profile) + " : " + str(self.address_type).upper()

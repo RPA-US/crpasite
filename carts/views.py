@@ -117,7 +117,7 @@ def checkout_home(request):
                 user = request.user
                 if ProductsAvailable.objects.filter(user=user).exists:
                     p = ProductsAvailable.objects.get(user=user)
-                    p.products.add(cart_obj.products)
+                    p.products.add(*cart_obj.products.all())
                 else:
                     ProductsAvailable.objects.create(user=user, products=cart_obj.products)
             del request.session["cart_id"] 

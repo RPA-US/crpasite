@@ -61,7 +61,9 @@
                         <h3>{{ object.title }}</h3>
                         <p>{{ object.description|linebreaks }}</p>
                         <p>Price: {{ object.price }}</p>
+                        {% if object.user.pk == request.user.pk %}
                         <p><a href="/products/private-data/{{object.component}}">{{object.component}}</a></p>
+                        {% endif %}
                         <div class="card_area">
                             <div class="product_count_area">
                                 <div class="product_count d-inline-block">

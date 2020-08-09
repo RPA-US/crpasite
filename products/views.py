@@ -1,5 +1,5 @@
 from django.views.generic import ListView, DetailView, CreateView
-from .models import Product
+from .models import Product, ProductsAvailable
 from carts.models import Cart
 from .forms import ProductForm
 from django.shortcuts import render
@@ -20,6 +20,14 @@ class ProductListView(ListView):
         context["cart"] = cart_obj
         context["level_zero"] = TaxCateg.objects.filter(active=True, level=0).all()
         return context
+
+class MyProductListView(ListView):
+    model = Product
+    template_name = "products/my_list.html"
+    paginate_by = 50
+
+    def get_queryset(self):
+        return ProductsAvailable.objects.get(user=self.request.user).products.all()
 
 class ProductDetailView(DetailView):
     model = Product
@@ -102,13 +110,13 @@ def register_product(request):
 
     return render(request, "products/create.html", context)
 
-def send_file(request):
+def send_file(request, path):
     """                                                                         
     Send a file through Django without loading the whole file into              
     memory at once. The FileWrapper will turn the file object into an           
     iterator for chunks of 8KB.                                                 
     """
-    filename = __file__ # Select your file here.                                
+    filename = path # Select your file here.                                
     wrapper = FileWrapper(file(filename))
     response = HttpResponse(wrapper, content_type='text/plain')
     response['Content-Length'] = os.path.getsize(filename)

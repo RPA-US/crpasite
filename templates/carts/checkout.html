@@ -7,11 +7,14 @@ Checkout
 
 {% block content %}
 <div class="container">
+    {% if object.order_code %}
     {{ object.order_code }} -- {{ object.cart.id }}
+    {% endif %}
+    <br>
     {% if not billing_profile %}
 
-    <div class="row">
-        <div class="col-md-6">
+    {% comment %} <div class="row"> {% endcomment %}
+        <div style="width: 50%; margin: 0 auto;">
             <p class="lead text-center"><b>Login</b></p>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-12">
@@ -19,7 +22,7 @@ Checkout
                 </div>
             </div>
         </div>
-        <div class="col-md-6 text-center">
+        {% comment %} <div class="col-md-6 text-center">
             <b>Continue as Guest</b>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-12">
@@ -28,7 +31,7 @@ Checkout
                 </div>
             </div>
         </div>
-    </div>
+    </div> {% endcomment %}
     {% else %}
 
     {% if not object.shipping_address %}

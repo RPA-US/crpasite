@@ -5,7 +5,7 @@ from django.contrib.auth.views import LogoutView
 app_name = "taxcategs"
 
 urlpatterns = [
-    path('listview/', CategoriesListView.as_view(), name="animated_taxonomy"),
+    path('listview/', CategoriesListView.as_view(), name="ul_taxonomy"),
     path('navigate/', taxonomy_view, name="categoryterm_list"),
     path('navigate/<int:pk>/', ProductNavigateCategoryView.as_view(), name="product_categoryterm_list"),
     path('view/<int:pk>/', CategoryDetailView.as_view(), name="categoryterm_detail"),

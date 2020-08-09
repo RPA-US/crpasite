@@ -37,11 +37,12 @@
                   {% if user.is_superuser %}
                   <li><a href="{% url 'admin:index' %}">Dashboard</a></li>
                   {% else %}
-                  <li><a href="{% url "taxcategs:categoryterm_list" %}">Taxonomy </a></li>
                   <li><a href="{% url 'products:list' %}">Shopping</a></li>
                   <li><a href="{% url 'carts:home' %}">Cart</a></li>
                   {% endif %}
+                  <li><a href="{% url "taxcategs:categoryterm_list" %}">Taxonomy </a></li>
                   {% if request.user.is_authenticated %}
+                  <li><a href="{% url 'products:my_list' %}">My products</a></li>
                   <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
                   {% endif %}
 
@@ -76,6 +77,7 @@
                     <li><a href="{% url "taxcategs:categoryterm_list" %}">Categories</a>
                       <ul class="submenu">
                         <li><a href="{% url "taxcategs:categoryterm_list" %}"> Navigate</a></li>
+                        <li><a href="{% url "taxcategs:ul_taxonomy" %}"> List</a></li>
                         {% if request.user.is_authenticated and request.user.role != 1 %}
                         <li><a href="{% url "taxcategs:categoryterm_myproposal" %}"> My proposals</a></li>
                         {% endif %}

@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from products.models import Product, ProductsAvailable
 from .models import Cart
 from orders.models import Order
@@ -8,6 +9,7 @@ from billing.models import BillingProfile
 from addresses.forms import AddressForm
 from addresses.models import Address
 from decimal import Decimal
+from django.http import HttpResponseRedirect
 
 
 def cart_detail_api_view(request):
@@ -93,7 +95,7 @@ def checkout_home(request):
     address_qs = None
     if billing_profile is not None:
         if request.user.is_authenticated:
-            address_qs = Address.objects.filter(billing_profile=billing_profile)
+            address_qs = Address.objects.filter(billing_profile=billing_profile).all().distinct("address_line_1", "postal_code")
         order_obj, order_obj_created = Order.objects.new_or_get(
             billing_profile, cart_obj
         )
@@ -115,13 +117,14 @@ def checkout_home(request):
             # Add product to available list
             if request.user.is_authenticated:
                 user = request.user
-                if ProductsAvailable.objects.filter(user=user).exists:
+                if ProductsAvailable.objects.filter(user=user).exists():
                     p = ProductsAvailable.objects.get(user=user)
                     p.products.add(*cart_obj.products.all())
                 else:
-                    ProductsAvailable.objects.create(user=user, products=cart_obj.products)
+                    p = ProductsAvailable.objects.create(user=user)
+                    p.products.add(*cart_obj.products.all())
             del request.session["cart_id"] 
-            return redirect("carts:success", kwargs={"order_code": order_obj.order_code})
+            return HttpResponseRedirect(reverse("carts:success", kwargs={"order_code": order_obj.order_code, "products": p.pk}))
 
     context = {
         "object": order_obj,
@@ -136,5 +139,6 @@ def checkout_home(request):
 
 
 def checkout_done_view(request, **kwargs):
-    context = {"order_code": kwargs["order_code"]}
+    prods = ProductsAvailable.objects.get(pk=kwargs["products"])
+    context = {"order_code": kwargs["order_code"], "products": prods.products.all()}
     return render(request, "carts/checkout-done.html", context)

@@ -21,12 +21,16 @@ Products List
                     </div>
                     <div class="single_sedebar">
                         <div class="select_option">
+                            {% if categoryTerm %}
+                            <div class="select_option_list">{{categoryTerm.term}}<i class="right fas fa-caret-down"></i></div>
+                            {% else %}
                             <div class="select_option_list">Category <i class="right fas fa-caret-down"></i> </div>
+                            {% endif %}
                             <div class="select_option_dropdown">
-                                    {% for category in level_zero %}
-                                    <p><a href="{{ category.get_absolute_url }}">{{ category }}</a></p>
-                                    {% include 'categories/snippets/taxcateg-child.html' with c=category sufix=">"%}
-                                    {% endfor %}
+                                {% for category in level_zero %}
+                                <p><a href="/categories/navigate/{{ category.pk }}/">{{ category }}</a></p>
+                                {% include 'categories/snippets/taxcateg-child.html' with c=category sufix=">"%}
+                                {% endfor %}
                             </div>
                         </div>
                     </div>

@@ -71,7 +71,7 @@ class Product(models.Model):
     featured = models.BooleanField(default=False)
     active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    categories = models.ManyToManyField(TaxCateg, blank=True, limit_choices_to={'active': True})
+    categories = models.ManyToManyField(TaxCateg, limit_choices_to={'active': True})
     user = models.ForeignKey(User, verbose_name="Provider", on_delete=models.CASCADE)
     component = PrivateFileField("Component")
 

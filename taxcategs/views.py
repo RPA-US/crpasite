@@ -28,6 +28,8 @@ from django.contrib.auth.decorators import permission_required
 from .forms import ProposalCategoryTermForm
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+from django.http import HttpResponse
+from django.template import loader
 
 class CategoriesListView(ListView):
     model = TaxCateg
@@ -377,8 +379,6 @@ def get_taxcateg_tree(taxcateg):
 #     page_number = request.GET.get("page")
 #     page_obj = paginator.get_page(page_number)
 #     return render(request, "list.html", {"page_obj": page_obj})
-from django.http import HttpResponse
-from django.template import loader
 
 def export_taxonomy(request):
     # Create the HttpResponse object with the appropriate CSV header.
@@ -386,12 +386,11 @@ def export_taxonomy(request):
     response['Content-Disposition'] = 'attachment; filename="CRPAsite-taxonomy.csv"'
 
     cts = CategoryTerm.objects.filter(active=True).order_by('-tax_categ')
-    # The data is hard-coded here, but you could load it from a database or
-    # some other source.
-    csv_data = []
+    csv_data = [('Taxonomic category', 'Category term corresponds to Tax. category?', 'Term', 'Description', 'Category characteristics', 'Input format supported', 'Knowledge source')]
     for categ in cts:
-        pp = (str(categ.tax_categ.name), categ.is_tax_categ, categ.term, categ.description, ' - '.join([str(j) for j in categ.categoryChars]), ' - '.join([str(i) for i in categ.formats_supported.all()]), categ.knowledge_source.name+" - URL: "+categ.knowledge_source.url)
+        pp = (categ.tax_categ.name, categ.is_tax_categ, categ.term, categ.description, ' - '.join([str(j) for j in categ.categoryChars]), ' - '.join([str(i) for i in categ.formats_supported.all()]), categ.knowledge_source.name+" - URL: "+categ.knowledge_source.url)
         csv_data.append(pp)
+
     t = loader.get_template('categories/snippets/taxonomy-csv.txt')
     c = {'data': csv_data}
     response.write(t.render(c))

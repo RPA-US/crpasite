@@ -336,28 +336,38 @@ def select_proposal_view(request):
 def taxonomy_view(request):
     taxcateg_tree = {}
     taxcateg_tree['name'] = "Taxonomy"
-    taxcateg_tree['img'] = "/media/products/1459495222.jpg"
+    taxcateg_tree['img'] = "/static/img/1459495222.jpg"
     h = []
-    for t in TaxCateg.objects.filter(active=True, level=0):
-        h.append(get_taxcateg_tree(t))
-    taxcateg_tree['children'] = h
-    rr = json.dumps(taxcateg_tree)
-    context = {"taxcateg_hierarchy": rr}
+    context = {}
+    txs = TaxCateg.objects.filter(active=True, level=0)
+    if txs.exists():
+        for t in txs:
+            g = get_taxcateg_tree(t)
+            if g:
+                h.append(g)
+    if h:
+        taxcateg_tree['children'] = h
+        rr = json.dumps(taxcateg_tree)
+        context = {"taxcateg_hierarchy": rr}
     return render(request, "categories/animated-taxonomy.html", context)
 
 def get_taxcateg_tree(taxcateg):   
     temp_obj = {}
     if taxcateg.active:
-        c = CategoryTerm.objects.get(term=taxcateg.name, active=True)
-        temp_obj['pk'] = taxcateg.pk
-        temp_obj['name'] = taxcateg.name
-        if c.image_url:
-            temp_obj['img'] = c.image.url
+        cs = CategoryTerm.objects.filter(term=taxcateg.name, active=True)
+        if cs.exists():
+            c = cs[0]
+            temp_obj['pk'] = taxcateg.pk
+            temp_obj['name'] = taxcateg.name
+            if c.image_url:
+                temp_obj['img'] = c.image.url
+            else:
+                temp_obj['img'] = '/media/products/101042126148.jpg'
+            it = taxcateg.children.all()
+            if it:
+                temp_obj['children'] = [get_taxcateg_tree(child) for child in it]
         else:
-            temp_obj['img'] = '/media/products/101042126148.jpg'
-        it = taxcateg.children.all()
-        if it:
-            temp_obj['children'] = [get_taxcateg_tree(child) for child in it]
+            temp_obj = None
     return temp_obj
 
 # def listing(request):
@@ -367,4 +377,22 @@ def get_taxcateg_tree(taxcateg):
 #     page_number = request.GET.get("page")
 #     page_obj = paginator.get_page(page_number)
 #     return render(request, "list.html", {"page_obj": page_obj})
+from django.http import HttpResponse
+from django.template import loader
 
+def export_taxonomy(request):
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="CRPAsite-taxonomy.csv"'
+
+    cts = CategoryTerm.objects.filter(active=True).order_by('-tax_categ')
+    # The data is hard-coded here, but you could load it from a database or
+    # some other source.
+    csv_data = []
+    for categ in cts:
+        pp = (str(categ.tax_categ.name), categ.is_tax_categ, categ.term, categ.description, ' - '.join([str(j) for j in categ.categoryChars]), ' - '.join([str(i) for i in categ.formats_supported.all()]), categ.knowledge_source.name+" - URL: "+categ.knowledge_source.url)
+        csv_data.append(pp)
+    t = loader.get_template('categories/snippets/taxonomy-csv.txt')
+    c = {'data': csv_data}
+    response.write(t.render(c))
+    return response

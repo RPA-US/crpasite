@@ -113,35 +113,3 @@ def register_product(request):
     context = {"form": form}
 
     return render(request, "products/create.html", context)
-
-def send_file(request, path):
-    """                                                                         
-    Send a file through Django without loading the whole file into              
-    memory at once. The FileWrapper will turn the file object into an           
-    iterator for chunks of 8KB.                                                 
-    """
-    filename = path # Select your file here.                                
-    wrapper = FileWrapper(file(filename))
-    response = HttpResponse(wrapper, content_type='text/plain')
-    response['Content-Length'] = os.path.getsize(filename)
-    return response
-
-
-def send_zipfile(request):
-    """                                                                         
-    Create a ZIP file on disk and transmit it in chunks of 8KB,                 
-    without loading the whole file into memory. A similar approach can          
-    be used for large dynamic PDF files.                                        
-    """
-    temp = tempfile.TemporaryFile()
-    archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
-    for index in range(10):
-        filename = __file__ # Select your files here.                           
-        archive.write(filename, 'file%d.txt' % index)
-    archive.close()
-    wrapper = FileWrapper(temp)
-    response = HttpResponse(wrapper, content_type='application/zip')
-    response['Content-Disposition'] = 'attachment; filename=test.zip'
-    response['Content-Length'] = temp.tell()
-    temp.seek(0)
-    return response

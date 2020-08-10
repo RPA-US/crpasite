@@ -7,11 +7,27 @@ Taxonomy of Cognitive RPA components
 {% load static %}
 {% load category_tags %}
 <div class="container">
-  <h1>Taxonomy of Cognitive RPA components</h1>
-  <div class="col-md-12">
-    <center>
-      <div id="d3Hierarchy"></div>
-    </center>
+  <div class="row">
+    <div class="col-md-11">
+      <h1>Taxonomy of Cognitive RPA components</h1>
+    </div>
+    <div class="col-md-1">
+      <div class="button-group-area">
+        <a href="{% url 'taxcategs:export' %}"
+          class="genric-btn primary-border">Download</a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      {% if not taxcateg_hierarchy %}
+      <br>
+      <h2 style="color:red;">No taxonomy available</h2>
+      {% endif %}
+      <center>
+        <div id="d3Hierarchy"></div>
+      </center>
+    </div>
   </div>
 </div>
 {% endblock %}
@@ -19,8 +35,9 @@ Taxonomy of Cognitive RPA components
 <script src="{% static 'js/d3.min.js' %}"></script>
 <script src="{% static 'js/taxonomy.js' %}"></script>
 <script>
+{% if taxcateg_hierarchy %}
 var taxonomy_data = {{ taxcateg_hierarchy|safe }}
-console.log(taxonomy_data)
 taxonomytree(taxonomy_data);
+{% endif %}
 </script>
 {% endblock bottom %}

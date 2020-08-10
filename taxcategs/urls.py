@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .views import CategoriesListView, CategoryDetailView, AddInputFormatSupportedView, AddKnowledgeSourceView, AddCommentView, AddCategoryTermProposalView, select_proposal_view, ProposalListView, review_multiple_form, CategoriesListReview, TaxCategoryDetailView, taxonomy_view, ProductNavigateCategoryView, CommentListView
+from .views import CategoriesListView, CategoryDetailView, AddInputFormatSupportedView, AddKnowledgeSourceView, AddCommentView, AddCategoryTermProposalView, select_proposal_view, ProposalListView, review_multiple_form, CategoriesListReview, TaxCategoryDetailView, taxonomy_view, ProductNavigateCategoryView, CommentListView, export_taxonomy
 from django.contrib.auth.views import LogoutView
 
 app_name = "taxcategs"
@@ -20,6 +20,7 @@ urlpatterns += [
     path('input/', AddInputFormatSupportedView.as_view(), name='inputformatsupported_create'),
     path('knowledgesource/', AddKnowledgeSourceView.as_view(), name='knowledgesource_create'),
     path('comment/', AddCommentView.as_view(), name='comment_create'),
+    path('export/', export_taxonomy, name='export'),
     re_path(r'^comment/list/(?:(?P<mine>\d||<pk>\d)/)?$', CommentListView.as_view(), name='comment_list'),
     re_path(r'^reviewproposals/(?:(?P<status>\d)/)?$', CategoriesListReview.as_view(), name='categoryterm_proposalreview'),
 ]

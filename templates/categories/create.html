@@ -40,7 +40,7 @@ Create a category term proposal
         </div>
     </ul>
     {% endif %}
-    <form method="POST">{% csrf_token %}
+    <form method="POST" enctype="multipart/form-data" >{% csrf_token %}
         <p>
             {{ form.term.label_tag }}
             {{ form.term }}
@@ -66,6 +66,11 @@ Create a category term proposal
             {{ form.knowledge_source.label_tag }}
             {{ form.knowledge_source }}
             <div class="form-validation">{{ form.knowledge_source.errors }}</div>
+        </p>
+        <p>
+            {{ form.image.label_tag }}
+            {{ form.image }}
+            <div class="form-validation">{{ form.image.errors }}</div>
         </p>
         <p>
             {{ form.formats_supported.label_tag }}

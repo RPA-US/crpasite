@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .views import CategoriesListView, CategoryDetailView, AddInputFormatSupportedView, AddKnowledgeSourceView, AddCommentView, AddCategoryTermProposalView, select_proposal_view, ProposalListView, review_multiple_form, CategoriesListReview, TaxCategoryDetailView, taxonomy_view, ProductNavigateCategoryView, CommentListView, export_taxonomy
+from .views import CategoriesListView, CategoryDetailView, AddInputFormatSupportedView, AddKnowledgeSourceView, AddCommentView, AddCategoryTermProposalView, select_proposal_view, ProposalListView, review_multiple_form, CategoriesListReview, TaxCategoryDetailView, taxonomy_view, ProductNavigateCategoryView, CommentListView, export_taxonomy, CommentDetailView
 from django.contrib.auth.views import LogoutView
 
 app_name = "taxcategs"
@@ -19,8 +19,9 @@ urlpatterns += [
     re_path(r'^myproposals/(?:(?P<status>\d)/)?$', ProposalListView.as_view(), name='categoryterm_myproposal'),
     path('input/', AddInputFormatSupportedView.as_view(), name='inputformatsupported_create'),
     path('knowledgesource/', AddKnowledgeSourceView.as_view(), name='knowledgesource_create'),
-    path('comment/', AddCommentView.as_view(), name='comment_create'),
-    path('export/', export_taxonomy, name='export'),
+    re_path(r'^comment/(?:(?P<categterm>\d)/)?$', AddCommentView.as_view(), name='comment_create'),
+    path('comment_detail/<int:pk>/', CommentDetailView.as_view(), name="comment_detail"),
     re_path(r'^comment/list/(?:(?P<mine>\d||<pk>\d)/)?$', CommentListView.as_view(), name='comment_list'),
+    path('export/', export_taxonomy, name='export'),
     re_path(r'^reviewproposals/(?:(?P<status>\d)/)?$', CategoriesListReview.as_view(), name='categoryterm_proposalreview'),
 ]

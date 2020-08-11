@@ -9,6 +9,7 @@ import os, tempfile, zipfile
 from django.http import HttpResponse, HttpResponseRedirect
 from wsgiref.util import FileWrapper
 from taxcategs.models import TaxCateg
+from django.contrib import messages
 
 class ProductListView(ListView):
     queryset = Product.objects.all()
@@ -16,6 +17,19 @@ class ProductListView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(ProductListView, self).get_context_data()
+        cart_obj, new_obj = Cart.objects.new_or_get(self.request)
+        context["cart"] = cart_obj
+        context["level_zero"] = TaxCateg.objects.filter(active=True, level=0).all()
+        return context
+
+class LatestProductListView(ListView):
+    queryset = Product.objects.all()
+    template_name = "products/list.html"
+    paginate_by = 6
+    ordering = ["-created_at"]
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(LatestProductListView, self).get_context_data()
         cart_obj, new_obj = Cart.objects.new_or_get(self.request)
         context["cart"] = cart_obj
         context["level_zero"] = TaxCateg.objects.filter(active=True, level=0).all()
@@ -65,6 +79,11 @@ class CreateProductView(CreateView):
         kwargs = super(CreateProductView, self).get_form_kwargs(*args, **kwargs)
         kwargs['user'] = self.request.user
         return kwargs
+    
+    def get_context_data(self, **kwargs):
+        ctx = super(CreateProductView, self).get_context_data(**kwargs)
+        ctx['level_zero'] = TaxCateg.objects.filter(active=True, level=0).all()
+        return ctx
 
 def upload(request):
     context = {}

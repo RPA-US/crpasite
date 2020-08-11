@@ -52,7 +52,9 @@ Comments
                 </div>
                 {% for c in object_list %}
                 <div class="table-row">
-                    <div class="categoryterm_1">{{ c.title }}</div>
+                    <div class="categoryterm_1">
+                        <a href="/categories/comment_detail/{{ c.pk }}/">{{ c.title }}</a>
+                    </div>
                     <div class="categoryterm_">{{ c.text|truncatewords:8 }}</div>
                     <div class="categoryterm_">{{ c.user}}</div>
                     {% if not request.GET.categterm %}
@@ -73,7 +75,8 @@ Comments
         <ul class="pagination">
             {% if page_obj.has_previous %}
             <li class="page-item">
-                <a href="?page=1{% if request.GET.categterm %}&categterm={{request.GET.categterm}}{% elif request.GET.mine %}&mine={{request.GET.mine}}{% endif %}" class="page-link">
+                <a href="?page=1{% if request.GET.categterm %}&categterm={{request.GET.categterm}}{% elif request.GET.mine %}&mine={{request.GET.mine}}{% endif %}"
+                    class="page-link">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-left"
                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -84,8 +87,8 @@ Comments
                 </a>
             </li>
             <li class="page-item">
-                <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.categterm %}&categterm={{request.GET.categterm}}{% elif request.GET.mine %}&mine={{request.GET.mine}}{% endif %}" class="page-link"
-                    aria-label="Previous">
+                <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.categterm %}&categterm={{request.GET.categterm}}{% elif request.GET.mine %}&mine={{request.GET.mine}}{% endif %}"
+                    class="page-link" aria-label="Previous">
                     <i class="ti-angle-left"></i></a>
             </li>
             {% endif %}
@@ -93,19 +96,21 @@ Comments
             {% if page_obj.number == i %}
             <li class="page-item activo"><a href="#" class="page-link">{{ i }}</a></li>
             {% else %}
-            <li class="page-item"><a href="?page={{ i }}{% if request.GET.categterm %}&categterm={{request.GET.categterm}}{% elif request.GET.mine %}&mine={{request.GET.mine}}{% endif %}" class="page-link">{{ i }}</a></li>
+            <li class="page-item"><a
+                    href="?page={{ i }}{% if request.GET.categterm %}&categterm={{request.GET.categterm}}{% elif request.GET.mine %}&mine={{request.GET.mine}}{% endif %}"
+                    class="page-link">{{ i }}</a></li>
             {% endif %}
             {% endfor %}
             {% if page_obj.has_next %}
             <li class="page-item">
-                <a href="?page={{ page_obj.next_page_number }}{% if request.GET.categterm %}&categterm={{request.GET.categterm}}{% elif request.GET.mine %}&mine={{request.GET.mine}}{% endif %}" class="page-link"
-                    aria-label="Next">
+                <a href="?page={{ page_obj.next_page_number }}{% if request.GET.categterm %}&categterm={{request.GET.categterm}}{% elif request.GET.mine %}&mine={{request.GET.mine}}{% endif %}"
+                    class="page-link" aria-label="Next">
                     <i class="ti-angle-right"></i>
                 </a>
             </li>
             <li class="page-item">
-                <a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.categterm %}&categterm={{request.GET.categterm}}{% elif request.GET.mine %}&mine={{request.GET.mine}}{% endif %}" class="page-link"
-                    aria-label="Last">
+                <a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.categterm %}&categterm={{request.GET.categterm}}{% elif request.GET.mine %}&mine={{request.GET.mine}}{% endif %}"
+                    class="page-link" aria-label="Last">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-right"
                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"

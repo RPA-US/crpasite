@@ -8,21 +8,7 @@ Purchased products
 
 <div class="container">
     {% if object_list %}
-    <div class="row">
-        <div class="col-md-7">
-            <h1>Purchased products</h1>
-        </div>
-        <div class="col-md-5">
-            <div class="button-group-area mt-10">
-                <a href="{% url 'taxcategs:categoryterm_proposalreview' %}?status=3"
-                    class="genric-btn primary-border">Pending</a>
-                <a href="{% url 'taxcategs:categoryterm_proposalreview' %}?status=2"
-                    class="genric-btn success-border">Rejected</a>
-                <a href="{% url 'taxcategs:categoryterm_proposalreview' %}?status=1"
-                    class="genric-btn info-border">Accepted</a>
-            </div>
-        </div>
-    </div>
+    <h1>Purchased products</h1>
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -50,7 +36,7 @@ Purchased products
                 {% for c in object_list %}
                 <div class="table-row">
                     <div class="categoryterm_1"><a href="/products/detail/{{ c.slug }}/">{{ c.title }}</a></div>
-                    <div class="categoryterm_">{{ c.description|truncatechars:10 }}</div>
+                    <div class="categoryterm_">{{ c.description|truncatechars:18 }}</div>
                     {% if c.user.pk == request.user.pk %}
                     <div class="categoryterm_">For sale</div>
                     {% else %}

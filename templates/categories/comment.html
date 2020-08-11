@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}
+Comment
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="container">
+    <h1>Comment</h1>
+    <br>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show"
+            role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p><strong>Title: </strong>{{ comment.title }}</p>
+    <p><strong>Text: </strong> {{ comment.text }}</p>
+    <p><strong>Created at: </strong> {{ comment.created_at }}</p>
+    <p><strong>User: </strong> {{ comment.user }}</p>
+    <div class="col-md-10">
+        <div class="button-group-area mt-10">
+            <a href="/categories/comment/?categterm={{ comment.category_term.pk }}" class="genric-btn primary-border">New comment</a>
+            <a href="/categories/comment/list/?categterm={{ comment.category_term.pk }}" class="genric-btn primary-border">Other comments</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -5,10 +5,10 @@ from enum import Enum
 from django.core.exceptions import ValidationError
 from django.contrib.postgres.fields import ArrayField
 from django.urls import reverse
+import os
+import random
 
 # Create your models here.
-
-
 class TaxCateg(CategoryBase):
     """
     The category term that stands as the representative of the others.
@@ -87,6 +87,10 @@ DECISION_CHOICES = (
         ("3", "Accepted with changes"),
     )
 
+def get_filename_ext(filepath):
+    base_name = os.path.basename(filepath)
+    name, ext = os.path.splitext(base_name)
+    return name, ext
 
 def upload_image_path(instance, filename):
     name, ext = get_filename_ext(filename)
@@ -237,4 +241,4 @@ class Comment(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("taxcategs:categoryterm_create")
+        return reverse("taxcategs:comment_list")

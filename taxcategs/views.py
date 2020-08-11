@@ -43,6 +43,7 @@ class CommentListView(ListView):
     model = Comment
     template_name = "categories/comment-list.html"
     paginate_by = 10
+    ordering = ["-created_at"]
 
     def get_queryset(self):
         status = self.request.GET.get("mine", None)
@@ -62,7 +63,13 @@ class ProductNavigateCategoryView(ListView):
     paginate_by = 15
     
     def get_queryset(self):
-        return Product.objects.filter(categories__in=[self.kwargs["pk"]])
+        pk = self.kwargs["pk"]
+        c = TaxCateg.objects.get(pk=pk)
+        filt = [pk]
+        if c.level > 0:
+            for x in c.children.all():
+                filt.append(x.pk)
+        return Product.objects.filter(categories__in=filt)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -114,6 +121,10 @@ class CategoryDetailView(DetailView):
         context = {"categoryTerm": categoryTerm}
         return render(request, "categories/detail.html", context)
 
+class CommentDetailView(DetailView):
+    def get(self, request, *args, **kwargs):
+        comment = get_object_or_404(Comment, pk=kwargs["pk"])
+        return render(request, "categories/comment.html", {"comment": comment})
 
 class TaxCategoryDetailView(DetailView):
     def get(self, request, *args, **kwargs):
@@ -140,7 +151,7 @@ class AddCategoryTermProposalView(CreateView):
         if form.taxcategdecision == "2":
             if cat_term.tax_categ:
                 taxcateg = TaxCateg.objects.create(
-                    name=cat_term.term, active=False, parent=cat_term.tax_categ
+                    name=cat_term.term, active=False, parent=cat_term.tax_categ,
                 )
             else:
                 taxcateg = TaxCateg.objects.create(name=cat_term.term, active=False)
@@ -214,8 +225,13 @@ class AddCommentView(CreateView):
             raise ValidationError("User must be authenticated.")
         self.object = form.save(commit=False)
         self.object.user = self.request.user
+        pk = self.request.GET["categterm"]
+        cs = CategoryTerm.objects.filter(pk=pk, active=True)
+        if not cs.exists():
+            raise ValidationError("Comment must have an active category term associated")
+        self.object.category_term = cs[0]
         saved = self.object.save()
-        return HttpResponseRedirect(self.get_success_url())
+        return HttpResponseRedirect(self.get_success_url()+"?pk="+pk)
 
 class CategoriesListReview(ListView):
     model = CategoryTerm
@@ -328,6 +344,9 @@ def review_multiple_form(request, id):
         "category_term_form": category_term_form,
     }
 
+    if categterm.image_url:
+        context["cat_image"] = categterm.image
+
     return render(request, "categories/create-report.html", context)
 
 
@@ -354,22 +373,21 @@ def taxonomy_view(request):
     return render(request, "categories/animated-taxonomy.html", context)
 
 def get_taxcateg_tree(taxcateg):   
-    temp_obj = {}
+    temp_obj = None
     if taxcateg.active:
         cs = CategoryTerm.objects.filter(term=taxcateg.name, active=True)
         if cs.exists():
+            temp_obj = {}
             c = cs[0]
             temp_obj['pk'] = taxcateg.pk
             temp_obj['name'] = taxcateg.name
             if c.image_url:
                 temp_obj['img'] = c.image.url
             else:
-                temp_obj['img'] = '/media/products/101042126148.jpg'
-            it = taxcateg.children.all()
+                temp_obj['img'] = '/static/img/categterm.png'
+            it = taxcateg.children.filter(active=True).all()
             if it:
                 temp_obj['children'] = [get_taxcateg_tree(child) for child in it]
-        else:
-            temp_obj = None
     return temp_obj
 
 # def listing(request):

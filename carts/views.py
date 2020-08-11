@@ -10,6 +10,7 @@ from addresses.forms import AddressForm
 from addresses.models import Address
 from decimal import Decimal
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 
 def cart_detail_api_view(request):
@@ -112,17 +113,21 @@ def checkout_home(request):
     if request.method == "POST":
         "some check that order is done"
         is_done = order_obj.check_done()
+        if request.user.is_authenticated:
+            user = request.user
+        for produuuuuct in cart_obj.products.all():
+            if produuuuuct.user.pk == user.pk:
+                messages.warning(request, "Cannot buy one of your products")
+                return render(request, "carts/home.html", {})
         if is_done:
             order_obj.mark_paid()
             # Add product to available list
-            if request.user.is_authenticated:
-                user = request.user
-                if ProductsAvailable.objects.filter(user=user).exists():
-                    p = ProductsAvailable.objects.get(user=user)
-                    p.products.add(*cart_obj.products.all())
-                else:
-                    p = ProductsAvailable.objects.create(user=user)
-                    p.products.add(*cart_obj.products.all())
+            if ProductsAvailable.objects.filter(user=user).exists():
+                p = ProductsAvailable.objects.get(user=user)
+                p.products.add(*cart_obj.products.all())
+            else:
+                p = ProductsAvailable.objects.create(user=user)
+                p.products.add(*cart_obj.products.all())
             del request.session["cart_id"] 
             return HttpResponseRedirect(reverse("carts:success", kwargs={"order_code": order_obj.order_code, "products": p.pk}))
 

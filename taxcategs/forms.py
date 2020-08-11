@@ -24,6 +24,7 @@ class ProposalCategoryTermForm(forms.ModelForm):
             "description",
             "tax_categ",
             "knowledge_source",
+            "image",
             "formats_supported",
             "categoryChars",
         )
@@ -107,8 +108,10 @@ class ProposalReviewForm(forms.ModelForm):
         exclude = (
             "user",
             "active",
+            "image",
             "is_tax_categ",
-            "substitute_tax_categ" "knowledge_source",
+            "substitute_tax_categ",
+            "knowledge_source",
             "tax_categ",
         )
         fields = (
@@ -270,8 +273,8 @@ class ReportForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        exclude = ("user",)
-        fields = ("title", "text","category_term",)
+        exclude = ("user", "category_term")
+        fields = ("title", "text",)
         widgets = {
             "title": forms.TextInput(
                 attrs={

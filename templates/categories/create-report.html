@@ -67,6 +67,14 @@ New report
                     <div class="single-input">{{ taxonomicategory }}</div>
                 </p>
             </div>
+            {% if not taxonomicategory.active %}
+            <div class="col-md-12">
+                <br/><br/><p>
+                    <label>Parent category</label>
+                    <div class="single-input">{{ taxonomicategory.parent }}</div>
+                </p>
+            </div>
+            {% endif %}
             <div class="col-md-12">
                 <p>
                     <div>{{ category_term_form.knowledge_source.label_tag }}</div>

@@ -49,9 +49,9 @@ $(document).ready(function () {
         });
     });
 
+    /* Several products detail view */
     $("#change-cart-items").click(function () {
         var items = $("#cart-items-counter").data('data-cart-items');
-        alert("HOOOOOLA" + $("#cart-items-counter").data('data-cart-items'));
         $("#cart-items-counter").data('data-cart-items', items + 1);
     });
 

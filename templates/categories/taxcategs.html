@@ -10,7 +10,7 @@ Taxonomy of Cognitive RPA components
 <h1>Taxonomy of Cognitive RPA components</h1><br>
     <ul class="unordered-list">
     {% for category in object_list %}
-        <li><a href="/categories/navigate/{{ category.pk }}/">{{ category }}</a>
+        <li><a href="/categories/detail/{{ category.pk }}/">{{ category }}</a>
         {% include 'categories/snippets/taxcateg-ul.html' with c=category sufix=">"%}
         </li>
     {% endfor %}

@@ -37,8 +37,14 @@ New product
             <div class="form-validation">{{ form.price.errors }}</div>
         </div>
         <div>
-            <label for="id_image">Categories:</label>
-            {{form.categories}}
+            <label for="id_categories">Categories:</label>
+            <select name="categories" id="id_categories" style="display: none;" data-placeholder="Click to select an option..." class="multipleselector" multiple>
+                {% for category in level_zero %}
+                <option value="{{ category.pk }}" {% if form.fields.categories.value == category.pk %}
+                    selected{% endif %}>{{ category }}</option>
+                {% include 'categories/snippets/taxcateg-child-form.html' with c=category sufix=">" val=form.fields.categories.value %}
+                {% endfor %}
+            </select>
             <div class="form-validation">{{ form.categories.errors }}</div>
         </div>
         <div>

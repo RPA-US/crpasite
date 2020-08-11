@@ -28,7 +28,7 @@ Category detail
     </p>
     <p><strong>Term:</strong> {{ categoryTerm.term }}</p>
     <p><strong>Description:</strong> {{ categoryTerm.description }}</p>
-    <p><strong>Knowledge Source:</strong> {{ categoryTerm.knowledge_source }}</p>
+    <p><strong>Knowledge Source:</strong> <a href="{{ categoryTerm.knowledge_source.url }}">{{ categoryTerm.knowledge_source }}</a></p>
     {% if request.user.is_authenticated %}
     <p><strong>Created at:</strong> {{ categoryTerm.created_at }}</p>
     <p><strong>User:</strong> {{ categoryTerm.user }}</p>
@@ -60,13 +60,16 @@ Category detail
     {% endif %}
     <div class="col-md-10">
         <div class="button-group-area mt-10">
+            {% if taxonomic_categ_pk %}
+            <a href="/categories/listview/#{{ taxonomic_categ_pk }}" class="genric-btn primary-border">Back</a>
+            {% endif %}
             {% if request.user.role == 1 and not categoryTerm.active %}
             <a href="/categories/review/{{ categoryTerm.pk }}/" class="genric-btn primary-border">Review</a>
             {% else %}
             <a href="/categories/select/" class="genric-btn primary-border">Register proposal</a>
             {% endif %}
-            {% if taxonomic_categ_pk %}
-            <a href="/categories/navigate/#{{ taxonomic_categ_pk }}" class="genric-btn primary-border">Back</a>
+            {% if request.user.role == 2 or request.user.role == 3 %}
+            <a href="/categories/comment/?categterm={{ categoryTerm.pk }}" class="genric-btn primary-border">New comment</a>
             {% endif %}
             <a href="/categories/comment/list/?categterm={{ categoryTerm.pk }}" class="genric-btn primary-border">Comments</a>
         </div>

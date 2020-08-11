@@ -1,0 +1,1214 @@
+[{
+    "model": "sessions.session",
+    "pk": "i0mg49utc26wyivsrpl8pv1dse4yikeg",
+    "fields": {
+        "session_data": "YWI2NTk2NTg2ZGU5NGYwNDZkZmVlYzg5MWRjNDBmZTA3YjQ0YTNlMDp7ImNhcnRfaWQiOjN9",
+        "expire_date": "2020-08-25T17:21:44.373Z"
+    }
+}, {
+    "model": "sessions.session",
+    "pk": "l2g8r2jlrgras17ycgzivzta8ptdpyrs",
+    "fields": {
+        "session_data": "NTM0MDdmYzNmODI3YjYxNzFkOTNlMzJiMzY3NDhlNmJiNWFiNTZiNDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhOWVmNWRkMDE0YTMwNTJhNjA4ZjM1NWQ2YzJlZTkzMjNiYTdkMmI2In0=",
+        "expire_date": "2020-08-25T09:52:48.423Z"
+    }
+}, {
+    "model": "sessions.session",
+    "pk": "m9k3ca0ewrlek2n0ogiwf2qm56hhpkmu",
+    "fields": {
+        "session_data": "OWRhMjg5NGRkYzNkODkyNDc1MDdjNTJiODMzMzZmN2U1M2JkYzk3Njp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJiNTI5M2I2NDA0N2MwYWE5ZWY4YjBiNGZkNWQ5ZTAyZTVmNGMwYjcwIiwiY2FydF9pZCI6NX0=",
+        "expire_date": "2020-08-25T18:15:34.737Z"
+    }
+}, {
+    "model": "sessions.session",
+    "pk": "nm8t27f8u0og31mshkgtrtv5po5lo9hi",
+    "fields": {
+        "session_data": "ODQ3YmI1NWMxYzJjZGRkYmNiYWFhMzFlOGQ3NGM5ZTEwNzk2Mjc3Mzp7ImNhcnRfaWQiOjJ9",
+        "expire_date": "2020-08-25T17:08:57.225Z"
+    }
+}, {
+    "model": "sessions.session",
+    "pk": "nvkh8renwrq90v23bq09s3r1h0kzvfvt",
+    "fields": {
+        "session_data": "MGM4NGY2NmU2MzQ3YjNmMmRhYTgzMmRkZDJjNjM4OTMxYzBmYzQ2Nzp7ImNhcnRfaWQiOjR9",
+        "expire_date": "2020-08-25T17:49:32.991Z"
+    }
+}, {
+    "model": "accounts.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$180000$TtVjNiwdN2Mk$IGiR14O5cs1IMX/KNudU0QY0Ko8X45OTNUerScTo2Ys=",
+        "last_login": "2020-08-11T11:45:06.494Z",
+        "role": 4,
+        "email": "antonio@crpa.site",
+        "first_name": "Antonio",
+        "last_name": "Mart\u00ednez Rojas",
+        "active": true,
+        "staff": true,
+        "superuser": true,
+        "groups": [],
+        "user_permissions": []
+    }
+}, {
+    "model": "accounts.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$180000$LfAye4pwfBlS$4qHyNmpD/ZMYja7BCsqGZzHAXdoOV0JhZA+0Ce/O0dA=",
+        "last_login": "2020-08-11T14:55:36.478Z",
+        "role": 1,
+        "email": "reviewer1@crpa.site",
+        "first_name": "Juan",
+        "last_name": "P\u00e9rez Dom\u00ednguez",
+        "active": true,
+        "staff": false,
+        "superuser": false,
+        "groups": [],
+        "user_permissions": []
+    }
+}, {
+    "model": "accounts.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$180000$w17pzRTgUrpU$3PZe2RBmwfbbKa7jKAI+v3xyqDU8GIzzc7nY3dqIiBs=",
+        "last_login": "2020-08-11T17:53:19.012Z",
+        "role": 1,
+        "email": "reviewer2@crpa.site",
+        "first_name": "Jos\u00e9",
+        "last_name": "Mart\u00ednez Albandea",
+        "active": true,
+        "staff": false,
+        "superuser": false,
+        "groups": [],
+        "user_permissions": []
+    }
+}, {
+    "model": "accounts.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$180000$yZexofcwcb5g$2DFL6E9JPftPsQYVZvHThDzVNSAkbcJXqPlvvP/kovM=",
+        "last_login": "2020-08-11T15:10:33.417Z",
+        "role": 2,
+        "email": "provider1@crpa.site",
+        "first_name": "Pedro",
+        "last_name": "Gonz\u00e1lez Ram\u00edrez",
+        "active": true,
+        "staff": false,
+        "superuser": false,
+        "groups": [],
+        "user_permissions": []
+    }
+}, {
+    "model": "accounts.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$180000$XZOC3GzL4SeR$w6M6iZLB6CPBmCxOq0UWxnLQJm6C7u7tlVdbfeC44aI=",
+        "last_login": "2020-08-11T18:09:57.523Z",
+        "role": 2,
+        "email": "provider2@crpa.site",
+        "first_name": "Crist\u00f3bal",
+        "last_name": "Garc\u00eda Guerrero",
+        "active": true,
+        "staff": false,
+        "superuser": false,
+        "groups": [],
+        "user_permissions": []
+    }
+}, {
+    "model": "accounts.user",
+    "pk": 6,
+    "fields": {
+        "password": "pbkdf2_sha256$180000$JjHilFVbVHXq$KRhnawCQlJ+zLte7mi0PDDo1P88hsTy4LqmEkdJ1K4A=",
+        "last_login": null,
+        "role": 3,
+        "email": "developer1@crpa.site",
+        "first_name": "Rafael",
+        "last_name": "Jim\u00e9nez Pedrosuo",
+        "active": true,
+        "staff": false,
+        "superuser": false,
+        "groups": [],
+        "user_permissions": []
+    }
+}, {
+    "model": "accounts.user",
+    "pk": 7,
+    "fields": {
+        "password": "pbkdf2_sha256$180000$d1efdX6VQ17G$ge5/jCU+ZSB9CRHmVQaeS3oqDwsgZarokVXRVfqt47c=",
+        "last_login": null,
+        "role": 3,
+        "email": "developer2@crpa.site",
+        "first_name": "Carlos",
+        "last_name": "Gallego Rodr\u00edguez",
+        "active": true,
+        "staff": false,
+        "superuser": false,
+        "groups": [],
+        "user_permissions": []
+    }
+}, {
+    "model": "taxcategs.taxcateg",
+    "pk": 1,
+    "fields": {
+        "parent": null,
+        "slug": "classification",
+        "active": true,
+        "name": "Classification",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 2,
+        "level": 0
+    }
+}, {
+    "model": "taxcategs.taxcateg",
+    "pk": 2,
+    "fields": {
+        "parent": null,
+        "slug": "governance",
+        "active": true,
+        "name": "Governance",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 6,
+        "level": 0
+    }
+}, {
+    "model": "taxcategs.taxcateg",
+    "pk": 3,
+    "fields": {
+        "parent": null,
+        "slug": "processing",
+        "active": true,
+        "name": "Processing",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 11,
+        "level": 0
+    }
+}, {
+    "model": "taxcategs.taxcateg",
+    "pk": 4,
+    "fields": {
+        "parent": 1,
+        "slug": "detection",
+        "active": true,
+        "name": "Detection",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 4,
+        "level": 1
+    }
+}, {
+    "model": "taxcategs.taxcateg",
+    "pk": 5,
+    "fields": {
+        "parent": 3,
+        "slug": "computer-vision",
+        "active": true,
+        "name": "Computer vision",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 3,
+        "level": 1
+    }
+}, {
+    "model": "taxcategs.taxcateg",
+    "pk": 6,
+    "fields": {
+        "parent": 3,
+        "slug": "natural-language",
+        "active": true,
+        "name": "Natural language",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 8,
+        "level": 1
+    }
+}, {
+    "model": "taxcategs.taxcateg",
+    "pk": 7,
+    "fields": {
+        "parent": 2,
+        "slug": "workflow",
+        "active": true,
+        "name": "Workflow",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 12,
+        "level": 1
+    }
+}, {
+    "model": "taxcategs.taxcateg",
+    "pk": 8,
+    "fields": {
+        "parent": 2,
+        "slug": "prediction",
+        "active": true,
+        "name": "Prediction",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 9,
+        "level": 1
+    }
+}, {
+    "model": "taxcategs.taxcateg",
+    "pk": 9,
+    "fields": {
+        "parent": 2,
+        "slug": "monitoring",
+        "active": true,
+        "name": "Monitoring",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 7,
+        "level": 1
+    }
+}, {
+    "model": "taxcategs.taxcateg",
+    "pk": 10,
+    "fields": {
+        "parent": 6,
+        "slug": "translation",
+        "active": true,
+        "name": "Translation",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 15,
+        "level": 2
+    }
+}, {
+    "model": "taxcategs.taxcateg",
+    "pk": 11,
+    "fields": {
+        "parent": 6,
+        "slug": "speech-text",
+        "active": true,
+        "name": "Speech-text",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 14,
+        "level": 2
+    }
+}, {
+    "model": "taxcategs.taxcateg",
+    "pk": 12,
+    "fields": {
+        "parent": 4,
+        "slug": "sentiment",
+        "active": true,
+        "name": "Sentiment",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 13,
+        "level": 2
+    }
+}, {
+    "model": "taxcategs.taxcateg",
+    "pk": 13,
+    "fields": {
+        "parent": 4,
+        "slug": "language",
+        "active": true,
+        "name": "Language",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 10,
+        "level": 2
+    }
+}, {
+    "model": "taxcategs.taxcateg",
+    "pk": 14,
+    "fields": {
+        "parent": 4,
+        "slug": "anomalies",
+        "active": true,
+        "name": "Anomalies",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 1,
+        "level": 2
+    }
+}, {
+    "model": "taxcategs.taxcateg",
+    "pk": 15,
+    "fields": {
+        "parent": 4,
+        "slug": "elements",
+        "active": true,
+        "name": "Elements",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 5,
+        "level": 2
+    }
+}, {
+    "model": "taxcategs.knowledgesource",
+    "pk": 1,
+    "fields": {
+        "name": "UiPath",
+        "url": "https://docs.uipath.com/activities",
+        "creator": 1,
+        "created_at": "2020-08-11T10:06:53.290Z",
+        "active": true
+    }
+}, {
+    "model": "taxcategs.knowledgesource",
+    "pk": 2,
+    "fields": {
+        "name": "Blue Prism",
+        "url": "https://digitalexchange.blueprism.com/dx/search",
+        "creator": 1,
+        "created_at": "2020-08-11T10:07:09.610Z",
+        "active": true
+    }
+}, {
+    "model": "taxcategs.knowledgesource",
+    "pk": 3,
+    "fields": {
+        "name": "Automation Anywhere",
+        "url": "https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/aae-client/bot-creator/using-the-workbench/cloud-commands-panel.html",
+        "creator": 1,
+        "created_at": "2020-08-11T10:07:46.664Z",
+        "active": true
+    }
+}, {
+    "model": "taxcategs.knowledgesource",
+    "pk": 4,
+    "fields": {
+        "name": "TFG antmarroj",
+        "url": "https://crpasite.herokuapp.com",
+        "creator": 1,
+        "created_at": "2020-08-11T10:08:57.253Z",
+        "active": true
+    }
+}, {
+    "model": "taxcategs.inputformatsupported",
+    "pk": 1,
+    "fields": {
+        "parent": null,
+        "slug": "dataset",
+        "active": true,
+        "name": "Dataset",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 2,
+        "level": 0
+    }
+}, {
+    "model": "taxcategs.inputformatsupported",
+    "pk": 2,
+    "fields": {
+        "parent": null,
+        "slug": "audio",
+        "active": true,
+        "name": "Audio",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 1,
+        "level": 0
+    }
+}, {
+    "model": "taxcategs.inputformatsupported",
+    "pk": 3,
+    "fields": {
+        "parent": null,
+        "slug": "video",
+        "active": true,
+        "name": "Video",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 6,
+        "level": 0
+    }
+}, {
+    "model": "taxcategs.inputformatsupported",
+    "pk": 4,
+    "fields": {
+        "parent": null,
+        "slug": "image",
+        "active": true,
+        "name": "Image",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 4,
+        "level": 0
+    }
+}, {
+    "model": "taxcategs.inputformatsupported",
+    "pk": 5,
+    "fields": {
+        "parent": null,
+        "slug": "document",
+        "active": true,
+        "name": "Document",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 3,
+        "level": 0
+    }
+}, {
+    "model": "taxcategs.inputformatsupported",
+    "pk": 6,
+    "fields": {
+        "parent": null,
+        "slug": "text",
+        "active": true,
+        "name": "Text",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 5,
+        "level": 0
+    }
+}, {
+    "model": "taxcategs.categoryterm",
+    "pk": 1,
+    "fields": {
+        "term": "Classification",
+        "description": "This term is used in both AI and RPA in the same way. As its name suggests, it comprises everything that encompasses a classification, from the traditional one by file type, to detection or recognition.",
+        "created_at": "2020-08-11T10:10:16.059Z",
+        "is_tax_categ": true,
+        "substitute_tax_categ": true,
+        "active": true,
+        "tax_categ": 1,
+        "knowledge_source": 4,
+        "user": 1,
+        "categoryChars": "[\"It takes as input a list of classes\", \"It takes a set of elements as input\", \"It fnds association between classes/categories and elements\"]",
+        "decision": "1",
+        "image": "",
+        "formats_supported": [2, 5, 4, 6, 3]
+    }
+}, {
+    "model": "taxcategs.categoryterm",
+    "pk": 2,
+    "fields": {
+        "term": "Governance",
+        "description": "IT governance enables the effective use of IT which has a substantial impact on the value generated by IT investments. In RPA, continuous estimation, similar to prediction and analysis |that is the basis of decision-making| are focused on process governance. The term governance is widely used in the field of RPA. One of the most representative examples of this is to determine which will be the next com ponent to be used or if extra instances of a robot will be needed to cover the demand.",
+        "created_at": "2020-08-11T10:13:08.323Z",
+        "is_tax_categ": true,
+        "substitute_tax_categ": true,
+        "active": true,
+        "tax_categ": 2,
+        "knowledge_source": 4,
+        "user": 1,
+        "categoryChars": "[\"It takes as input a set of data concerning a decision\", \"The outputs obtained are aimed at optimizing\", \"It is on a higher level than other instances or components\", \"so that it carries out control over them\"]",
+        "decision": "1",
+        "image": "",
+        "formats_supported": [1]
+    }
+}, {
+    "model": "taxcategs.categoryterm",
+    "pk": 3,
+    "fields": {
+        "term": "Processing",
+        "description": "It includes functionality that requires skills acquisition, i.e., natural language processing or intelligent image processing to obtain a specific output.",
+        "created_at": "2020-08-11T10:14:39.439Z",
+        "is_tax_categ": true,
+        "substitute_tax_categ": true,
+        "active": true,
+        "tax_categ": 3,
+        "knowledge_source": 4,
+        "user": 1,
+        "categoryChars": "[\"The output is obtained by transforming or modifying the input\"]",
+        "decision": "1",
+        "image": "",
+        "formats_supported": [2, 5, 4, 6, 3]
+    }
+}, {
+    "model": "taxcategs.categoryterm",
+    "pk": 4,
+    "fields": {
+        "term": "Detection",
+        "description": "It includes everything related to the classification of entities aimed at detecting one of the values that can take their classes.",
+        "created_at": "2020-08-11T10:43:38.315Z",
+        "is_tax_categ": true,
+        "substitute_tax_categ": true,
+        "active": true,
+        "tax_categ": 4,
+        "knowledge_source": 4,
+        "user": 1,
+        "categoryChars": "[\"It takes an input from which a specific classification is extracted\", \"The input can be a file from which it is necessary to deduce to which specific class it belongs or to identify the entities within it that comply with a specific classification\"]",
+        "decision": "1",
+        "image": "categories/detection.png",
+        "formats_supported": [2, 5, 4, 6, 3]
+    }
+}, {
+    "model": "taxcategs.categoryterm",
+    "pk": 5,
+    "fields": {
+        "term": "Computer vision",
+        "description": "To belong to this category, components must process images or videos to extract specific information from them. A very clear example would be a character recognition applied for example to the reading of car plates in a parking lot.",
+        "created_at": "2020-08-11T10:47:25.714Z",
+        "is_tax_categ": true,
+        "substitute_tax_categ": true,
+        "active": true,
+        "tax_categ": 5,
+        "knowledge_source": 4,
+        "user": 1,
+        "categoryChars": "[\"It takes as input an image or a document\", \"It extracts from the input\", \"concrete information that is visually inferred\"]",
+        "decision": "1",
+        "image": "categories/computervision.png",
+        "formats_supported": [4, 3]
+    }
+}, {
+    "model": "taxcategs.categoryterm",
+    "pk": 6,
+    "fields": {
+        "term": "Natural language",
+        "description": "Within the processing, the NLP or natural language processing, deals as its name indicates, with the treatment of messages of text or  audio type coming from humans, to obtain an output resulting from the transformation of these, as a coherent response to the message or its translation to another language.",
+        "created_at": "2020-08-11T10:51:42.229Z",
+        "is_tax_categ": true,
+        "substitute_tax_categ": true,
+        "active": true,
+        "tax_categ": 6,
+        "knowledge_source": 4,
+        "user": 1,
+        "categoryChars": "[\"It takes as input an image or a document\", \"It transforms the input according to some of its. characteristics\", \"such as language or format\", \"or makes an interpretation of the input to\\r\\nobtain a coherent output to it\"]",
+        "decision": "1",
+        "image": "categories/nlp.png",
+        "formats_supported": [2, 6]
+    }
+}, {
+    "model": "taxcategs.categoryterm",
+    "pk": 7,
+    "fields": {
+        "term": "Workflow",
+        "description": "It groups components generally associated with governing other RPA robots, whose main purpose is to decide, based on the current data, among which we can find data resulting from the execution of the previous task, which is the ideal robot to be executed in the next step.",
+        "created_at": "2020-08-11T10:55:04.658Z",
+        "is_tax_categ": true,
+        "substitute_tax_categ": true,
+        "active": true,
+        "tax_categ": 7,
+        "knowledge_source": 4,
+        "user": 1,
+        "categoryChars": "[\"The component takes as input the data related to the process\", \"such as the result of the last action\", \"The component determines which is the best action to take next according to the parameters\"]",
+        "decision": "1",
+        "image": "categories/workflow.png",
+        "formats_supported": [1]
+    }
+}, {
+    "model": "taxcategs.categoryterm",
+    "pk": 8,
+    "fields": {
+        "term": "Prediction",
+        "description": "It groups together the more purely analytical components, which, based on  current data, are capable of obtaining predictions of variables in the future. Such as a component capable of predicting how many instances of robots of a particular type will be needed in the next 24 hours.",
+        "created_at": "2020-08-11T10:58:25.186Z",
+        "is_tax_categ": true,
+        "substitute_tax_categ": true,
+        "active": true,
+        "tax_categ": 8,
+        "knowledge_source": 4,
+        "user": 1,
+        "categoryChars": "[\"It takes as input the historical and/or environmental data of the prediction\", \"It makes a forecast or regression of what is going to happen\"]",
+        "decision": "1",
+        "image": "categories/prediction.png",
+        "formats_supported": [1]
+    }
+}, {
+    "model": "taxcategs.categoryterm",
+    "pk": 9,
+    "fields": {
+        "term": "Monitoring",
+        "description": "Components that act in real time, waiting for a special circumstance to react, for example, monitoring a specific robot in case it generates an exception, capturing it and controlling the robot to continue working",
+        "created_at": "2020-08-11T11:01:03.158Z",
+        "is_tax_categ": true,
+        "substitute_tax_categ": true,
+        "active": true,
+        "tax_categ": 9,
+        "knowledge_source": 4,
+        "user": 1,
+        "categoryChars": "[\"It carries out a real-time control of the process\", \"It is waiting for a failure to appears during the execution of the process when this happens it decides resolve it.\"]",
+        "decision": "1",
+        "image": "categories/monitoring.png",
+        "formats_supported": [1]
+    }
+}, {
+    "model": "taxcategs.categoryterm",
+    "pk": 10,
+    "fields": {
+        "term": "Translation",
+        "description": "Process voice or text inputs to translate them into a given language",
+        "created_at": "2020-08-11T11:47:24.517Z",
+        "is_tax_categ": true,
+        "substitute_tax_categ": true,
+        "active": true,
+        "tax_categ": 10,
+        "knowledge_source": 4,
+        "user": 1,
+        "categoryChars": "[\"As its name suggests\", \"performs an interpretation of its input to translate it into a specified language\"]",
+        "decision": "1",
+        "image": "categories/translation.png",
+        "formats_supported": [2, 6]
+    }
+}, {
+    "model": "taxcategs.categoryterm",
+    "pk": 11,
+    "fields": {
+        "term": "Speech-text",
+        "description": "Depending on your input, it transforms the voice into plain text, or the text into voice.",
+        "created_at": "2020-08-11T12:02:01.651Z",
+        "is_tax_categ": true,
+        "substitute_tax_categ": true,
+        "active": true,
+        "tax_categ": 11,
+        "knowledge_source": 4,
+        "user": 1,
+        "categoryChars": "[\"It extracts the message contained in the entry\", \"and transforms it into another format\", \"If it is an audio input\", \"it transforms the input into text\", \"If it is a text input\", \"it transforms it into audio\"]",
+        "decision": "1",
+        "image": "categories/speech-text.png",
+        "formats_supported": [2, 6]
+    }
+}, {
+    "model": "taxcategs.categoryterm",
+    "pk": 12,
+    "fields": {
+        "term": "Sentiment",
+        "description": "Components that detect the sentiment of an audio or text input, i.e. classify these among certain classes that correspond to sentiment, e.g. a positive or negative comment.",
+        "created_at": "2020-08-11T12:07:27.188Z",
+        "is_tax_categ": true,
+        "substitute_tax_categ": true,
+        "active": true,
+        "tax_categ": 12,
+        "knowledge_source": 4,
+        "user": 1,
+        "categoryChars": "[\"It takes as input audio or text\", \"It takes as classes a list of possible feelings\", \"and gets as output one of them\"]",
+        "decision": "1",
+        "image": "categories/sentiment.png",
+        "formats_supported": [2, 6]
+    }
+}, {
+    "model": "taxcategs.categoryterm",
+    "pk": 13,
+    "fields": {
+        "term": "Language",
+        "description": "Components that detect the language of a text or audio input, that is, classify it among several classes, such as: English, Spanish, French or German.",
+        "created_at": "2020-08-11T12:16:28.150Z",
+        "is_tax_categ": true,
+        "substitute_tax_categ": true,
+        "active": true,
+        "tax_categ": 13,
+        "knowledge_source": 4,
+        "user": 1,
+        "categoryChars": "[\"It takes as input audio or text\", \"It takes as classes the existing languages and gets as output one of them.\"]",
+        "decision": "1",
+        "image": "categories/language.png",
+        "formats_supported": [2, 6]
+    }
+}, {
+    "model": "taxcategs.categoryterm",
+    "pk": 14,
+    "fields": {
+        "term": "Anomalies",
+        "description": "Components that detect anomalies in files They take an input file and classify it as anomalous or not",
+        "created_at": "2020-08-11T12:28:32.910Z",
+        "is_tax_categ": true,
+        "substitute_tax_categ": true,
+        "active": true,
+        "tax_categ": 14,
+        "knowledge_source": 4,
+        "user": 1,
+        "categoryChars": "[\"Characteristics of a non-anomalous element as input\", \"Of the elements it takes in the entry\", \"it performs a binary classification between two classes\", \"yes/no anomalous.\"]",
+        "decision": "1",
+        "image": "categories/anomalies.png",
+        "formats_supported": [2, 5, 4, 6, 3]
+    }
+}, {
+    "model": "taxcategs.categoryterm",
+    "pk": 15,
+    "fields": {
+        "term": "Elements",
+        "description": "Components that detect specific items within your input file. For example, finding all product references within a plain text file.",
+        "created_at": "2020-08-11T14:50:49.427Z",
+        "is_tax_categ": true,
+        "substitute_tax_categ": true,
+        "active": true,
+        "tax_categ": 15,
+        "knowledge_source": 4,
+        "user": 1,
+        "categoryChars": "[\"It extracts the elements that meet specific characteristics that have been taken as input.\"]",
+        "decision": "1",
+        "image": "categories/109331637739.png",
+        "formats_supported": [5, 6]
+    }
+}, {
+    "model": "taxcategs.report",
+    "pk": 1,
+    "fields": {
+        "result": "3",
+        "categ_term": 1,
+        "explanation": "This proposal is well defined and adds value to the CRPA taxonomy",
+        "created_at": "2020-08-11T10:16:19.917Z",
+        "review_user": 2
+    }
+}, {
+    "model": "taxcategs.report",
+    "pk": 2,
+    "fields": {
+        "result": "3",
+        "categ_term": 2,
+        "explanation": "This proposal is well defined and adds value to the CRPA taxonomy",
+        "created_at": "2020-08-11T10:16:32.879Z",
+        "review_user": 2
+    }
+}, {
+    "model": "taxcategs.report",
+    "pk": 3,
+    "fields": {
+        "result": "3",
+        "categ_term": 3,
+        "explanation": "This proposal is well defined and adds value to the CRPA taxonomy",
+        "created_at": "2020-08-11T10:16:44.806Z",
+        "review_user": 2
+    }
+}, {
+    "model": "taxcategs.report",
+    "pk": 4,
+    "fields": {
+        "result": "3",
+        "categ_term": 4,
+        "explanation": "This proposal is well defined and adds value to the CRPA taxonomy",
+        "created_at": "2020-08-11T11:36:24.105Z",
+        "review_user": 2
+    }
+}, {
+    "model": "taxcategs.report",
+    "pk": 5,
+    "fields": {
+        "result": "3",
+        "categ_term": 5,
+        "explanation": "This proposal is well defined and adds value to the CRPA taxonomy",
+        "created_at": "2020-08-11T11:36:35.963Z",
+        "review_user": 2
+    }
+}, {
+    "model": "taxcategs.report",
+    "pk": 6,
+    "fields": {
+        "result": "3",
+        "categ_term": 6,
+        "explanation": "This proposal is well defined and adds value to the CRPA taxonomy",
+        "created_at": "2020-08-11T11:36:46.648Z",
+        "review_user": 2
+    }
+}, {
+    "model": "taxcategs.report",
+    "pk": 7,
+    "fields": {
+        "result": "3",
+        "categ_term": 7,
+        "explanation": "This proposal is well defined and adds value to the CRPA taxonomy",
+        "created_at": "2020-08-11T11:36:58.041Z",
+        "review_user": 2
+    }
+}, {
+    "model": "taxcategs.report",
+    "pk": 8,
+    "fields": {
+        "result": "3",
+        "categ_term": 8,
+        "explanation": "This proposal is well defined and adds value to the CRPA taxonomy",
+        "created_at": "2020-08-11T11:37:09.785Z",
+        "review_user": 2
+    }
+}, {
+    "model": "taxcategs.report",
+    "pk": 9,
+    "fields": {
+        "result": "3",
+        "categ_term": 9,
+        "explanation": "This proposal is well defined and adds value to the CRPA taxonomy",
+        "created_at": "2020-08-11T11:37:27.883Z",
+        "review_user": 2
+    }
+}, {
+    "model": "taxcategs.report",
+    "pk": 10,
+    "fields": {
+        "result": "3",
+        "categ_term": 10,
+        "explanation": "This proposal is well defined and adds value to the CRPA taxonomy",
+        "created_at": "2020-08-11T17:54:07.547Z",
+        "review_user": 3
+    }
+}, {
+    "model": "taxcategs.report",
+    "pk": 11,
+    "fields": {
+        "result": "3",
+        "categ_term": 11,
+        "explanation": "This proposal is well defined and adds value to the CRPA taxonomy",
+        "created_at": "2020-08-11T17:54:27.178Z",
+        "review_user": 3
+    }
+}, {
+    "model": "taxcategs.report",
+    "pk": 12,
+    "fields": {
+        "result": "3",
+        "categ_term": 12,
+        "explanation": "This proposal is well defined and adds value to the CRPA taxonomy",
+        "created_at": "2020-08-11T17:54:40.804Z",
+        "review_user": 3
+    }
+}, {
+    "model": "taxcategs.report",
+    "pk": 13,
+    "fields": {
+        "result": "3",
+        "categ_term": 13,
+        "explanation": "This proposal is well defined and adds value to the CRPA taxonomy",
+        "created_at": "2020-08-11T17:55:05.079Z",
+        "review_user": 3
+    }
+}, {
+    "model": "taxcategs.report",
+    "pk": 14,
+    "fields": {
+        "result": "3",
+        "categ_term": 14,
+        "explanation": "This proposal is well defined and adds value to the CRPA taxonomy",
+        "created_at": "2020-08-11T17:55:25.798Z",
+        "review_user": 3
+    }
+}, {
+    "model": "taxcategs.report",
+    "pk": 15,
+    "fields": {
+        "result": "3",
+        "categ_term": 15,
+        "explanation": "This proposal is well defined and adds value to the CRPA taxonomy",
+        "created_at": "2020-08-11T17:55:40.779Z",
+        "review_user": 3
+    }
+}, {
+    "model": "taxcategs.comment",
+    "pk": 1,
+    "fields": {
+        "user": 4,
+        "category_term": 2,
+        "title": "Decision-making",
+        "created_at": "2020-08-11T15:31:22.877Z",
+        "text": "Does this category cover all decision-making processes or should there be a subcategory?"
+    }
+}, {
+    "model": "carts.cart",
+    "pk": 1,
+    "fields": {
+        "user": 4,
+        "subtotal": "0.0000",
+        "total": "0.0000",
+        "updated_at": "2020-08-11T17:47:35.372Z",
+        "created_at": "2020-08-11T15:11:56.354Z",
+        "products": []
+    }
+}, {
+    "model": "carts.cart",
+    "pk": 2,
+    "fields": {
+        "user": null,
+        "subtotal": "0.0000",
+        "total": "0.0000",
+        "updated_at": "2020-08-11T17:08:56.998Z",
+        "created_at": "2020-08-11T17:08:56.998Z",
+        "products": []
+    }
+}, {
+    "model": "carts.cart",
+    "pk": 3,
+    "fields": {
+        "user": null,
+        "subtotal": "0.0000",
+        "total": "0.0000",
+        "updated_at": "2020-08-11T17:21:44.176Z",
+        "created_at": "2020-08-11T17:21:44.176Z",
+        "products": []
+    }
+}, {
+    "model": "carts.cart",
+    "pk": 4,
+    "fields": {
+        "user": null,
+        "subtotal": "0.0000",
+        "total": "0.0000",
+        "updated_at": "2020-08-11T17:49:32.206Z",
+        "created_at": "2020-08-11T17:49:32.206Z",
+        "products": []
+    }
+}, {
+    "model": "carts.cart",
+    "pk": 5,
+    "fields": {
+        "user": 5,
+        "subtotal": "0.0000",
+        "total": "0.0000",
+        "updated_at": "2020-08-11T18:15:34.637Z",
+        "created_at": "2020-08-11T18:15:34.637Z",
+        "products": []
+    }
+}, {
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+        "title": "Tesseract OCR",
+        "slug": "tesseract-ocr",
+        "description": "This package contains an OCR engine - libtesseract and a command line program - tesseract. Tesseract 4 adds a new neural net (LSTM) based OCR engine which is focused on line recognition, but also still supports the legacy Tesseract OCR engine of Tesseract 3 which works by recognizing character patterns. Compatibility with Tesseract 3 is enabled by using the Legacy OCR Engine mode (--oem 0). It also needs traineddata files which support the legacy engine, for example those from the tessdata repository.",
+        "price": "39.9900",
+        "image": "products/58620657930.png",
+        "featured": true,
+        "active": true,
+        "created_at": "2020-08-11T16:59:13.451Z",
+        "user": 4,
+        "component": "Tesseract_OCR_C3TIFkh.zip",
+        "categories": [2]
+    }
+}, {
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+        "title": "NTLK",
+        "slug": "ntlk",
+        "description": "NLTK is a leading platform for building Python programs to work with human language data. It provides easy-to-use interfaces to over 50 corpora and lexical resources such as WordNet, along with a suite of text processing libraries for classification, tokenization, stemming, tagging, parsing, and semantic reasoning, wrappers for industrial-strength NLP libraries, and an active discussion forum.",
+        "price": "79.9900",
+        "image": "products/27776743417.png",
+        "featured": true,
+        "active": true,
+        "created_at": "2020-08-11T18:15:33.756Z",
+        "user": 5,
+        "component": "NLTK.zip",
+        "categories": [6]
+    }
+}, {
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+        "title": "Node.js IBM Watson Speech to Text service features",
+        "slug": "nodejs-ibm-watson-speech-to-text-service-features",
+        "description": "Node.js sample applications that shows some of the the IBM Watson Speech to Text service features. The Speech to Text service uses IBM's speech recognition capabilities to convert speech in multiple languages into text. The transcription of incoming audio is continuously sent back to the client with minimal delay, and it is corrected as more speech is heard. The service is accessed via a WebSocket interface; a REST HTTP interface is also available",
+        "price": "19.9900",
+        "image": "products/96223375125.jpg",
+        "featured": true,
+        "active": true,
+        "created_at": "2020-08-11T18:28:20.500Z",
+        "user": 5,
+        "component": "Speech2text.zip",
+        "categories": [11]
+    }
+}, {
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+        "title": "Monitoring model performance using python",
+        "slug": "monitoring-model-performance-using-python",
+        "description": "Kafka-Python, MLflow and HyperparameterHunter or Hyperopt to cover Logging and monitoring an algorithm\u2019s performance through time.",
+        "price": "39.9900",
+        "image": "products/68973774641.png",
+        "featured": true,
+        "active": true,
+        "created_at": "2020-08-11T18:32:58.752Z",
+        "user": 5,
+        "component": "KafkaPython-MLFlow.zip",
+        "categories": [9]
+    }
+}, {
+    "model": "products.product",
+    "pk": 5,
+    "fields": {
+        "title": "ChatterBot",
+        "slug": "chatterbot",
+        "description": "ChatterBot is a Python library that makes it easy to generate automated responses to a user\u2019s input. ChatterBot uses a selection of machine learning algorithms to produce different types of responses. This makes it easy for developers to create chat bots and automate conversations with users. For more details about the ideas and concepts behind ChatterBot see the process flow diagram.",
+        "price": "50.0000",
+        "image": "products/10369105522.png",
+        "featured": true,
+        "active": true,
+        "created_at": "2020-08-11T18:36:41.614Z",
+        "user": 5,
+        "component": "chatterbot.zip",
+        "categories": [6]
+    }
+}, {
+    "model": "products.product",
+    "pk": 6,
+    "fields": {
+        "title": "RubyWorkflow",
+        "slug": "rubyworkflow",
+        "description": "Workflow is a finite-state-machine-inspired API for modeling and interacting with what we tend to refer to as 'workflow'.\r\n\r\nA lot of business modeling tends to involve workflow-like concepts, and the aim of this library is to make the expression of these concepts as clear as possible, using similar terminology as found in state machine theory.\r\n\r\nSo, a workflow has a state. It can only be in one state at a time. When a workflow changes state, we call that a transition. Transitions occur on an event, so events cause transitions to occur. Additionally, when an event fires, other arbitrary code can be executed, we call those actions. So any given state has a bunch of events, any event in a state causes a transition to another state and potentially causes code to be executed (an action). We can hook into states when they are entered, and exited from, and we can cause transitions to fail (guards), and we can hook in to every transition that occurs ever for whatever reason we can come up with.",
+        "price": "100.0000",
+        "image": "products/20179649097.jpg",
+        "featured": true,
+        "active": true,
+        "created_at": "2020-08-11T18:41:16.797Z",
+        "user": 5,
+        "component": "WorkflowRuby.zip",
+        "categories": [7]
+    }
+}, {
+    "model": "products.product",
+    "pk": 7,
+    "fields": {
+        "title": "Node Language Detect",
+        "slug": "node-language-detect",
+        "description": "LanguageDetect can identify 52 human languages from text samples and return confidence scores for each. LanguageDetect is a port of the PEAR::Text_LanguageDetect for node.js.",
+        "price": "42.0000",
+        "image": "products/14603987057.png",
+        "featured": true,
+        "active": true,
+        "created_at": "2020-08-11T18:46:02.638Z",
+        "user": 5,
+        "component": "NodeLanguageDetection.zip",
+        "categories": [13]
+    }
+}, {
+    "model": "products.product",
+    "pk": 8,
+    "fields": {
+        "title": "PyOD - PythonOutlierDetection",
+        "slug": "pyod-pythonoutlierdetection",
+        "description": "PyOD is a comprehensive and scalable Python toolkit for detecting outlying objects in multivariate data. This exciting yet challenging field is commonly referred as Outlier Detection or Anomaly Detection.\r\n\r\nPyOD is featured for:\r\n    Unified APIs, detailed documentation, and interactive examples across various algorithms.\r\n    Advanced models, including Neural Networks/Deep Learning and Outlier Ensembles.\r\n    Optimized performance with JIT and parallelization when possible, using numba and joblib.\r\n    Compatible with both Python 2 & 3.",
+        "price": "270.0000",
+        "image": "products/102139508158.jpg",
+        "featured": true,
+        "active": true,
+        "created_at": "2020-08-11T18:53:21.145Z",
+        "user": 5,
+        "component": "PyOD.zip",
+        "categories": [14]
+    }
+}, {
+    "model": "products.product",
+    "pk": 9,
+    "fields": {
+        "title": "Batch-OCR-Engine",
+        "slug": "batch-ocr-engine",
+        "description": "Batch-OCR-Engine tool uses OCR (Optical Character Recognition) to first read in all the words from a document and then uses NLP (Natural Language Processing) to pick necessary information for future actions. Currently it's in the process of automating Request For Information processes where TD Bank sends detailed information to Government agencies. This is the first use case for Batch-OCR-Engine but it can be potentially used anywhere and everywhere a documents needs to be read as part of a business process.\r\n\r\nSome future applications of Batch-OCR-Engine are in reading return mail addresses, automatically creating summaries from credit applications, checking accuracy and details from uploaded documents and much much more. The tool has simple intuitive User interface for users with range of digital literacy.\r\n\r\nThe first step of the tool is to read in clean high quality text data from any document using OCR. This utilizes Python libraries like OpenCV and Tesserect. The tool corrects for skew, brightness, sharpness, contrasts and color levels. The tool rechecks and modifies images not meeting internal quality control requirements utilizing Hyper Parameter tuning. The tool can understand 22 languages from English to Finnish. The tool automatically gets trained on new fonts by testing a limited amount of data. Finally Natural Language Tool Kit and Regular Expression are leveraged to pull information in structures reusable format. This information can then be utilized for the next step of process.\r\n\r\nBatch-OCR-Engine has met the short term objective of demonstrating value of an AI based document reader but it will inculcate future advanced and differing requirements of different processes to become even more effective in future.",
+        "price": "120.0000",
+        "image": "products/97602049695.jpg",
+        "featured": true,
+        "active": true,
+        "created_at": "2020-08-11T19:00:48.950Z",
+        "user": 5,
+        "component": "BatchOCREngine.zip",
+        "categories": [5, 15]
+    }
+}, {
+    "model": "products.productsavailable",
+    "pk": 1,
+    "fields": {
+        "user": 4,
+        "products": [1]
+    }
+}, {
+    "model": "products.productsavailable",
+    "pk": 2,
+    "fields": {
+        "user": 5,
+        "products": [2, 3, 4, 5, 6, 7, 8, 9]
+    }
+}, {
+    "model": "billing.billingprofile",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "email": "antonio@crpa.site",
+        "active": true,
+        "created_at": "2020-08-11T09:52:31.356Z",
+        "updated_at": "2020-08-11T09:52:31.356Z"
+    }
+}, {
+    "model": "billing.billingprofile",
+    "pk": 2,
+    "fields": {
+        "user": 2,
+        "email": "reviewer1@crpa.site",
+        "active": true,
+        "created_at": "2020-08-11T09:53:57.333Z",
+        "updated_at": "2020-08-11T09:53:57.333Z"
+    }
+}, {
+    "model": "billing.billingprofile",
+    "pk": 3,
+    "fields": {
+        "user": 3,
+        "email": "reviewer2@crpa.site",
+        "active": true,
+        "created_at": "2020-08-11T09:54:45.974Z",
+        "updated_at": "2020-08-11T09:54:45.974Z"
+    }
+}, {
+    "model": "billing.billingprofile",
+    "pk": 4,
+    "fields": {
+        "user": 4,
+        "email": "provider1@crpa.site",
+        "active": true,
+        "created_at": "2020-08-11T09:55:21.480Z",
+        "updated_at": "2020-08-11T09:55:21.480Z"
+    }
+}, {
+    "model": "billing.billingprofile",
+    "pk": 5,
+    "fields": {
+        "user": 5,
+        "email": "provider2@crpa.site",
+        "active": true,
+        "created_at": "2020-08-11T09:56:53.102Z",
+        "updated_at": "2020-08-11T09:56:53.102Z"
+    }
+}, {
+    "model": "billing.billingprofile",
+    "pk": 6,
+    "fields": {
+        "user": 6,
+        "email": "developer1@crpa.site",
+        "active": true,
+        "created_at": "2020-08-11T09:57:20.471Z",
+        "updated_at": "2020-08-11T09:57:20.471Z"
+    }
+}, {
+    "model": "billing.billingprofile",
+    "pk": 7,
+    "fields": {
+        "user": 7,
+        "email": "developer2@crpa.site",
+        "active": true,
+        "created_at": "2020-08-11T09:57:58.010Z",
+        "updated_at": "2020-08-11T09:57:58.010Z"
+    }
+}, {
+    "model": "orders.order",
+    "pk": 1,
+    "fields": {
+        "billing_profile": 4,
+        "order_code": "5RYT7NWKG4",
+        "shipping_address": 1,
+        "billing_address": 2,
+        "cart": 1,
+        "status": "created",
+        "shipping_total": "10.0000",
+        "order_total": "10.0000",
+        "active": true
+    }
+}, {
+    "model": "addresses.address",
+    "pk": 1,
+    "fields": {
+        "billing_profile": 4,
+        "address_type": "shipping",
+        "address_line_1": "Avd. Reina Mercedes s/n",
+        "address_line_2": null,
+        "city": "Seville",
+        "country": "Spain",
+        "state": "Spain",
+        "postal_code": "41012"
+    }
+}, {
+    "model": "addresses.address",
+    "pk": 2,
+    "fields": {
+        "billing_profile": 4,
+        "address_type": "billing",
+        "address_line_1": "Avd. Reina Mercedes s/n",
+        "address_line_2": null,
+        "city": "Seville",
+        "country": "Spain",
+        "state": "Spain",
+        "postal_code": "41012"
+    }
+}]

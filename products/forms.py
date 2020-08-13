@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        exclude = ("slug",)
+        exclude = ("slug","active",)
         fields = (
             "title",
             "description",
@@ -15,7 +15,6 @@ class ProductForm(forms.ModelForm):
             "image",
             "component",
             "featured",
-            "active",
         )
 
         widgets = {
@@ -35,9 +34,6 @@ class ProductForm(forms.ModelForm):
                 attrs={"class": "form-control", "placeholder": "File"}
             ),
             "featured": forms.CheckboxInput(
-                attrs={"class": "primary-checkbox", "checked": "checked"}
-            ),
-            "active": forms.CheckboxInput(
                 attrs={"class": "primary-checkbox", "checked": "checked"}
             ),
             "categories": forms.SelectMultiple(

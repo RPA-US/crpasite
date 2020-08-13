@@ -69,7 +69,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=20, decimal_places=4, default=39.99)
     image = models.ImageField(upload_to=upload_image_path)
     featured = models.BooleanField(default=False)
-    active = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     categories = models.ManyToManyField(TaxCateg, limit_choices_to={'active': True})
     user = models.ForeignKey(User, verbose_name="Provider", on_delete=models.CASCADE)

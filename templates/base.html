@@ -46,10 +46,12 @@
                             <div class="footer-tittle">
                                 <h4>Quick Links</h4>
                                 <ul>
-                                    <li><a href="#">About</a></li>
-                                    <li><a href="#"> Taxonomy</a></li>
-                                    <li><a href="#"> Make a proposal</a></li>
-                                    <li><a href="#"> Contact Us</a></li>
+                                    <li><a href="{% url 'taxcategs:categoryterm_list' %}"> Taxonomy</a></li>
+                                    <li><a href="{% url 'taxcategs:ul_taxonomy' %}"> List view</a></li>
+                                    {% if request.user.is_authenticated %}
+                                    <li><a href="{% url 'taxcategs:categoryterm_create' %}"> Make a proposal</a></li>
+                                    {% endif %}
+                                    <li><a href="mailto:contact@crpa.site"> Contact Us</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -59,11 +61,11 @@
                             <div class="footer-tittle">
                                 <h4>Products</h4>
                                 <ul>
-                                    <li><a href="#">Brand new components</a></li>
-                                    <li><a href="#">Browse categories</a></li>
-                                    <li><a href="#"> Classifiication</a></li>
-                                    <li><a href="#"> Processing</a></li>
-                                    <li><a href="#"> Governance</a></li>
+                                    <li><a href="{% url 'products:latest' %}">Brand new components</a></li>
+                                    <li><a href="{% url 'taxcategs:ul_taxonomy' %}">Browse categories</a></li>
+                                    <li><a href="{% url 'taxcategs:categoryterm_list' %}/1/"> Classifiication</a></li>
+                                    <li><a href="{% url 'taxcategs:categoryterm_list' %}/3/"> Processing</a></li>
+                                    <li><a href="{% url 'taxcategs:categoryterm_list' %}/2/"> Governance</a></li>
                                 </ul>
                             </div>
                         </div>

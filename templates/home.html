@@ -28,7 +28,7 @@ Homepage
                                 <p data-animation="fadeInRight" data-delay=".8s">Best CRPA Classification By 2020!</p>
                                 <!-- Hero-btn -->
                                 <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
-                                    <a href="industries.html" class="btn hero-btn">Find what you want at CRPA</a>
+                                    <a href="{% url 'taxcategs:categoryterm_list' %}" class="btn hero-btn">Find what you want at CRPA</a>
                                 </div>
                             </div>
                         </div>
@@ -50,7 +50,7 @@ Homepage
                                 <p data-animation="fadeInRight" data-delay=".8s">Best CRPA Classification By 2020!</p>
                                 <!-- Hero-btn -->
                                 <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
-                                    <a href="industries.html" class="btn hero-btn">Find what you want at CRPA</a>
+                                    <a href="{% url 'taxcategs:categoryterm_list' %}" class="btn hero-btn">Find what you want at CRPA</a>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +78,7 @@ Homepage
                             <img src="{% static 'img/categori/cat1.png' %}" alt="">
                             <div class="category-caption">
                                 <h2>Classification</h2>
-                                <span class="best"><a href="#">Best New Deals</a></span>
+                                <span class="best"><a href="{% url 'taxcategs:categoryterm_list' %}/1/">Best New Deals</a></span>
                                 <span class="collection">New Collection</span>
                             </div>
                         </div>
@@ -91,7 +91,7 @@ Homepage
                             <div class="category-caption">
                                 <span class="collection">Download!</span>
                                 <h2>Processing</h2>
-                                <p><a href="#">Most popular</a></p>
+                                <p><a href="{% url 'taxcategs:categoryterm_list' %}/3/">Most popular</a></p>
                             </div>
                         </div>
                     </div>
@@ -102,7 +102,7 @@ Homepage
                             <img src="{% static 'img/categori/cat3.png' %}" alt="">
                             <div class="category-caption">
                                 <h2>Governance</h2>
-                                <span class="best"><a href="#">Best New Deals</a></span>
+                                <span class="best"><a href="{% url 'taxcategs:categoryterm_list' %}/2/">Best New Deals</a></span>
                                 <span class="collection">New Collection</span>
                             </div>
                         </div>
@@ -146,13 +146,11 @@ Homepage
                 <!-- card one -->
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <div class="row">
+                    {% for p in products %}
                         <div class="col-xl-4 col-lg-4 col-md-6">
                             <div class="single-product mb-60">
                                 <div class="product-img">
-                                    <img src="{% static 'img/categori/product1.png' %}" alt="">
-                                    <div class="new-product">
-                                        <span>New</span>
-                                    </div>
+                                    <img src="{{p.image.url}}" alt="">
                                 </div>
                                 <div class="product-caption">
                                     <div class="product-ratting">
@@ -162,195 +160,32 @@ Homepage
                                         <i class="far fa-star low-star"></i>
                                         <i class="far fa-star low-star"></i>
                                     </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
+                                    <h4><a href="{% url 'products:detail' p.slug %}">{{p.title}}</a></h4>
                                     <div class="price">
                                         <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
+                                            <li>{{p.price}}€</li>
+                                            <li class="discount">{{p.price|add:20}}€</li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="{% static 'img/categori/product2.png' %}" alt="">
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                    </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="{% static 'img/categori/product3.png' %}" alt="">
-                                    <div class="new-product">
-                                        <span>New</span>
-                                    </div>
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                    </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="{% static 'img/categori/product4.png' %}" alt="">
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                    </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="{% static 'img/categori/product5.png' %}" alt="">
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                    </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="{% static 'img/categori/product6.png' %}" alt="">
-                                    <div class="new-product">
-                                        <span>New</span>
-                                    </div>
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                    </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    {% endfor %}
                     </div>
                 </div>
                 <!-- Card two -->
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <div class="row">
+                        {% for p in latests %}
                         <div class="col-xl-4 col-lg-4 col-md-6">
                             <div class="single-product mb-60">
                                 <div class="product-img">
-                                    <img src="{% static 'img/categori/product4.png' %}" alt="">
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                    </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="{% static 'img/categori/product5.png' %}" alt="">
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                    </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="{% static 'img/categori/product6.png' %}" alt="">
+                                    <img src="{{p.image.url}}" alt="">
+                                    {% if forloop.counter < 4 %}
                                     <div class="new-product">
                                         <span>New</span>
                                     </div>
+                                    {% endif %}
                                 </div>
                                 <div class="product-caption">
                                     <div class="product-ratting">
@@ -360,100 +195,27 @@ Homepage
                                         <i class="far fa-star low-star"></i>
                                         <i class="far fa-star low-star"></i>
                                     </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
+                                    <h4><a href="{% url 'products:detail' p.slug %}">{{p.title}}</a></h4>
                                     <div class="price">
                                         <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
+                                            <li>{{p.price}}€</li>
+                                            <li class="discount">{{p.price|add:20}}€</li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="{% static 'img/categori/product2.png' %}" alt="">
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                    </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="{% static 'img/categori/product3.png' %}" alt="">
-                                    <div class="new-product">
-                                        <span>New</span>
-                                    </div>
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                    </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="{% static 'img/categori/product1.png' %}" alt="">
-                                    <div class="new-product">
-                                        <span>New</span>
-                                    </div>
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                    </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    {% endfor %}
                     </div>
                 </div>
                 <!-- Card three -->
                 <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                     <div class="row">
+                        {% for p in featured %}
                         <div class="col-xl-4 col-lg-4 col-md-6">
                             <div class="single-product mb-60">
                                 <div class="product-img">
-                                    <img src="{% static 'img/categori/product2.png' %}" alt="">
+                                    <img src="{{p.image.url}}" alt="">
                                 </div>
                                 <div class="product-caption">
                                     <div class="product-ratting">
@@ -463,152 +225,27 @@ Homepage
                                         <i class="far fa-star low-star"></i>
                                         <i class="far fa-star low-star"></i>
                                     </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
+                                    <h4><a href="{% url 'products:detail' p.slug %}">{{p.title}}</a></h4>
                                     <div class="price">
                                         <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
+                                            <li>{{p.price}}€</li>
+                                            <li class="discount">{{p.price|add:20}}€</li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="{% static 'img/categori/product3.png' %}" alt="">
-                                    <div class="new-product">
-                                        <span>New</span>
-                                    </div>
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                    </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="{% static 'img/categori/product1.png' %}" alt="">
-                                    <div class="new-product">
-                                        <span>New</span>
-                                    </div>
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                    </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="{% static 'img/categori/product4.png' %}" alt="">
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                    </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="{% static 'img/categori/product6.png' %}" alt="">
-                                    <div class="new-product">
-                                        <span>New</span>
-                                    </div>
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                    </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="{% static 'img/categori/product5.png' %}" alt="">
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                    </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    {% endfor %}
                     </div>
                 </div>
                 <!-- card foure -->
                 <div class="tab-pane fade" id="nav-last" role="tabpanel" aria-labelledby="nav-last-tab">
                     <div class="row">
+                         {% for p in latests %}
                         <div class="col-xl-4 col-lg-4 col-md-6">
                             <div class="single-product mb-60">
                                 <div class="product-img">
-                                    <img src="{% static 'img/categori/product1.png' %}" alt="">
-                                    <div class="new-product">
-                                        <span>New</span>
-                                    </div>
+                                    <img src="{{p.image.url}}" alt="">
                                 </div>
                                 <div class="product-caption">
                                     <div class="product-ratting">
@@ -618,137 +255,17 @@ Homepage
                                         <i class="far fa-star low-star"></i>
                                         <i class="far fa-star low-star"></i>
                                     </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
+                                    <h4><a href="{% url 'products:detail' p.slug %}">{{p.title}}</a></h4>
                                     <div class="price">
                                         <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
+                                            <li>{{p.price}}€</li>
+                                            <li class="discount">{{p.price|add:20}}€</li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="{% static 'img/categori/product2.png' %}" alt="">
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                    </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="{% static 'img/categori/product3.png' %}" alt="">
-                                    <div class="new-product">
-                                        <span>New</span>
-                                    </div>
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                    </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="{% static 'img/categori/product4.png' %}" alt="">
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                    </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="{% static 'img/categori/product5.png' %}" alt="">
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                    </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="single-product mb-60">
-                                <div class="product-img">
-                                    <img src="{% static 'img/categori/product6.png' %}" alt="">
-                                    <div class="new-product">
-                                        <span>New</span>
-                                    </div>
-                                </div>
-                                <div class="product-caption">
-                                    <div class="product-ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                        <i class="far fa-star low-star"></i>
-                                    </div>
-                                    <h4><a href="#">Green Dress with details</a></h4>
-                                    <div class="price">
-                                        <ul>
-                                            <li>$40.00</li>
-                                            <li class="discount">$60.00</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    {% endfor %}
                     </div>
                 </div>
             </div>
@@ -773,7 +290,7 @@ Homepage
                         <div class="best-product-caption">
                             <h2>Try CRPA, <br> don't miss the chance</h2>
                             <p>for a robot to do your tiresome work.</p>
-                            <a href="#" class="black-btn">Shop Now</a>
+                            <a href="{% url 'products:latest' %}" class="black-btn">Shop Now</a>
                         </div>
                     </div>
                 </div>

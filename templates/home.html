@@ -78,7 +78,7 @@ Homepage
                             <img src="{% static 'img/categori/cat1.png' %}" alt="">
                             <div class="category-caption">
                                 <h2>Classification</h2>
-                                <span class="best"><a href="{% url 'taxcategs:categoryterm_list' %}/1/">Best New Deals</a></span>
+                                <span class="best"><a href="{% url 'taxcategs:product_categoryterm_list' 1 %}">Best New Deals</a></span>
                                 <span class="collection">New Collection</span>
                             </div>
                         </div>
@@ -91,7 +91,7 @@ Homepage
                             <div class="category-caption">
                                 <span class="collection">Download!</span>
                                 <h2>Processing</h2>
-                                <p><a href="{% url 'taxcategs:categoryterm_list' %}/3/">Most popular</a></p>
+                                <p><a href="{% url 'taxcategs:product_categoryterm_list' 3 %}">Most popular</a></p>
                             </div>
                         </div>
                     </div>
@@ -102,7 +102,7 @@ Homepage
                             <img src="{% static 'img/categori/cat3.png' %}" alt="">
                             <div class="category-caption">
                                 <h2>Governance</h2>
-                                <span class="best"><a href="{% url 'taxcategs:categoryterm_list' %}/2/">Best New Deals</a></span>
+                                <span class="best"><a href="{% url 'taxcategs:product_categoryterm_list' 2 %}">Best New Deals</a></span>
                                 <span class="collection">New Collection</span>
                             </div>
                         </div>

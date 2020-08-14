@@ -8,7 +8,7 @@ Category detail
 
 
 <div class="container">
-    <h1>Category Term</h1>
+    <h1>{% if taxonomic_categ_pk %}Taxonomic {% endif %}Category Term</h1>
     <br>
     {% if messages %}
     <ul class="messages">
@@ -23,55 +23,69 @@ Category detail
         {% endfor %}
     </ul>
     {% endif %}
-    <p><strong>Taxonomic category:</strong>
-        <a href="/categories/navigate/#{{categoryTerm.tax_categ.pk}}">{{ categoryTerm.tax_categ }}</a>
-    </p>
-    <p><strong>Term:</strong> {{ categoryTerm.term }}</p>
-    <p><strong>Description:</strong> {{ categoryTerm.description }}</p>
-    <p><strong>Knowledge Source:</strong> <a href="{{ categoryTerm.knowledge_source.url }}">{{ categoryTerm.knowledge_source }}</a></p>
-    {% if request.user.is_authenticated %}
-    <p><strong>Created at:</strong> {{ categoryTerm.created_at }}</p>
-    <p><strong>User:</strong> {{ categoryTerm.user }}</p>
-    {% endif %}
-    <h6><strong>Category characteristics</strong></h6>
-    {% if categoryTerm.categoryChars %}
-    <ol class="ordered-list">
-        {% for ch in categoryTerm.categoryChars %}
-        <li>{{ ch }}</li>
-        {% endfor %}
-    </ol>
-    {% else %}
-    <p><strong>Empty category characteristics list!!!</strong></p>
-    {% endif %}
-    {% if categoryTerm.formats_supported.all %}
-    <h6><strong>Input Format Supported</strong></h6>
-    <ol class="ordered-list">
-        {% for ifp in categoryTerm.formats_supported.all %}
-        <li>{{ ifp }}</li>
-        {% endfor %}
-    </ol>
-    {% else %}
-    <p><strong>Empty input formats supported list!!!</strong></p>
-    {% endif %}
-    {% if categoryTerm.is_tax_categ %}
-    <p class="form-validation">Represents its taxonomic category</p>
-    {% elif categoryTerm.substitute_tax_categ %}
-    <p class="form-validation">Pretends to be a taxonomic category</p>
-    {% endif %}
-    <div class="col-md-10">
-        <div class="button-group-area mt-10">
-            {% if taxonomic_categ_pk %}
-            <a href="/categories/listview/#{{ taxonomic_categ_pk }}" class="genric-btn primary-border">Back</a>
+    <div class="row">
+        <div class="col-md-10">
+            <p><strong>Taxonomic category:</strong>
+                <a href="/categories/navigate/#{{categoryTerm.tax_categ.pk}}">{{ categoryTerm.tax_categ }}</a>
+            </p>
+            <p><strong>Term:</strong> {{ categoryTerm.term }}</p>
+            <p><strong>Description:</strong> {{ categoryTerm.description }}</p>
+            <p><strong>Knowledge Source:</strong> <a
+                    href="{{ categoryTerm.knowledge_source.url }}">{{ categoryTerm.knowledge_source }}</a></p>
+            {% if request.user.is_authenticated %}
+            <p><strong>Created at:</strong> {{ categoryTerm.created_at }}</p>
+            <p><strong>User:</strong> {{ categoryTerm.user }}</p>
             {% endif %}
-            {% if request.user.role == 1 and not categoryTerm.active %}
-            <a href="/categories/review/{{ categoryTerm.pk }}/" class="genric-btn primary-border">Review</a>
+            <h6><strong>Category characteristics</strong></h6>
+            {% if categoryTerm.categoryChars %}
+            <ol class="ordered-list">
+                {% for ch in categoryTerm.categoryChars %}
+                <li>{{ ch }}</li>
+                {% endfor %}
+            </ol>
             {% else %}
-            <a href="/categories/select/" class="genric-btn primary-border">Register proposal</a>
+            <p><strong>Empty category characteristics list!!!</strong></p>
             {% endif %}
-            {% if request.user.role == 2 or request.user.role == 3 %}
-            <a href="/categories/comment/?categterm={{ categoryTerm.pk }}" class="genric-btn primary-border">New comment</a>
+            {% if categoryTerm.formats_supported.all %}
+            <h6><strong>Input Format Supported</strong></h6>
+            <ol class="ordered-list">
+                {% for ifp in categoryTerm.formats_supported.all %}
+                <li>{{ ifp }}</li>
+                {% endfor %}
+            </ol>
+            {% else %}
+            <p><strong>Empty input formats supported list!!!</strong></p>
             {% endif %}
-            <a href="/categories/comment/list/?categterm={{ categoryTerm.pk }}" class="genric-btn primary-border">Comments</a>
+            {% if categoryTerm.is_tax_categ %}
+            <p class="form-validation">Represents its taxonomic category</p>
+            {% elif categoryTerm.substitute_tax_categ %}
+            <p class="form-validation">Pretends to be a taxonomic category</p>
+            {% endif %}
+        </div>
+        <div class="col-md-2">
+            <img src="{{ categoryTerm.image.url }}" width=100% alt="">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="button-group-area mt-10">
+                {% if taxonomic_categ_pk %}
+                <a href="/categories/listview/#{{ taxonomic_categ_pk }}" class="genric-btn primary-border">List</a>
+                <a href="/categories/terms/{{ taxonomic_categ_pk }}/" class="genric-btn primary-border">Category
+                    terms</a>
+                {% endif %}
+                {% if request.user.role == 1 and not categoryTerm.active %}
+                <a href="/categories/review/{{ categoryTerm.pk }}/" class="genric-btn primary-border">Review</a>
+                {% else %}
+                <a href="/categories/select/" class="genric-btn primary-border">Register proposal</a>
+                {% endif %}
+                {% if request.user.role == 2 or request.user.role == 3 %}
+                <a href="/categories/comment/?categterm={{ categoryTerm.pk }}" class="genric-btn primary-border">New
+                    comment</a>
+                {% endif %}
+                <a href="/categories/comment/list/?categterm={{ categoryTerm.pk }}"
+                    class="genric-btn primary-border">Comments</a>
+            </div>
         </div>
     </div>
 </div>

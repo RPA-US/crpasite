@@ -65,11 +65,7 @@ class ProductNavigateCategoryView(ListView):
     def get_queryset(self):
         pk = self.kwargs["pk"]
         c = TaxCateg.objects.get(pk=pk)
-        filt = [pk]
-        if c.level > 0:
-            for x in c.children.all():
-                filt.append(x.pk)
-        return Product.objects.filter(categories__in=filt)
+        return Product.objects.filter(categories__in=filtro(c))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -77,6 +73,13 @@ class ProductNavigateCategoryView(ListView):
         context["categoryTerm"] = categoryTerm
         context["level_zero"] = TaxCateg.objects.filter(active=True, level=0).all()
         return context
+
+def filtro(taxcategory):
+    filt = [taxcategory.pk]
+    if taxcategory.children.all():
+        for x in taxcategory.children.all():
+            filt.extend(filtro(x))
+    return filt
 
 class ProposalListView(ListView):
     model = CategoryTerm
@@ -265,6 +268,17 @@ class CategoriesListReview(ListView):
         context["status"] = c
         return context
 
+class CategTermsListView(ListView):
+    model = CategoryTerm
+    template_name = "categories/categterms.html"
+    context_object_name = "terms"
+    paginate_by = 5
+    ordering = ["-created_at"]
+
+    def get_queryset(self):
+        pk = self.kwargs["pk"]
+        q = CategoryTerm.objects.filter(tax_categ__pk=pk, active=True)
+        return q
 
 def review_multiple_form(request, id):
     categterm = CategoryTerm.objects.get(pk=id)

@@ -39,6 +39,9 @@
                   {% if user.is_superuser %}
                   <li><a href="{% url 'admin:index' %}">Dashboard</a></li>
                   {% else %}
+                  {% if request.user.role == 3 %}
+                  <li><a href="{% url 'products:my_list' %}">My products</a></li>
+                  {% endif %}
                   <li><a href="{% url 'products:list' %}">Shopping</a></li>
                   <li><a href="{% url 'carts:home' %}">Cart</a></li>
                   {% endif %}

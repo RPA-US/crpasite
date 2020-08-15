@@ -418,7 +418,7 @@ def export_taxonomy(request):
     response['Content-Disposition'] = 'attachment; filename="CRPAsite-taxonomy.csv"'
 
     cts = CategoryTerm.objects.filter(active=True).order_by('-tax_categ')
-    csv_data = [('Taxonomic category', 'Category term corresponds to Tax. category?', 'Term', 'Description', 'Category characteristics', 'Input format supported', 'Knowledge source')]
+    csv_data = [('Category term', 'Category term corresponds to Tax. category?', 'Term', 'Description', 'Category characteristics', 'Input format supported', 'Knowledge source')]
     for categ in cts:
         pp = (categ.tax_categ.name, categ.is_tax_categ, categ.term, categ.description, ' - '.join([str(j) for j in categ.categoryChars]), ' - '.join([str(i) for i in categ.formats_supported.all()]), categ.knowledge_source.name+" - URL: "+categ.knowledge_source.url)
         csv_data.append(pp)

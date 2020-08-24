@@ -62,9 +62,11 @@ Category detail
             <p class="form-validation">Pretends to be a taxonomic category</p>
             {% endif %}
         </div>
+        {% if categoryTerm.image %}
         <div class="col-md-2">
             <img src="{{ categoryTerm.image.url }}" width=100% alt="">
         </div>
+        {% endif %}
     </div>
     <div class="row">
         <div class="col-md-10">

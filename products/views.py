@@ -14,6 +14,15 @@ from django.contrib import messages
 class ProductListView(ListView):
     queryset = Product.objects.all()
     template_name = "products/list.html"
+    paginate_by = 6
+
+    def get_queryset(self):
+        if self.request.user.role == 3:
+            ps = ProductsAvailable.objects.get(user=self.request.user).products.all()
+            q = Product.objects.filter(active=True).exclude(id__in=ps)
+        else:
+            q = Product.objects.filter(active=True)
+        return q
 
     def get_context_data(self, *args, **kwargs):
         context = super(ProductListView, self).get_context_data()
@@ -26,7 +35,14 @@ class LatestProductListView(ListView):
     queryset = Product.objects.all()
     template_name = "products/list.html"
     paginate_by = 6
-    ordering = ["-created_at"]
+
+    def get_queryset(self):
+        if self.request.user.role == 3:
+            ps = ProductsAvailable.objects.get(user=self.request.user).products.all()
+            q = Product.objects.filter(active=True).exclude(id__in=ps).order_by("-created_at")
+        else:
+            q = Product.objects.filter(active=True).order_by("-created_at")
+        return q
 
     def get_context_data(self, *args, **kwargs):
         context = super(LatestProductListView, self).get_context_data()
@@ -53,6 +69,9 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         cart_obj, new_obj = Cart.objects.new_or_get(self.request)
+        if self.request.user.is_authenticated and ProductsAvailable.objects.filter(user=self.request.user).exists():
+            q = ProductsAvailable.objects.get(user=self.request.user).products.all()
+            context["hide_button"] = q.filter(pk=kwargs["object"].pk).exists()
         context["cart"] = cart_obj
         return context
 

@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}
+{% if request.user.role == 2 %}
+My products
+{% elif request.user.role == 3 %}
 Purchased products
+{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -8,7 +12,11 @@ Purchased products
 
 <div class="container">
     {% if object_list %}
+    {% if request.user.role == 2 %}
+    <h1>My products</h1>
+    {% elif request.user.role == 3 %}
     <h1>Purchased products</h1>
+    {% endif %}
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}

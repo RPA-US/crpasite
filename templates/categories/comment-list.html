@@ -14,7 +14,9 @@ Comments
         </div>
         <div class="col-md-5">
             <div class="button-group-area mt-10">
+                {% if request.user.is_authenticated %}
                 <a href="{% url 'taxcategs:comment_list' %}?mine=1" class="genric-btn primary-border">My comments</a>
+                {% endif %}
                 <a href="{% url 'taxcategs:comment_list' %}" class="genric-btn success-border">All comments</a>
             </div>
         </div>

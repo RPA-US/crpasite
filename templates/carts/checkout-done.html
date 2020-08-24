@@ -10,7 +10,7 @@ Checkout Done
     <div class="col-6 mx-auto py-5 text-center">
         <h1 class="display-1"> Thank you for your order.</h1>
         <p><b>Order Code: </b> {{ order_code }}</p>
-        <p><strong>Download:</strong></p>
+        <p><strong>Available to download:</strong></p>
         {% for product in products %}
         <p><a href="/products/private-data/{{product.component}}">{{product}}</a></p>
         {% endfor %}

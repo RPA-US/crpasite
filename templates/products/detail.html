@@ -62,6 +62,7 @@
                         {% if object.user.pk == request.user.pk %}
                         <p><a href="/products/private-data/{{object.component}}">{{object.component}}</a></p>
                         {% else %}
+                        {% if not hide_button %}
                         <div class="card_area">
                             <!--div class="product_count_area">
                                 <div class="product_count d-inline-block">
@@ -75,6 +76,7 @@
                                 {% include "products/snippets/update-cart.html" with product=object cart=cart %}
                             </div>
                         </div>
+                        {% endif %}
                         {% endif %}
                     </div>
                 </div>

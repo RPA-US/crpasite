@@ -17,8 +17,6 @@ test:
     - pip install -r requirements.txt
     - python manage.py makemigrations
     - python manage.py migrate
-    - coverage run manage.py test
-    - coverage report
   only:
   - master
 

@@ -10,6 +10,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from wsgiref.util import FileWrapper
 from taxcategs.models import TaxCateg
 from django.contrib import messages
+from django.urls import reverse
 
 class ProductListView(ListView):
     queryset = Product.objects.all()

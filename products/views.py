@@ -18,7 +18,7 @@ class ProductListView(ListView):
     paginate_by = 6
 
     def get_queryset(self):
-        if self.request.user.is_authenticated and self.request.user.role == 3:
+        if self.request.user.is_authenticated and self.request.user.role == 3 and ProductsAvailable.objects.filter(user=self.request.user).exists():
             ps = ProductsAvailable.objects.get(user=self.request.user).products.all()
             q = Product.objects.filter(active=True).exclude(id__in=ps)
         else:
@@ -38,7 +38,7 @@ class LatestProductListView(ListView):
     paginate_by = 6
 
     def get_queryset(self):
-        if self.request.user.role == 3:
+        if self.request.user.is_authenticated and self.request.user.role == 3 and ProductsAvailable.objects.filter(user=self.request.user).exists():
             ps = ProductsAvailable.objects.get(user=self.request.user).products.all()
             q = Product.objects.filter(active=True).exclude(id__in=ps).order_by("-created_at")
         else:

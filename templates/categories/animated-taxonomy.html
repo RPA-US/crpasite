@@ -39,5 +39,8 @@ Taxonomy of Cognitive RPA components
 var taxonomy_data = {{ taxcateg_hierarchy|safe }}
 taxonomytree(taxonomy_data);
 {% endif %}
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
 </script>
 {% endblock bottom %}

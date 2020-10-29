@@ -386,6 +386,8 @@ def taxonomy_view(request):
         context = {"taxcateg_hierarchy": rr}
     return render(request, "categories/animated-taxonomy.html", context)
 
+import textwrap
+
 def get_taxcateg_tree(taxcateg):   
     temp_obj = None
     if taxcateg.active:
@@ -395,6 +397,9 @@ def get_taxcateg_tree(taxcateg):
             c = cs[0]
             temp_obj['pk'] = taxcateg.pk
             temp_obj['name'] = taxcateg.name
+            if c.description:
+                # Textwrap es usado para limitar el numero de palabras que apareceran en el tooltip
+                temp_obj['description'] = textwrap.shorten(c.description, width=200, placeholder="...")
             if c.image_url:
                 temp_obj['img'] = c.image.url
             else:

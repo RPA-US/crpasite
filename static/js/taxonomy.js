@@ -1,6 +1,7 @@
 /*
  * name: category
  * img: url
+ * description: description of the category which it belongs
  * children: [{subcategories}]
  */
 
@@ -110,6 +111,10 @@ function taxonomytree(data) {
             }).append("text")
             .attr("y", function (d) {
                 return -(radius + fontSize)
+            })
+            .attr("data-toggle", "tooltip")
+            .attr("title", function (d) {
+                return d.description;
             })
             .attr("text-anchor", 'middle')
             .text(function (d) {

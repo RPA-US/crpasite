@@ -9,6 +9,7 @@ from .models import (
     KnowledgeSource,
     Report,
     Comment,
+    OutputFormatSupported,
 )
 from products.models import Product
 from django.core.exceptions import ValidationError
@@ -17,6 +18,7 @@ from taxcategs.forms import (
     ProposalCategoryTermForm,
     ProposalReviewForm,
     InputFormatSupportedForm,
+    OutputFormatSupportedForm,
     KnowledgeSourceForm,
     ReportForm,
     CommentForm,
@@ -65,7 +67,12 @@ class ProductNavigateCategoryView(ListView):
     def get_queryset(self):
         pk = self.kwargs["pk"]
         c = TaxCateg.objects.get(pk=pk)
-        return Product.objects.filter(categories__in=filtro(c))
+        if self.kwargs["ifp"]:
+            # TODO: filtrar por formato de entrada o salida
+            ls = Product.objects.filter(categories__in=filtro(c))
+        else:
+            ls = Product.objects.filter(categories__in=filtro(c))
+        return ls 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -202,6 +209,11 @@ class AddInputFormatSupportedView(CreateView):
     model = InputFormatSupported
     form_class = InputFormatSupportedForm
     template_name = "categories/create-inputformat.html"
+
+class AddOutputFormatSupportedView(CreateView):
+    model = OutputFormatSupported
+    form_class = OutputFormatSupportedForm
+    template_name = "categories/create-outputformat.html"
 
 
 class AddKnowledgeSourceView(CreateView):

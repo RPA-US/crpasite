@@ -3,6 +3,7 @@ from .models import (
     CategoryTerm,
     KnowledgeSource,
     InputFormatSupported,
+    OutputFormatSupported,
     Report,
     Comment,
     TaxCateg,
@@ -204,6 +205,22 @@ class InputFormatSupportedForm(forms.ModelForm):
         fields = ("name", "parent")
         widgets = {
             "name": forms.TextInput(
+                attrs={
+                    "class": "single-input",
+                    "placeholder": "Name",
+                    "onfocus": "this.placeholder = ''",
+                    "onblur": "this.placeholder = 'Name'",
+                }
+            ),
+        }
+
+class OutputFormatSupportedForm(forms.ModelForm):
+    class Meta:
+        model = OutputFormatSupported
+        exclude = ("slug",)
+        fields = ("name", "parent")
+        widgets = {
+            "name": forms.TextOutput(
                 attrs={
                     "class": "single-input",
                     "placeholder": "Name",

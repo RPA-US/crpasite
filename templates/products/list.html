@@ -35,6 +35,11 @@ Products List
                             </div>
                         </div>
                     </div>
+                    {% if categoryTerm %}
+                    <div class="blog_right_sidebar">
+                        {% include 'categories/snippets/mini-category-detail.html' with categoryTerm=categoryTerm %}
+                    </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-md-9">

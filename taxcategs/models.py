@@ -64,6 +64,24 @@ class KnowledgeSource(models.Model):
         return reverse("taxcategs:categoryterm_create")
 
 
+class OutputFormatSupported(CategoryBase):
+    """
+    Output format supported by RPA components that are included in a category.
+    """
+
+    name = models.CharField(max_length=50, unique=True)
+
+    class Meta:
+        verbose_name = "Output Format Supported"
+        verbose_name_plural = "Output Formats Supported"
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("taxcategs:categoryterm_create")  # , kwargs={"pk": self.pk})
+
+
 class InputFormatSupported(CategoryBase):
     """
     Input format supported by RPA components that are included in a category.
@@ -114,6 +132,7 @@ class CategoryTerm(models.Model):
     )
     knowledge_source = models.ForeignKey(KnowledgeSource, on_delete=models.CASCADE)
     formats_supported = models.ManyToManyField(InputFormatSupported, blank=True)
+    output_formats_supported = models.ManyToManyField(OutputFormatSupported, blank=True)
     user = models.ForeignKey(
         UserModel, verbose_name="Creator", on_delete=models.CASCADE
     )

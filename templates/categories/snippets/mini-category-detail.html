@@ -1,0 +1,19 @@
+<p>
+  <strong>{{ categoryTerm.term }}:</strong> {{ categoryTerm.description }}. From
+  <a href="{{ categoryTerm.knowledge_source.url }}"
+    >{{ categoryTerm.knowledge_source }}</a
+  >
+</p>
+
+{% if categoryTerm.formats_supported.all %}
+<aside class="single_sidebar_widget tag_cloud_widget">
+  <h4 class="widget_title">Input Format Supported</h4>
+  <ul class="list">
+    {% for ifp in categoryTerm.formats_supported.all %}
+    <li>
+      <a href="#">{{ifp}}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</aside>
+{% endif %}

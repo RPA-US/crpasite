@@ -5,12 +5,13 @@ from django.db.models.signals import pre_save
 from crpasite.utils import unique_slug_generator_title
 from django.urls import reverse
 from django.db.models import Q
-from taxcategs.models import TaxCateg
+from taxcategs.models import TaxCateg, InputFormatSupported
 from accounts.models import User
 from django.core.exceptions import ValidationError
 from private_storage.storage.files import PrivateFileSystemStorage
 from private_storage.fields import PrivateFileField
 from django.shortcuts import get_object_or_404
+from django.contrib.postgres.fields import ArrayField
 
 def get_filename_ext(filepath):
     base_name = os.path.basename(filepath)
@@ -62,6 +63,23 @@ class ProductManager(models.Manager):
     def search(self, query):
         return self.get_queryset().active().search(query)
 
+class Parameter(models.Model):
+    output = models.BooleanField(default=False)
+    name = models.CharField(max_length=50)
+    formato = models.CharField(max_length=50)
+    optional = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = _("Parameter")
+        verbose_name_plural = _("Parameters")
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("Parameter_detail", kwargs={"pk": self.pk})
+
+
 class Product(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField(blank=True)
@@ -74,6 +92,15 @@ class Product(models.Model):
     categories = models.ManyToManyField(TaxCateg, limit_choices_to={'active': True})
     user = models.ForeignKey(User, verbose_name="Provider", on_delete=models.CASCADE)
     component = PrivateFileField("Component")
+    componentChars = ArrayField(models.CharField(max_length=200))
+    parameters = models.ManyToManyField(Parameter, blank=True)
+
+    # TODO: extender componente DONE
+    # categoryChars (componentChar[])
+    # Parametros: almacenar para cada parametro si es opcional o no
+    # lista de parametros de entrada, para cada uno, nombre y formato (input format supported)
+    # lista de parametros de salida, para cada uno, nombre y formato (output format supported)
+    # Plantear la necesidad de ofrecer algun soporte all ofrecimiento de un componente como servicio y no como produto, API key, subscripcion y demas
 
     # Manager
     objects = ProductManager()

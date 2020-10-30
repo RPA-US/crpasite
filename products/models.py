@@ -69,9 +69,10 @@ class Parameter(models.Model):
     formato = models.CharField(max_length=50)
     optional = models.BooleanField(default=False)
 
+    # TODO: hay que validar que el formato es uno de los registrados en el sistema
     class Meta:
-        verbose_name = _("Parameter")
-        verbose_name_plural = _("Parameters")
+        verbose_name = ("Parameter")
+        verbose_name_plural = ("Parameters")
 
     def __str__(self):
         return self.name
@@ -92,6 +93,7 @@ class Product(models.Model):
     categories = models.ManyToManyField(TaxCateg, limit_choices_to={'active': True})
     user = models.ForeignKey(User, verbose_name="Provider", on_delete=models.CASCADE)
     component = PrivateFileField("Component")
+    # Extension
     componentChars = ArrayField(models.CharField(max_length=200))
     parameters = models.ManyToManyField(Parameter, blank=True)
 
@@ -101,6 +103,8 @@ class Product(models.Model):
     # lista de parametros de entrada, para cada uno, nombre y formato (input format supported)
     # lista de parametros de salida, para cada uno, nombre y formato (output format supported)
     # Plantear la necesidad de ofrecer algun soporte all ofrecimiento de un componente como servicio y no como produto, API key, subscripcion y demas
+
+    # TODO: hay que validar que las caracteristicas del componente estan contenidas en las registradas en el sistema
 
     # Manager
     objects = ProductManager()

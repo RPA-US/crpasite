@@ -220,7 +220,7 @@ class OutputFormatSupportedForm(forms.ModelForm):
         exclude = ("slug",)
         fields = ("name", "parent")
         widgets = {
-            "name": forms.TextOutput(
+            "name": forms.TextInput(
                 attrs={
                     "class": "single-input",
                     "placeholder": "Name",

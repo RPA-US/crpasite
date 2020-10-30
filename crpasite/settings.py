@@ -93,17 +93,27 @@ WSGI_APPLICATION = "crpasite.wsgi.application"
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'bzpro8nmnav7lcx1wfof',
+#         'HOST': 'bzpro8nmnav7lcx1wfof-postgresql.services.clever-cloud.com',
+#         'PORT': '5432',
+#         'USER': 'uphbbfafkvwo5cfrwb4r',
+#         'PASSWORD': 'vo5QlKsKgQB0JeuLcDf3',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bzpro8nmnav7lcx1wfof',
-        'HOST': 'bzpro8nmnav7lcx1wfof-postgresql.services.clever-cloud.com',
+        'NAME': 'bcnqpkkzi6vy242xegmu',
+        'HOST': 'bcnqpkkzi6vy242xegmu-postgresql.services.clever-cloud.com',
         'PORT': '5432',
-        'USER': 'uphbbfafkvwo5cfrwb4r',
-        'PASSWORD': 'vo5QlKsKgQB0JeuLcDf3',
+        'USER': 'uwultrlnwo73pei9z0zp',
+        'PASSWORD': 'Y3e4HNzcQiUado8AtL2J',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

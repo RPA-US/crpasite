@@ -132,13 +132,14 @@ class CategoryTerm(models.Model):
     )
     knowledge_source = models.ForeignKey(KnowledgeSource, on_delete=models.CASCADE)
     formats_supported = models.ManyToManyField(InputFormatSupported, blank=True)
-    output_formats_supported = models.ManyToManyField(OutputFormatSupported, blank=True)
     user = models.ForeignKey(
         UserModel, verbose_name="Creator", on_delete=models.CASCADE
     )
     categoryChars = ArrayField(models.CharField(max_length=200))
     decision = models.CharField(max_length=5, choices=DECISION_CHOICES, blank=True)
     image = models.ImageField(upload_to=upload_image_path, blank=True)
+    # Extends
+    output_formats_supported = models.ManyToManyField(OutputFormatSupported, blank=True)
 
     class Meta:
         verbose_name = "Category Term"

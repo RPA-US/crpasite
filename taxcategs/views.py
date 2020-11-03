@@ -309,6 +309,9 @@ def review_multiple_form(request, id):
             categterm.formats_supported.add(
                 *categterm_validated_data.get("formats_supported")
             )
+            categterm.output_formats_supported.add(
+                *categterm_validated_data.get("output_formats_supported")
+            )
             categterm.decision = categterm_validated_data.get("decision")
             desc = categterm_validated_data.get("decision")
             if desc == "1" or desc == "3":

@@ -56,6 +56,16 @@ Category detail
             {% else %}
             <p><strong>Empty input formats supported list!!!</strong></p>
             {% endif %}
+            {% if categoryTerm.output_formats_supported.all %}
+            <h6><strong>Input Format Supported</strong></h6>
+            <ol class="ordered-list">
+                {% for ifp in categoryTerm.output_formats_supported.all %}
+                <li>{{ ifp }}</li>
+                {% endfor %}
+            </ol>
+            {% else %}
+            <p><strong>Empty output formats supported list!!!</strong></p>
+            {% endif %}
             {% if categoryTerm.is_tax_categ %}
             <p class="form-validation">Represents its taxonomic category</p>
             {% elif categoryTerm.substitute_tax_categ %}

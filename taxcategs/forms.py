@@ -27,6 +27,7 @@ class ProposalCategoryTermForm(forms.ModelForm):
             "knowledge_source",
             "image",
             "formats_supported",
+            "output_formats_supported",
             "categoryChars",
         )
 
@@ -52,6 +53,13 @@ class ProposalCategoryTermForm(forms.ModelForm):
                 attrs={"class": "form-control", "placeholder": "Image"}
             ),
             "formats_supported": forms.SelectMultiple(
+                attrs={
+                    "class": "multipleselector",
+                    "data-placeholder": "Click to select an option...",
+                    "multiple": "multiple",
+                }
+            ),
+            "output_formats_supported": forms.SelectMultiple(
                 attrs={
                     "class": "multipleselector",
                     "data-placeholder": "Click to select an option...",
@@ -88,6 +96,14 @@ class ProposalCategoryTermForm(forms.ModelForm):
 
     def clean_formats_supported(self):
         ifp = self.cleaned_data["formats_supported"]
+        if len(ifp) < 1:
+            raise forms.ValidationError(
+                "A category term cannot have less than one associated input format supported"
+            )
+        return ifp
+    
+    def clean_formats_supported(self):
+        ifp = self.cleaned_data["output_formats_supported"]
         if len(ifp) < 1:
             raise forms.ValidationError(
                 "A category term cannot have less than one associated input format supported"

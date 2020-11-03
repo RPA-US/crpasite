@@ -78,6 +78,11 @@ Create a category term proposal
             <div class="form-validation">{{ form.formats_supported.errors }}</div>
         </p>
         <p>
+            {{ form.output_formats_supported.label_tag }}
+            {{ form.output_formats_supported }}
+            <div class="form-validation">{{ form.output_formats_supported.errors }}</div>
+        </p>
+        <p>
             {{ form.categoryChars.label_tag }}
             {{ form.categoryChars }}
             <div class="form-validation">{{ form.categoryChars.errors }}</div>

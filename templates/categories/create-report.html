@@ -91,6 +91,13 @@ New report
             </div>
             <div class="col-md-12">
                 <p>
+                    {{ category_term_form.output_formats_supported.label_tag }}
+                    {{ category_term_form.output_formats_supported }}
+                    <div class="form-validation">{{ category_term_form.output_formats_supported.errors }}</div>
+                </p>
+            </div>
+            <div class="col-md-12">
+                <p>
                     {{ category_term_form.categoryChars.label_tag }}
                     {{ category_term_form.categoryChars }}
                     <div class="form-validation">{{ category_term_form.categoryChars.errors }}</div>

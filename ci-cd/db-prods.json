@@ -341,6 +341,19 @@
             "level": 2
         }
     }, {
+        "model": "taxcategs.taxcateg",
+        "pk": 16,
+        "fields": {
+            "parent": 6,
+            "slug": "comparison",
+            "active": true,
+            "name": "Comparison",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 16,
+            "level": 2
+        }
+    }, {
         "model": "taxcategs.knowledgesource",
         "pk": 1,
         "fields": {
@@ -575,8 +588,20 @@
             "tree_id": 9,
             "level": 0
         }
-    },
-    {
+    }, {
+        "model": "taxcategs.outputformatsupported",
+        "pk": 10,
+        "fields": {
+            "parent": null,
+            "slug": "json",
+            "active": true,
+            "name": "JSON",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 10,
+            "level": 0
+        }
+    }, {
         "model": "taxcategs.categoryterm",
         "pk": 1,
         "fields": {
@@ -862,6 +887,25 @@
             "output_formats_supported": [1, 5, 7, 8]
         }
     }, {
+        "model": "taxcategs.categoryterm",
+        "pk": 16,
+        "fields": {
+            "term": "Comparison",
+            "description": "Components that compare text strings and returns as a result the percentage of similarity or coincidence that exists between them.",
+            "created_at": "2020-08-11T14:50:49.427Z",
+            "is_tax_categ": true,
+            "substitute_tax_categ": true,
+            "active": true,
+            "tax_categ": 15,
+            "knowledge_source": 4,
+            "user": 1,
+            "categoryChars": "[\"It Takes as input two text strings to be compared\", \" It returns as output a percentage of similarity\"]",
+            "decision": "1",
+            "image": "categories/109331637739.png",
+            "formats_supported": [6],
+            "output_formats_supported": [10]
+        }
+    }, {
         "model": "taxcategs.report",
         "pk": 1,
         "fields": {
@@ -1012,6 +1056,16 @@
             "review_user": 3
         }
     }, {
+        "model": "taxcategs.report",
+        "pk": 16,
+        "fields": {
+            "result": "3",
+            "categ_term": 16,
+            "explanation": "This proposal is well defined and adds value to the CRPA taxonomy",
+            "created_at": "2020-08-11T17:55:40.779Z",
+            "review_user": 3
+        }
+    }, {
         "model": "taxcategs.comment",
         "pk": 1,
         "fields": {
@@ -1076,13 +1130,15 @@
             "created_at": "2020-08-11T18:15:34.637Z",
             "products": []
         }
-    }, {
+    },
+    {
         "model": "products.parameter",
         "pk": 1,
         "fields": {
             "output": true,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1092,6 +1148,7 @@
             "output": true,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1101,6 +1158,7 @@
             "output": true,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1110,6 +1168,7 @@
             "output": true,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1119,6 +1178,7 @@
             "output": true,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1128,6 +1188,7 @@
             "output": true,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1137,6 +1198,7 @@
             "output": true,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1146,6 +1208,7 @@
             "output": true,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1155,6 +1218,7 @@
             "output": true,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1162,17 +1226,19 @@
         "pk": 10,
         "fields": {
             "output": true,
-            "name": "image",
-            "formato": "Image",
+            "name": "Sentiment",
+            "formato": "Text",
+            "description": "A Tuple<String,String> variable containing the retrieved sentiment and sentiment value of the specified sentence.",
             "optional": false
         }
     }, {
         "model": "products.parameter",
         "pk": 11,
         "fields": {
-            "output": true,
-            "name": "image",
-            "formato": "Image",
+            "output": false,
+            "name": "text",
+            "formato": "Text",
+            "description": "The text to be analyzed. This field supports String variables",
             "optional": false
         }
     }, {
@@ -1180,8 +1246,9 @@
         "pk": 12,
         "fields": {
             "output": true,
-            "name": "image",
-            "formato": "Image",
+            "name": "FaceRectangle",
+            "formato": "Complex",
+            "description": "An IEnumerable<Rectangle> variable, which contains the location of the face inside the image.",
             "optional": false
         }
     }, {
@@ -1189,8 +1256,9 @@
         "pk": 13,
         "fields": {
             "output": true,
-            "name": "image",
-            "formato": "Image",
+            "name": "Model id",
+            "formato": "Text",
+            "description": "The unique identifier for the model",
             "optional": false
         }
     }, {
@@ -1198,8 +1266,9 @@
         "pk": 14,
         "fields": {
             "output": true,
-            "name": "image",
-            "formato": "Image",
+            "name": "annotations",
+            "formato": "JSON",
+            "description": "An array of Box2DPrediction objects with the label and associated information.",
             "optional": false
         }
     }, {
@@ -1207,8 +1276,9 @@
         "pk": 15,
         "fields": {
             "output": true,
-            "name": "image",
-            "formato": "Image",
+            "name": "Strings",
+            "formato": "Text",
+            "description": "A Tuple<String,String> variable containing the two string to be compared",
             "optional": false
         }
     }, {
@@ -1216,8 +1286,9 @@
         "pk": 16,
         "fields": {
             "output": true,
-            "name": "image",
-            "formato": "Image",
+            "name": "Similarity annotations",
+            "formato": "JSON",
+            "description": "Percentage of similarity between text strings",
             "optional": false
         }
     }, {
@@ -1227,34 +1298,38 @@
             "output": true,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
         "model": "products.parameter",
         "pk": 18,
         "fields": {
-            "output": true,
-            "name": "image",
-            "formato": "Image",
+            "output": false,
+            "name": "key",
+            "formato": "Text",
+            "description": "The API key used to provide you access to the IBM Watson Text Analysis tool. This field supports String variables.",
             "optional": false
         }
     }, {
         "model": "products.parameter",
         "pk": 19,
         "fields": {
-            "output": true,
-            "name": "image",
-            "formato": "Image",
+            "output": false,
+            "name": "ServiceUrl",
+            "formato": "Text",
+            "description": "The custom web address of the local or regional IBM Watson instance used to connect to the text analysis service. This URL needs to match the API key provided in the Key property. If this field is left blank, the default URL is used.",
             "optional": false
         }
     }, {
         "model": "products.parameter",
         "pk": 20,
         "fields": {
-            "output": true,
-            "name": "image",
-            "formato": "Image",
-            "optional": false
+            "output": false,
+            "name": "AnalysisType ",
+            "formato": "Text",
+            "description": "Select the type of analysis to be performed on the specified text. The following types are available: Language, Sentiment, Sentences, and Entities. Depending on the analysis types selected, the output properties may differ.",
+            "optional": true
         }
     }, {
         "model": "products.parameter",
@@ -1263,6 +1338,7 @@
             "output": true,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1272,6 +1348,7 @@
             "output": true,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1281,6 +1358,7 @@
             "output": true,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1290,6 +1368,7 @@
             "output": false,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1299,6 +1378,7 @@
             "output": false,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1308,6 +1388,7 @@
             "output": false,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1317,6 +1398,7 @@
             "output": false,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1326,6 +1408,7 @@
             "output": false,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1335,6 +1418,7 @@
             "output": false,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1344,6 +1428,7 @@
             "output": false,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1353,6 +1438,7 @@
             "output": false,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1360,35 +1446,39 @@
         "pk": 32,
         "fields": {
             "output": false,
-            "name": "image",
-            "formato": "Image",
+            "name": "Sentence",
+            "formato": "Text",
+            "description": "The sentence from which you want to extract the sentiment. This sentence has to be stored in a StanfordCoreNlpSentence variable. This field supports only StanfordCoreNlpSentence variables",
             "optional": false
         }
     }, {
         "model": "products.parameter",
         "pk": 33,
         "fields": {
-            "output": false,
-            "name": "image",
-            "formato": "Image",
+            "output": true,
+            "name": "Error",
+            "formato": "Text",
+            "description": "Extracts error messages (if any), as String variables.",
             "optional": false
         }
     }, {
         "model": "products.parameter",
-        "pk": 34,
+        "pk": 40,
         "fields": {
-            "output": false,
-            "name": "image",
-            "formato": "Image",
+            "output": true,
+            "name": "Language ",
+            "formato": "Identifier",
+            "description": "Extracts the language the given text is in.",
             "optional": false
         }
     }, {
         "model": "products.parameter",
-        "pk": 35,
+        "pk": 41,
         "fields": {
             "output": false,
-            "name": "image",
-            "formato": "Image",
+            "name": "RawResult ",
+            "formato": "JSON",
+            "description": "Enables you to extract the information from the specified text, in a JSON format, as a String variable. The data obtained differs depending on the Analysis Type selected.",
             "optional": false
         }
     }, {
@@ -1396,8 +1486,9 @@
         "pk": 36,
         "fields": {
             "output": false,
-            "name": "image",
-            "formato": "Image",
+            "name": "Model Run Id",
+            "formato": "Text",
+            "description": "The ID of the model run I want to get the output from.",
             "optional": false
         }
     }, {
@@ -1407,6 +1498,7 @@
             "output": false,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1416,6 +1508,7 @@
             "output": false,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
@@ -1425,24 +1518,27 @@
             "output": false,
             "name": "image",
             "formato": "Image",
+            "description": "Description1",
             "optional": false
         }
     }, {
         "model": "products.parameter",
-        "pk": 40,
+        "pk": 34,
         "fields": {
             "output": false,
-            "name": "image",
-            "formato": "Image",
+            "name": "ImagePath",
+            "formato": "Text",
+            "description": "The path to a local image to be analysed. The field is mutually exclusive with ImageUrl. This field supports only Strings and String variables",
             "optional": false
         }
     }, {
         "model": "products.parameter",
-        "pk": 41,
+        "pk": 35,
         "fields": {
             "output": false,
-            "name": "image",
-            "formato": "Image",
+            "name": "Database reference id",
+            "formato": "Text",
+            "description": "Identifies DatasetItem by absolute number of a row in the dataset.",
             "optional": false
         }
     }, {
@@ -1450,8 +1546,9 @@
         "pk": 42,
         "fields": {
             "output": false,
-            "name": "image",
-            "formato": "Image",
+            "name": "ImageURL",
+            "formato": "Text",
+            "description": "The URL to a remote image to be analysed. The field is mutually exclusive with ImagePath. This field supports only Strings and String variables.",
             "optional": false
         }
     }, {
@@ -1459,8 +1556,9 @@
         "pk": 43,
         "fields": {
             "output": false,
-            "name": "image",
-            "formato": "Image",
+            "name": "MaxNumberOfResults",
+            "formato": "Number",
+            "description": "The maximum number of detected faces. This field supports only integers and Int32 variables.",
             "optional": false
         }
     }, {
@@ -1468,8 +1566,9 @@
         "pk": 44,
         "fields": {
             "output": false,
-            "name": "image",
-            "formato": "Image",
+            "name": "Name",
+            "formato": "Text",
+            "description": "A human-readable name of the model project.",
             "optional": false
         }
     }, {
@@ -1477,8 +1576,9 @@
         "pk": 45,
         "fields": {
             "output": false,
-            "name": "image",
-            "formato": "Image",
+            "name": "Reference id",
+            "formato": "Text",
+            "description": "An optional user-specified identifier to reference this given model.",
             "optional": false
         }
     }, {
@@ -1486,8 +1586,72 @@
         "pk": 46,
         "fields": {
             "output": false,
-            "name": "image",
-            "formato": "Image",
+            "name": "Metadata",
+            "formato": "Text",
+            "description": "An arbitrary metadata blob for the model.",
+            "optional": false
+        }
+    }, {
+        "model": "products.parameter",
+        "pk": 47,
+        "fields": {
+            "output": false,
+            "name": "Name",
+            "formato": "Text",
+            "description": "An optional name for the model run.",
+            "optional": true
+        }
+    }, {
+        "model": "products.parameter",
+        "pk": 48,
+        "fields": {
+            "output": false,
+            "name": "Reference id",
+            "formato": "Text",
+            "description": "The user-specified reference identifier to associate with the model. The item_id field should be empty if this field is populated.",
+            "optional": false
+        }
+    }, {
+        "model": "products.parameter",
+        "pk": 49,
+        "fields": {
+            "output": false,
+            "name": "Metadata",
+            "formato": "Text",
+            "description": "An arbitrary metadata blob for the model.",
+            "optional": false
+        }
+    },
+    {
+        "model": "products.parameter",
+        "pk": 50,
+        "fields": {
+            "output": false,
+            "name": "Model id",
+            "formato": "Text",
+            "description": "The internally-controlled identifier of the model. The reference_id field should be empty if this field is populated.",
+            "optional": false
+        }
+    },
+    {
+        "model": "products.parameter",
+        "pk": 51,
+        "fields": {
+            "output": true,
+            "name": "Model id",
+            "formato": "Text",
+            "description": "The internally-controlled identifier of the model.",
+            "optional": false
+        }
+    },
+    {
+        "model": "products.parameter",
+        "pk": 52,
+        "fields": {
+            "output": true,
+            "name": "Model run id",
+            "formato": "Text",
+            "description": "The unique identifier for the model run.",
             "optional": false
         }
     },
@@ -1660,6 +1824,158 @@
             "categories": [5, 15],
             "componentChars": "[\"It takes as input an image or a document\", \"It extracts from the input concrete information that is visually inferred\", \"It extracts the elements that meet specific characteristics that have been taken as input.\"]",
             "parameters": [9, 31]
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 10,
+        "fields": {
+            "title": "StanfordNLP Get Sentence Sentiment",
+            "slug": "standfordnlp-get-sentence-sentiment",
+            "description": "Extracts the sentiment and sentiment value from a StanfordCoreNlpSentence variable retrieved from a Text Analysis activity and returns them in a Tuple<String,String> variable. The first string in the Tuple represents the sentiment, while the second represents the sentiment value.",
+            "price": "120.0000",
+            "image": "products/sample0.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-11-02T19:00:48.950Z",
+            "user": 5,
+            "component": "standfordnlp-get-sentence-sentiment.zip",
+            "categories": [12],
+            "componentChars": "[\"It takes as input audio or text\", \"It takes as classes a list of possible feelings and gets as output one of them\"]",
+            "parameters": [10, 32]
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 11,
+        "fields": {
+            "title": "IBM Watson Text Analysis",
+            "slug": "ibm-text-analysis",
+            "description": "Extracts the language of a specified text, and an analysis of it in a JSON format, as a String variable.",
+            "price": "120.0000",
+            "image": "products/sample1.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-11-03T19:00:48.950Z",
+            "user": 5,
+            "component": "ibmtextanalysis.zip",
+            "categories": [13],
+            "componentChars": "[\"It takes as input audio or text\", \"It takes as classes the existing languages and gets as output one of them.\"]",
+            "parameters": [11, 18, 19, 20, 33, 40, 41]
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 12,
+        "fields": {
+            "title": "Face detection",
+            "slug": "face-detection",
+            "description": "Identifies and retrieves faces inside the image.",
+            "price": "120.0000",
+            "image": "products/sample2.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-11-03T19:00:48.950Z",
+            "user": 5,
+            "component": "prod2.zip",
+            "categories": [15],
+            "componentChars": "[\"It extracts the elements that meet specific characteristics that have been taken as input.\"]",
+            "parameters": [12, 34, 42, 43]
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 13,
+        "fields": {
+            "title": "Scale AI Nucleus Add model",
+            "slug": "scale-ai-1",
+            "description": "Scale AI is a component that allows to consume the services of Scale AI to create a data model from an uploaded dataset and extract predictions. In order to keep track of your models, you can add information about them to your repo. It will enable the naming of models and comparison of model performance across different datasets.",
+            "price": "120.0000",
+            "image": "products/sample3.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-11-03T19:00:48.950Z",
+            "user": 5,
+            "component": "prod1.zip",
+            "categories": [8],
+            "componentChars": "[\"It takes as input the historical and/or environmental data of the prediction\", \"It makes a forecast or regression of what is going to happen\"]",
+            "parameters": [13, 44, 45, 46]
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 14,
+        "fields": {
+            "title": "Scale AI Nucleus Create Model Run",
+            "slug": "scale-ai-2",
+            "description": "You can add model runs to your dataset. Model runs represent detections of a specific model on your dataset. Having an open model run is a prerequisite for uploading predictions to your dataset. This endpoint also requires that the caller exclusively use model_id or reference_id to identify the model from the model repo for a new run.",
+            "price": "120.0000",
+            "image": "products/sample4.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-11-03T19:00:48.950Z",
+            "user": 5,
+            "component": "prod112.zip",
+            "categories": [8],
+            "componentChars": "[\"It takes as input the historical and/or environmental data of the prediction\", \"It makes a forecast or regression of what is going to happen\"]",
+            "parameters": [47, 48, 49, 50, 51, 52]
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 15,
+        "fields": {
+            "title": "Scale AI Nucleus Get model output",
+            "slug": "scale-ai-3",
+            "description": "These endpoints provide predictions of ModelRun for the corresponding DatasetItem. ",
+            "price": "120.0000",
+            "image": "products/sample5.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-11-03T19:00:48.950Z",
+            "user": 5,
+            "component": "prod113.zip",
+            "categories": [8],
+            "componentChars": "[\"It takes as input the historical and/or environmental data of the prediction\", \"It makes a forecast or regression of what is going to happen\"]",
+            "parameters": [14, 36, 35]
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 16,
+        "fields": {
+            "title": "Approximate Matching",
+            "slug": "approximate-matching",
+            "description": "Approximate Matching (fuzzy matching) algorithms. Using Jaro-Winkler and Levenshtein algorithms Warning – any use of approximate matching to make business process flow decisions should be tested extensively to ensure high accuracy of the resulting decisions. Benefits: Uses algorithms to compare different text strings to help decide if they match, and includes an action to find the nearest matching text out of multiple options",
+            "price": "120.0000",
+            "image": "products/sample6.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-11-03T19:00:48.950Z",
+            "user": 5,
+            "component": "prod3.zip",
+            "categories": [16],
+            "componentChars": "[\"It Takes as input two text strings to be compared\", \" It returns as output a percentage of similarity\"]",
+            "parameters": [16, 15]
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 17,
+        "fields": {
+            "title": "AWS Textract",
+            "slug": "aws-textract",
+            "description": "Amazon Textract is a service that automatically extracts text and data from scanned documents. Amazon Textract goes beyond simple optical character recognition (OCR) to also identify the contents of fields in forms and information stored in tables. Integrating this service with Blue Prism allows users to automate the extraction of structured data from their documents.",
+            "price": "120.0000",
+            "image": "products/sample7.jpg",
+            "featured": true,
+            "active": true,
+            "created_at": "2020-11-03T19:00:48.950Z",
+            "user": 5,
+            "component": "prod5.zip",
+            "categories": [15, 5],
+            "componentChars": "[\"It extracts the elements that meet specific characteristics that have been taken as input.\"]",
+            "parameters": [17, 39]
         }
     },
     {

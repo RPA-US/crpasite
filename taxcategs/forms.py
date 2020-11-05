@@ -135,6 +135,7 @@ class ProposalReviewForm(forms.ModelForm):
             "term",
             "description",
             "formats_supported",
+            "output_formats_supported",
             "categoryChars",
             "decision",
         )
@@ -160,6 +161,13 @@ class ProposalReviewForm(forms.ModelForm):
             ),
             "tax_categ": forms.Select(attrs={"class": "form-control default-select"}),
             "formats_supported": forms.SelectMultiple(
+                attrs={
+                    "class": "multipleselector",
+                    "data-placeholder": "Click to select an option...",
+                    "multiple": "multiple",
+                }
+            ),
+            "output_formats_supported": forms.SelectMultiple(
                 attrs={
                     "class": "multipleselector",
                     "data-placeholder": "Click to select an option...",

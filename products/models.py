@@ -67,6 +67,7 @@ class Parameter(models.Model):
     output = models.BooleanField(default=False)
     name = models.CharField(max_length=50)
     formato = models.CharField(max_length=50)
+    description = models.CharField(max_length=500)
     optional = models.BooleanField(default=False)
 
     # TODO: hay que validar que el formato es uno de los registrados en el sistema

@@ -111,6 +111,10 @@ function taxonomytree(data) {
             .attr("y", function (d) {
                 return -(radius + fontSize)
             })
+            .attr("data-toggle", "tooltip")
+            .attr("title", function (d) {
+                return d.description;
+            })
             .attr("text-anchor", 'middle')
             .text(function (d) {
                 return d.name;
@@ -211,6 +215,7 @@ function taxonomytree(data) {
             d.children.forEach(hide);
         }
         update(d);
+        $('[data-toggle="tooltip"]').tooltip();
     }
 
     function hide(d) {

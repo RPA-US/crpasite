@@ -23,6 +23,7 @@ from taxcategs.forms import (
 )
 import json
 import datetime
+import textwrap
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import permission_required
 from .forms import ProposalCategoryTermForm
@@ -395,6 +396,9 @@ def get_taxcateg_tree(taxcateg):
             c = cs[0]
             temp_obj['pk'] = taxcateg.pk
             temp_obj['name'] = taxcateg.name
+            if c.description:
+                # Textwrap es usado para limitar el numero de palabras que apareceran en el tooltip
+                temp_obj['description'] = textwrap.shorten(c.description, width=200, placeholder="...")
             if c.image_url:
                 temp_obj['img'] = c.image.url
             else:

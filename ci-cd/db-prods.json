@@ -354,6 +354,19 @@
             "level": 2
         }
     }, {
+        "model": "taxcategs.taxcateg",
+        "pk": 17,
+        "fields": {
+            "parent": 6,
+            "slug": "conversational",
+            "active": true,
+            "name": "Conversational",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 17,
+            "level": 2
+        }
+    }, {
         "model": "taxcategs.knowledgesource",
         "pk": 1,
         "fields": {
@@ -896,14 +909,33 @@
             "is_tax_categ": true,
             "substitute_tax_categ": true,
             "active": true,
-            "tax_categ": 15,
+            "tax_categ": 16,
             "knowledge_source": 4,
             "user": 1,
-            "categoryChars": "[\"It Takes as input two text strings to be compared\", \" It returns as output a percentage of similarity\"]",
+            "categoryChars": "[\"It takes as input two text strings to be compared\", \" It returns as output a percentage of similarity\"]",
             "decision": "1",
-            "image": "categories/109331637739.png",
+            "image": "categories/comparison.png",
             "formats_supported": [6],
             "output_formats_supported": [10]
+        }
+    },  {
+        "model": "taxcategs.categoryterm",
+        "pk": 17,
+        "fields": {
+            "term": "Conversational",
+            "description": "components that take as input a message from a human and process as output a coherent response to it, being able to carry out an interaction.",
+            "created_at": "2020-08-11T14:50:49.427Z",
+            "is_tax_categ": true,
+            "substitute_tax_categ": true,
+            "active": true,
+            "tax_categ": 17,
+            "knowledge_source": 4,
+            "user": 1,
+            "categoryChars": "[\"It takes an input from interaction with a human through language, either written or spoken.\", \"According to the input, it interprets its meaning and generates as output a coherent response.\"]",
+            "decision": "1",
+            "image": "categories/comparison.png",
+            "formats_supported": [5, 6],
+            "output_formats_supported": [6]
         }
     }, {
         "model": "taxcategs.report",
@@ -1061,6 +1093,16 @@
         "fields": {
             "result": "3",
             "categ_term": 16,
+            "explanation": "This proposal is well defined and adds value to the CRPA taxonomy",
+            "created_at": "2020-08-11T17:55:40.779Z",
+            "review_user": 3
+        }
+    }, {
+        "model": "taxcategs.report",
+        "pk": 17,
+        "fields": {
+            "result": "3",
+            "categ_term": 17,
             "explanation": "This proposal is well defined and adds value to the CRPA taxonomy",
             "created_at": "2020-08-11T17:55:40.779Z",
             "review_user": 3
@@ -1745,7 +1787,7 @@
             "created_at": "2020-08-11T18:36:41.614Z",
             "user": 5,
             "component": "chatterbot.zip",
-            "categories": [6],
+            "categories": [16],
             "componentChars": "[\"It takes as input an image or a document\", \"It transforms the input according to some of its. characteristics such as language or format or makes an interpretation of the input to\\r\\nobtain a coherent output to it\"]",
             "parameters": [5, 27]
         }

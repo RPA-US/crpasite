@@ -11,7 +11,7 @@
   <ul class="list">
     {% for ifp in categoryTerm.formats_supported.all %}
     <li>
-      <a href="#">{{ifp}}</a>
+      <a href="{% url "taxcategs:product_ifp_categoryterm_list" categoryTerm.tax_categ.pk ifp.pk %}">{{ifp}}</a>
     </li>
     {% endfor %}
   </ul>

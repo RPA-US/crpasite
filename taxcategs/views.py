@@ -11,7 +11,7 @@ from .models import (
     Comment,
     OutputFormatSupported,
 )
-from products.models import Product
+from products.models import Product, Parameter
 from django.core.exceptions import ValidationError
 from django.contrib import messages
 from taxcategs.forms import (
@@ -66,18 +66,20 @@ class ProductNavigateCategoryView(ListView):
     
     def get_queryset(self):
         pk = self.kwargs["pk"]
-        c = TaxCateg.objects.get(pk=pk)
-        if self.kwargs["ifp"]:
-            # TODO: filtrar por formato de entrada o salida
-            ls = Product.objects.filter(categories__in=filtro(c))
+        taxcateg = TaxCateg.objects.get(pk=pk)
+        if "ifp" in self.kwargs:
+            # TODO: filtrar por formato de  salida
+            ls = ifp_filtro(taxcateg, self.kwargs["ifp"])
         else:
-            ls = Product.objects.filter(categories__in=filtro(c))
+            ls = Product.objects.filter(categories__in=filtro(taxcateg))
         return ls 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         categoryTerm = get_object_or_404(CategoryTerm, tax_categ__pk=self.kwargs["pk"], active=True, is_tax_categ=True)
         context["categoryTerm"] = categoryTerm
+        if "ifp" in self.kwargs:
+            context["ifp_p"] = InputFormatSupported.objects.get(pk=self.kwargs["ifp"]).name
         context["level_zero"] = TaxCateg.objects.filter(active=True, level=0).all()
         return context
 
@@ -87,6 +89,12 @@ def filtro(taxcategory):
         for x in taxcategory.children.all():
             filt.extend(filtro(x))
     return filt
+
+def ifp_filtro(taxcateg, ifp):
+    inputfp = InputFormatSupported.objects.get(pk=ifp)
+    # TODO: hay que forzar el parameters con output = False
+    p2 = Product.objects.filter(categories__in=filtro(taxcateg), parameters__formato=inputfp.name).distinct()
+    return p2
 
 class ProposalListView(ListView):
     model = CategoryTerm

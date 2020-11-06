@@ -59,6 +59,9 @@ Products List
                                 </div>
                             </div>
                         </div>
+                        {% elif ifp_p %}
+                        <h2>No products available for category <a
+                                href="/categories/detail/{{categoryTerm.pk}}/">{{categoryTerm.term}}</a> with {{ifp_p}} as input</h2>
                         {% elif categoryTerm %}
                         <h2>No products available for category <a
                                 href="/categories/detail/{{categoryTerm.pk}}/">{{categoryTerm.term}}</a></h2>

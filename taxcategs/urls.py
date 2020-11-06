@@ -8,6 +8,7 @@ urlpatterns = [
     path('listview/', CategoriesListView.as_view(), name="ul_taxonomy"),
     path('navigate/', taxonomy_view, name="categoryterm_list"),
     path('navigate/<int:pk>/', ProductNavigateCategoryView.as_view(), name="product_categoryterm_list"),
+    path('navigate/<int:pk>/<int:ifp>/', ProductNavigateCategoryView.as_view(), name="product_ifp_categoryterm_list"),
     path('view/<int:pk>/', CategoryDetailView.as_view(), name="categoryterm_detail"),
     path('detail/<int:pk>/', TaxCategoryDetailView.as_view(), name="taxcategory_detail"),
     path('review/<int:id>/', review_multiple_form, name="review"),

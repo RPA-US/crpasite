@@ -9,8 +9,7 @@ from taxcategs.views import taxonomy_view
 urlpatterns = (
     [
         path("admin/", admin.site.urls),
-        # path("", home_page, name="home_url"),
-        path("", taxonomy_view, name="categoryterm_list"),
+        path("", home_page, name="home_url"),
         path("termandconds", termandconds_page, name="termandconds_url"),
         path("accounts/", include("accounts.urls")),
         path("products/", include("products.urls"), name="products"),

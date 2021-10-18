@@ -157,7 +157,7 @@ def register_product(request):
 def export_products(request):
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="CRPAsite-components-info.csv"'
+    response['Content-Disposition'] = 'attachment; filename="CRPAsite-components.csv"'
 
     # products = Product.objects.filter(active=True).order_by('-price')
     products = Product.objects.order_by('-price')

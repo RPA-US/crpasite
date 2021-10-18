@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-Products List
+Components List
 {% endblock %}
 
 {% block content %}
@@ -55,10 +55,10 @@ Products List
                             </div>
                         </div>
                         {% elif categoryTerm %}
-                        <h2>No products available for category <a
+                        <h2>No components available for category <a
                                 href="/categories/detail/{{categoryTerm.pk}}/">{{categoryTerm.term}}</a></h2>
                         {% else %}
-                        <h2>No products available</h2>
+                        <h2>No components available</h2>
                         {% endif %}
                     </div>
                 </div>

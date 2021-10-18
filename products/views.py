@@ -11,6 +11,7 @@ from wsgiref.util import FileWrapper
 from taxcategs.models import TaxCateg
 from django.contrib import messages
 from django.urls import reverse
+from django.template import loader
 
 class ProductListView(ListView):
     queryset = Product.objects.all()
@@ -152,3 +153,21 @@ def register_product(request):
     context = {"form": form}
 
     return render(request, "products/create.html", context)
+
+def export_products(request):
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="CRPAsite-components-info.csv"'
+
+    # products = Product.objects.filter(active=True).order_by('-price')
+    products = Product.objects.order_by('-price')
+    csv_data = [('Component title', 'Description', 'Price', 'Date of creation', 'Categories')]
+    for p in products:
+        s = ''.join(p.description.splitlines())
+        pp = (p.title,s,p.price,p.created_at, p.categories)
+        csv_data.append(pp)
+
+    t = loader.get_template('products/snippets/product-csv.txt')
+    c = {'data': csv_data}
+    response.write(t.render(c))
+    return response

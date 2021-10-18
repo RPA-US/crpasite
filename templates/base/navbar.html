@@ -32,15 +32,15 @@
                   <li><a href="{% url 'accounts:reviewer_register' %}">New reviewer</a></li>
                   {% endif %}
                   {% if request.user.role == 2 %}
-                  <li><a href="{% url 'products:create' %}">New product</a></li>
-                  <li><a href="{% url 'products:my_list' %}">My products</a></li>
+                  <li><a href="{% url 'products:create' %}">New component</a></li>
+                  <li><a href="{% url 'products:my_list' %}">My components</a></li>
                   {% endif %}
                   <li><a href="{% url "taxcategs:categoryterm_list" %}">Taxonomy</a></li>
                   {% if user.is_superuser %}
                   <li><a href="{% url 'admin:index' %}">Dashboard</a></li>
                   {% else %}
                   {% if request.user.role == 3 %}
-                  <li><a href="{% url 'products:my_list' %}">My products</a></li>
+                  <li><a href="{% url 'products:my_list' %}">My components</a></li>
                   {% endif %}
                   <li><a href="{% url 'products:list' %}">Shopping</a></li>
                   <li><a href="{% url 'carts:home' %}">Cart</a></li>
@@ -69,20 +69,20 @@
               <div class="main-menu f-right d-none d-lg-block">
                 <nav>
                   <ul id="navigation">
-                    <li><a href="/">Home</a></li>
-                    <li class="{% if request.path == products_list_url %}noactive{% endif %}">
-                      <a href="{% url "products:list" %}">Products</a>
-                    </li>
-
-                    <li class="hot"><a href="{% url "products:latest" %}">Latest</a>
-                    </li>
                     <li><a href="{% url "taxcategs:categoryterm_list" %}">Categories</a>
+                      {% if request.user.is_authenticated and request.user.role != 1 %}
                       <ul class="submenu">
                         <li><a href="{% url "taxcategs:categoryterm_list" %}"> Navigate</a></li>
-                        <li><a href="{% url "taxcategs:ul_taxonomy" %}"> Category details</a></li>
-                        {% if request.user.is_authenticated and request.user.role != 1 %}
                         <li><a href="{% url "taxcategs:categoryterm_myproposal" %}"> My proposals</a></li>
-                        {% endif %}
+                      </ul>
+                      {% endif %}
+                    </li>
+                    <li class="hot"><a href="{% url "taxcategs:ul_taxonomy" %}"> Category Details</a></li>
+                    <li><a href="{% url "products:list" %}">Components</a>
+                    <ul class="submenu">
+                        <li class="{% if request.path == products_list_url %}noactive{% endif %}"><a href="{% url "products:list" %}">All</a></li>
+                        <li><a href="{% url "products:latest" %}">Latest</a></li>
+                        </ul>
                     </li>
                   </ul>
                   </li>

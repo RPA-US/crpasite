@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}
 {% if request.user.role == 2 %}
-My products
+My components
 {% elif request.user.role == 3 %}
-Purchased products
+Purchased components
 {% endif %}
 {% endblock %}
 
@@ -13,9 +13,9 @@ Purchased products
 <div class="container">
     {% if object_list %}
     {% if request.user.role == 2 %}
-    <h1>My products</h1>
+    <h1>My components</h1>
     {% elif request.user.role == 3 %}
-    <h1>Purchased products</h1>
+    <h1>Purchased components</h1>
     {% endif %}
     {% if messages %}
     <ul class="messages">
@@ -35,7 +35,7 @@ Purchased products
             <div class="progress-table">
                 {% if object_list %}
                 <div class="table-head">
-                    <div class="categoryterm_1">Product</div>
+                    <div class="categoryterm_1">Component</div>
                     <div class="categoryterm_">Description</div>
                     <div class="categoryterm_">Price</div>
                     <div class="categoryterm_">Categories</div>

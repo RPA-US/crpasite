@@ -1,0 +1,2 @@
+{% for row in data %}{% if forloop.counter == 1 %}{{ row.0 }}, {{ row.1 }}, {{ row.2 }}, {{ row.3 }}, {{ row.4 }}{% else %}"{{ row.0|addslashes }}", "{{ row.1|addslashes }}", {{ row.2|addslashes }}, {{ row.3|addslashes }}, "{{ row.4|addslashes }}"{% endif %}
+{% endfor %}

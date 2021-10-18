@@ -96,11 +96,11 @@ WSGI_APPLICATION = "crpasite.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bzpro8nmnav7lcx1wfof',
-        'HOST': 'bzpro8nmnav7lcx1wfof-postgresql.services.clever-cloud.com',
+        'NAME': 'b5lye8knzwhxiu586yu3',
+        'HOST': 'b5lye8knzwhxiu586yu3-postgresql.services.clever-cloud.com',
         'PORT': '5432',
-        'USER': 'uphbbfafkvwo5cfrwb4r',
-        'PASSWORD': 'vo5QlKsKgQB0JeuLcDf3',
+        'USER': 'ulp53qgdhewh3f17smht',
+        'PASSWORD': 'pCrMi10llo582gaJTI6c',
     }
 }
 

@@ -5,7 +5,7 @@
 To prepare the development environment, execute the following commands:
 
 ```
-git clone https://gitlab.com/a8081/tfg
+git clone https://github.com/RPA-US/crpasite
 python3 -m venv env
 source env/Scripts/activate
 pip install -r requirement.txt
@@ -15,5 +15,3 @@ python manage.py runserver
 ```
 
 Python version = 3.7.8
-
-Bachelor thesis. Software Engineering. University of Seville.
